@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-07-20T21:44:29+09:00",
- "odds_asof": "21:44",
+ "updated_at": "2026-07-20T21:45:34+09:00",
+ "odds_asof": "21:45",
  "picks": [
   {
    "race_id": "202602011101",
@@ -273,176 +273,186 @@
   {
    "race_id": "202603020803",
    "horse_number": 1,
-   "odds_win": null,
+   "odds_win": 412.6,
    "in_band": false
   },
   {
    "race_id": "202603020803",
    "horse_number": 4,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 10.8,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202603020803",
    "horse_number": 7,
-   "odds_win": null,
+   "odds_win": 63.0,
    "in_band": false
   },
   {
    "race_id": "202603020803",
    "horse_number": 9,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 22.5,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202603020803",
    "horse_number": 10,
-   "odds_win": null,
+   "odds_win": 88.8,
    "in_band": false
   },
   {
    "race_id": "202603020803",
    "horse_number": 11,
-   "odds_win": null,
+   "odds_win": 699.7,
    "in_band": false
   },
   {
    "race_id": "202603020803",
    "horse_number": 13,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 19.2,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202603020803",
    "horse_number": 14,
-   "odds_win": null,
+   "odds_win": 4.6,
    "in_band": false
   },
   {
    "race_id": "202602011205",
    "horse_number": 7,
-   "odds_win": null,
+   "odds_win": 75.8,
    "in_band": false
   },
   {
    "race_id": "202602011205",
    "horse_number": 9,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 44.4,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202610020805",
    "horse_number": 1,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 48.9,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202610020805",
    "horse_number": 2,
-   "odds_win": null,
+   "odds_win": 2.1,
    "in_band": false
   },
   {
    "race_id": "202610020805",
    "horse_number": 6,
-   "odds_win": null,
+   "odds_win": 9.5,
    "in_band": false
   },
   {
    "race_id": "202610020805",
    "horse_number": 8,
-   "odds_win": null,
+   "odds_win": 3.2,
    "in_band": false
   },
   {
    "race_id": "202603020808",
    "horse_number": 1,
-   "odds_win": null,
+   "odds_win": 571.3,
    "in_band": false
   },
   {
    "race_id": "202603020808",
    "horse_number": 8,
-   "odds_win": null,
+   "odds_win": 3.3,
    "in_band": false
   },
   {
    "race_id": "202602011209",
    "horse_number": 6,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 11.7,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202602011209",
    "horse_number": 8,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 40.5,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202602011209",
    "horse_number": 9,
-   "odds_win": null,
+   "odds_win": 1.5,
    "in_band": false
   },
   {
    "race_id": "202602011209",
    "horse_number": 12,
-   "odds_win": null,
+   "odds_win": 582.7,
    "in_band": false
   },
   {
    "race_id": "202602011209",
    "horse_number": 13,
-   "odds_win": null,
+   "odds_win": 58.8,
    "in_band": false
   },
   {
    "race_id": "202610020809",
    "horse_number": 2,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 13.0,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202610020809",
    "horse_number": 4,
-   "odds_win": null,
+   "odds_win": 9.1,
    "in_band": false
   },
   {
    "race_id": "202610020809",
    "horse_number": 6,
-   "odds_win": null,
+   "odds_win": 5.3,
    "in_band": false
   },
   {
    "race_id": "202610020809",
    "horse_number": 8,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 10.7,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   },
   {
    "race_id": "202610020812",
    "horse_number": 4,
-   "odds_win": null,
+   "odds_win": 2.4,
    "in_band": false
   },
   {
    "race_id": "202610020812",
    "horse_number": 7,
-   "odds_win": null,
+   "odds_win": 2.2,
    "in_band": false
   },
   {
    "race_id": "202610020812",
    "horse_number": 8,
-   "odds_win": null,
+   "odds_win": 7.3,
    "in_band": false
   },
   {
    "race_id": "202610020812",
    "horse_number": 9,
-   "odds_win": null,
-   "in_band": false
+   "odds_win": 45.7,
+   "in_band": true,
+   "entered_band_at": "2026-07-20T21:45:34+09:00"
   }
  ]
 }
