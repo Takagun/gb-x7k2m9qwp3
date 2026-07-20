@@ -1,0 +1,38 @@
+name: results
+on:
+  schedule:
+    - cron: "0 0 * * 1"   # 月曜 9:00 JST — 週末レースの確定結果を収集
+  workflow_dispatch:
+concurrency:
+  group: data-update
+  cancel-in-progress: false
+permissions:
+  contents: write
+  actions: write
+jobs:
+  collect-results:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests beautifulsoup4
+      - name: Collect weekend results
+        run: python -m engine.collect_results
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/data/history.json
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "results: 実運用実績を更新 [skip ci]"
+            git pull --rebase origin "${{ github.ref_name }}"
+            git push origin "HEAD:${{ github.ref_name }}"
+            # [skip ci] でpagesも発火しないため明示的にデプロイを起動
+            gh workflow run pages.yml --ref "${{ github.ref_name }}"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}

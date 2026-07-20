@@ -270,7 +270,7 @@ button.race-card { cursor: pointer; }
   color: var(--accent-text);
   border-color: var(--accent);
 }
-#pnl-svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.pnl-svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
 .pnl-text { font-size: 10px; fill: var(--text-sub); }
 .pnl-end { font-weight: 700; fill: var(--text); }
 

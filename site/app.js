@@ -37,14 +37,16 @@
     const spinner = $("spinner");
     spinner.hidden = false;
     try {
-      const [candidates, picks, meta] = await Promise.all([
+      const [candidates, picks, meta, history] = await Promise.all([
         fetchJson("candidates.json", bust),
         fetchJson("picks.json", bust).catch(() => null),
         fetchJson("meta.json", bust).catch(() => null),
+        fetchJson("history.json", bust).catch(() => null),
       ]);
       state.candidates = candidates;
       state.picks = picks;
       state.meta = meta;
+      state.history = history;
       if (!state.tab) state.tab = defaultTab();
       render();
     } catch (e) {
@@ -321,6 +323,8 @@
     }).join("");
     const ci = core.ci95 ? `${core.ci95[0]}-${core.ci95[1]}%` : "--";
     body.innerHTML = `
+      ${liveHtml()}
+      <h2 class="section-title">検証実績(keiba.db・単勝ベタ買い回収率)</h2>
       <table class="results-table">
         <thead><tr><th>年</th><th>n</th><th>回収率</th></tr></thead>
         <tbody>${rows}
@@ -373,15 +377,23 @@
   }
 
   function wirePnlChart(body, meta) {
-    const wrap = body.querySelector("#pnl-svg-wrap");
-    if (!wrap) return;
     for (const b of body.querySelectorAll("[data-pnl-year]")) {
       b.addEventListener("click", () => {
         state.pnlYear = b.dataset.pnlYear;
         renderResults();
       });
     }
-    const series = (meta.pnl_by_year[state.pnlYear] || []).map((v) => v * BET_YEN / 100);
+    const series = (meta.pnl_by_year?.[state.pnlYear] || []).map((v) => v * BET_YEN / 100);
+    mountChart(body.querySelector("#pnl-svg-wrap"),
+      body.querySelector("#pnl-readout"), series, `${state.pnlYear}年`);
+    const live = liveData();
+    mountChart(body.querySelector("#live-svg-wrap"),
+      body.querySelector("#live-readout"), live.series, "実運用");
+  }
+
+  // 汎用チャート: wrap にSVG折れ線を描き、なぞりで readout に値を出す
+  function mountChart(wrap, readout, series, label) {
+    if (!wrap) return;
     if (series.length < 2) { wrap.innerHTML = ""; return; }
 
     const W = 320, H = 150, padL = 6, padR = 6, padT = 16, padB = 8;
@@ -392,8 +404,8 @@
     const last = series[series.length - 1];
     const endAnchor = last >= (hi + lo) / 2 ? y(last) + 14 : y(last) - 6;
     wrap.innerHTML = `
-      <svg id="pnl-svg" viewBox="0 0 ${W} ${H}" role="img"
-           aria-label="${state.pnlYear}年のコア累積収支カーブ">
+      <svg class="pnl-svg" viewBox="0 0 ${W} ${H}" role="img"
+           aria-label="${label}のコア累積収支カーブ">
         <line x1="${padL}" y1="${y(0)}" x2="${W - padR}" y2="${y(0)}"
               stroke="var(--line)" stroke-width="1"/>
         <text x="${padL}" y="${padT - 5}" class="pnl-text">${fmtYen(hi)}</text>
@@ -402,14 +414,13 @@
                   stroke-width="2" stroke-linejoin="round"/>
         <text x="${x(series.length - 1)}" y="${endAnchor}" text-anchor="end"
               class="pnl-text pnl-end">${fmtYen(last)}</text>
-        <circle id="pnl-dot" r="4" fill="var(--accent)" stroke="var(--card)"
+        <circle class="pnl-dot" r="4" fill="var(--accent)" stroke="var(--card)"
                 stroke-width="2" visibility="hidden"/>
       </svg>`;
 
     // なぞり読み取り (ホバー非依存: タッチ/マウス両対応)
-    const svg = wrap.querySelector("#pnl-svg");
-    const dot = wrap.querySelector("#pnl-dot");
-    const readout = body.querySelector("#pnl-readout");
+    const svg = wrap.querySelector("svg");
+    const dot = wrap.querySelector(".pnl-dot");
     const show = (ev) => {
       const rect = svg.getBoundingClientRect();
       const px = ((ev.clientX - rect.left) / rect.width) * W;
@@ -418,12 +429,59 @@
       dot.setAttribute("cx", x(i));
       dot.setAttribute("cy", y(series[i]));
       dot.setAttribute("visibility", "visible");
-      readout.textContent = `${i + 1}頭目: ${fmtYen(series[i])}(${state.pnlYear}年)`;
+      if (readout) readout.textContent = `${i + 1}頭目: ${fmtYen(series[i])}(${label})`;
     };
     svg.addEventListener("pointerdown", show);
     svg.addEventListener("pointermove", (ev) => {
       if (ev.pressure > 0 || ev.pointerType === "mouse") show(ev);
     });
+  }
+
+  // ─── 実運用 (アプリ推奨の自動答え合わせ — history.json) ───
+
+  function liveData() {
+    // core=購入対象のみ。確定オッズ・着順が取れた馬だけ集計 (取消等は対象外)
+    const settled = (state.history?.entries || []).filter((e) =>
+      e.tier === "core" && e.finish_position != null && e.odds_final != null);
+    const series = [];
+    let wins = 0, ret = 0, streak = 0;
+    for (const e of settled) {
+      const won = e.finish_position === 1;
+      if (won) { wins += 1; ret += e.odds_final; streak = 0; }
+      else { streak += 1; }
+      const net = won ? e.odds_final * BET_YEN - BET_YEN : -BET_YEN;
+      series.push((series.length ? series[series.length - 1] : 0) + net);
+    }
+    return {
+      n: settled.length, wins, streak, series,
+      roi: settled.length ? ret / settled.length * 100 : 0,
+      from: settled.length ? settled[0].date : null,
+      to: settled.length ? settled[settled.length - 1].date : null,
+    };
+  }
+
+  function liveHtml() {
+    const title = `<h2 class="section-title">実運用(アプリ推奨の自動答え合わせ)</h2>`;
+    const live = liveData();
+    if (live.n === 0) {
+      return `${title}<div class="streak-card">
+        <div class="streak-sub">まだ実運用データがありません。週末の推奨結果は
+        月曜朝に自動で記録されます。</div></div>`;
+    }
+    const total = live.series[live.series.length - 1];
+    return `${title}
+      <div class="streak-card">
+        <div class="streak-main">通算 <strong>${fmtYen(total)}</strong>
+          <span class="streak-sub">(1点${BET_YEN}円換算)</span></div>
+        <div class="streak-sub">core ${live.n}頭 / ${live.wins}勝 /
+          回収率${live.roi.toFixed(1)}% / 現在${live.streak}連敗
+          (${(live.from || "").slice(5).replace("-", "/")}〜${(live.to || "").slice(5).replace("-", "/")})</div>
+        <div class="streak-sub">確定オッズで計算。出走取消・レース中止は集計対象外。</div>
+      </div>
+      <div class="pnl-card">
+        <div id="live-svg-wrap"></div>
+        <div id="live-readout" class="streak-sub">グラフをなぞると各時点の収支を表示</div>
+      </div>`;
   }
 
   function fmtYen(v) {

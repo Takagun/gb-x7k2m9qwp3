@@ -1,7 +1,7 @@
 /* 逆・血統ビーム Service Worker
    シェル: cache-first / data/*.json: network-first + キャッシュフォールバック
    → 圏外でも最後に取得した picks が表示される */
-const VERSION = "v4";
+const VERSION = "v5";
 const SHELL_CACHE = `shell-${VERSION}`;
 const DATA_CACHE = `data-${VERSION}`;
 const SHELL = [

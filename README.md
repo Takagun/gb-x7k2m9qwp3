@@ -31,6 +31,7 @@ make test        # オフラインテスト + lint (CIと同一)
 make test-net    # ネットワーク込み (実HTMLフィクスチャ取得、ローカルのみ)
 make backtest    # golden_v2.json / golden.json / E2E v2 照合 (要 keiba.db: 既定 ../data/keiba.db)
 make meta        # 実績タブ用 meta.json 再生成 (連敗状況・年別収支カーブ。要 keiba.db)
+make results     # 週末結果の収集をdry-runで実行 (実運用トラッキング)
 make weekly      # build_weekly をdry-runで実行
 make odds        # update_odds をdry-runで実行
 make serve       # http://localhost:8000 で site/ をプレビュー
@@ -49,6 +50,7 @@ DISCORD_WEBHOOK_URL=... ./bootstrap.sh   # Discord通知も登録する場合
 |---|---|---|
 | weekly.yml | 木・金 21:00 | 翌土日の出馬表→候補確定→candidates.json |
 | odds.yml | 土日 8:00、9:00〜16:00毎時 | 候補レースのオッズ→picks.json、新規帯入りをDiscord通知 |
+| results.yml | 月曜 9:00 | 週末候補レースの確定結果→history.json(実運用の答え合わせ) |
 | pages.yml | site/** 変更時 | GitHub Pages デプロイ |
 | ci.yml | push/PR | pytest + ruff |
 
@@ -76,9 +78,12 @@ DISCORD_WEBHOOK_URL=... ./bootstrap.sh   # Discord通知も登録する場合
   終了レースは下部「終了」へ自動移動
 - カードをタップすると年別実績・95%CI・除外理由の説明・netkeibaリンクを展開
 - 推奨0頭の日は「今日は該当なし。買わないのも戦略」
-- **実績タブ**に連敗状況(現在/最長/最終勝利)と年別の累積収支カーブ(コアのみ・
-  1点500円換算、なぞると各時点の収支)を表示。データは keiba.db 基準の静的値なので、
-  四半期ごとの verify_factors 実行後に `make meta` → commit/push で更新する
+- **実績タブ**は2部構成:
+  - **実運用** = このアプリが実際にcore推奨した馬の答え合わせ(確定オッズ・
+    毎週月曜に自動更新)。通算収支・回収率・連敗・累積収支カーブ
+  - **検証** = keiba.db バックテストの連敗状況と年別収支カーブ(コアのみ・
+    1点500円換算)。四半期ごとの verify_factors 実行後に `make meta` →
+    commit/push で更新する
 
 ## kill-switch 基準(減衰監視)
 

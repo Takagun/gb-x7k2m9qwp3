@@ -17,6 +17,9 @@ backtest:
 meta:
 	$(PY) -m engine.make_meta --db $(KEIBA_DB)
 
+results:
+	$(PY) -m engine.collect_results --dry-run
+
 weekly:
 	$(PY) -m engine.build_weekly --dry-run
 

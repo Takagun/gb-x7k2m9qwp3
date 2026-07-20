@@ -341,6 +341,7 @@ def _parse_db_race_table(soup):
         i_name = headers.index("馬名")
         i_tansho = headers.index("単勝") if "単勝" in headers else None
         i_weight = headers.index("馬体重") if "馬体重" in headers else None
+        i_finish = headers.index("着順") if "着順" in headers else None
 
         horses = []
         win_odds = {}
@@ -369,8 +370,13 @@ def _parse_db_race_table(soup):
                 mw = WEIGHT_RE.match(cells[i_weight].get_text(strip=True))
                 if mw:
                     weight = int(mw.group(1))
+            finish = None
+            if i_finish is not None and len(cells) > i_finish:
+                ftext = cells[i_finish].get_text(strip=True)
+                finish = int(ftext) if ftext.isdigit() else None  # 取/除/中 は None
             horses.append({"horse_number": number, "horse_id": horse_id,
-                           "horse_name": name, "horse_weight": weight})
+                           "horse_name": name, "horse_weight": weight,
+                           "finish_position": finish})
             if i_tansho is not None and len(cells) > i_tansho:
                 try:
                     val = float(cells[i_tansho].get_text(strip=True))
@@ -530,6 +536,13 @@ class ShutubaScraper(BaseScraper):
             # 未来の実在しないレース番号はdb側もParseErrorになり従来どおりskipされる。
             soup = self.get_soup(DB_RACE_URL.format(race_id=race_id))
             return parse_db_race(soup, race_id)
+
+
+class DbRaceScraper(BaseScraper):
+    def scrape(self, race_id):
+        """施行済みレースの確定結果 (着順・確定単勝オッズ込み) をdbページから取る。"""
+        soup = self.get_soup(DB_RACE_URL.format(race_id=race_id))
+        return parse_db_race(soup, race_id)
 
 
 class PedScraper(BaseScraper):
