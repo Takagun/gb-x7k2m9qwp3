@@ -24,6 +24,7 @@ ODDS_SP_URL = "https://odds.sp.netkeiba.com/"
 # 過去日付のレースは race.netkeiba.com がJSレンダリングの空シェルを返すため、
 # サーバレンダリングされる db.netkeiba.com のレースページへフォールバックする
 DB_RACE_URL = "https://db.netkeiba.com/race/{race_id}/"
+DB_RACE_LIST_URL = "https://db.netkeiba.com/race/list/{date_str}/"
 
 # JRA会場コード (NAR=地方は30以上なので除外)
 JRA_VENUE_CODES = {f"{i:02d}" for i in range(1, 11)}
@@ -225,6 +226,20 @@ def _horse_number_from_row(tr):
     return None
 
 
+def parse_db_race_list(html_text):
+    """dbの日別レース一覧ページから実在レースIDを返す (過去日付用)。
+
+    /race/{race_id}/ リンクのみ拾う。R01-12への展開はしない —
+    一覧に載っているものが施行された全レースなので、そのまま使う。
+    """
+    ids = set()
+    for m in re.finditer(r"/race/(20[2-9]\d{9})/", html_text):
+        race_id = m.group(1)
+        if race_id[4:6] in JRA_VENUE_CODES:
+            ids.add(race_id)
+    return sorted(ids)
+
+
 def parse_db_race(soup, race_id):
     """db.netkeiba.com のレースページから parse_shutuba 互換の情報を抽出する。
 
@@ -409,7 +424,17 @@ def parse_odds_html(soup):
 
 class RaceListScraper(BaseScraper):
     def race_ids_for_date(self, date_str):
-        """kaisai_date=YYYYMMDD のページからJRAレースIDを展開して返す。"""
+        """kaisai_date=YYYYMMDD のJRAレースIDを返す。
+
+        まず db の日別一覧 (施行済みなら実在IDが確定で取れる) を試し、
+        空なら race.netkeiba.com のトップから展開する (未来日付はこちら)。
+        race.netkeiba.com は過去日付だとJSシェルに別週のIDが混ざるため、
+        過去日付でトップページを信用してはならない。
+        """
+        soup = self.get_soup(DB_RACE_LIST_URL.format(date_str=date_str))
+        ids = parse_db_race_list(str(soup))
+        if ids:
+            return ids
         soup = self.get_soup(TOP_URL.format(date_str=date_str))
         return parse_race_ids(str(soup))
 

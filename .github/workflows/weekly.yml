@@ -9,7 +9,7 @@ on:
         required: false
         default: ""
       probe_race_id:
-        description: "(一時診断用) 指定するとページ構造を出力して終了"
+        description: "(一時診断用) 日付YYYYMMDDを指定するとリスト→レース抽出を検証して終了"
         required: false
         default: ""
 concurrency:
@@ -31,39 +31,23 @@ jobs:
         if: inputs.probe_race_id != ''
         run: |
           python - "${{ inputs.probe_race_id }}" <<'EOF'
-          import re
+          import json
           import sys
-          from engine.scraper import BaseScraper, SHUTUBA_URL
+          from engine.scraper import DB_RACE_URL, RaceListScraper, parse_db_race
 
-          race_id = sys.argv[1]
-          s = BaseScraper()
-          for label, url in [
-              ("db", f"https://db.netkeiba.com/race/{race_id}/"),
-          ]:
-              resp = s._fetch(url)
-              if resp.encoding is None or resp.encoding.lower() in ("iso-8859-1", "windows-1252"):
-                  resp.encoding = "EUC-JP"
-              text = resp.text
-              print(f"===== {label} =====")
-              print("status:", resp.status_code, "final_url:", resp.url)
-              print("len:", len(text))
-              m = re.search(r"<title>(.*?)</title>", text, re.S)
-              print("title:", (m.group(1).strip()[:120] if m else None))
-              print("has RaceData01:", "RaceData01" in text)
-              print("surface_dist matches:", re.findall(r"(芝|ダ)(\d{3,4})m", text)[:5])
-              print("hatsuso matches:", re.findall(r"(\d{1,2}:\d{2})発走", text)[:3])
-              print("horse links:", len(re.findall(r"db\.netkeiba\.com/horse/(\d{10})", text)))
-              print("Umaban count:", text.count("Umaban"))
-              i = text.find("RaceData01")
-              if i >= 0:
-                  print("RaceData01 snippet:", re.sub(r"\s+", " ", text[i:i+900])[:900])
-              print("data_intro:", "data_intro" in text, "/ race_table_01:", "race_table_01" in text)
-              print("table count:", text.count("<table"))
-              from bs4 import BeautifulSoup
-              soup = BeautifulSoup(text, "html.parser")
-              body_text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
-              print("body head:", body_text[:600])
-              print("body tail:", body_text[-300:])
+          date_str = sys.argv[1]
+          rl = RaceListScraper()
+          ids = rl.race_ids_for_date(date_str)
+          print(f"race ids for {date_str}: {len(ids)}")
+          print(ids)
+          if ids:
+              soup = rl.get_soup(DB_RACE_URL.format(race_id=ids[0]))
+              info = parse_db_race(soup, ids[0])
+              info_no_horses = {k: v for k, v in info.items() if k not in ("horses", "win_odds")}
+              print("first race:", json.dumps(info_no_horses, ensure_ascii=False))
+              print("horses:", len(info["horses"]), "win_odds:", len(info["win_odds"]))
+              print("sample horse:", json.dumps(info["horses"][0], ensure_ascii=False))
+              print("sample odds:", dict(list(info["win_odds"].items())[:5]))
           EOF
           exit 0
       - name: Build candidates.json

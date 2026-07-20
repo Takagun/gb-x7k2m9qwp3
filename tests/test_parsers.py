@@ -290,3 +290,19 @@ class TestParseDbRace:
         from engine.scraper import ParseError, parse_db_race
         with pytest.raises(ParseError):
             parse_db_race(soup_of("<html><body>データがありません</body></html>"), "202604020201")
+
+
+class TestParseDbRaceList:
+    def test_extracts_ids_from_race_links(self):
+        from engine.scraper import parse_db_race_list
+        html = """
+        <a href="/race/202603030101/">福島1R</a>
+        <a href="/race/202603030102/">福島2R</a>
+        <a href="/race/202644030101/">NAR</a>
+        <a href="/horse/2023100001/">馬ページは無視</a>
+        """
+        assert parse_db_race_list(html) == ["202603030101", "202603030102"]
+
+    def test_empty_for_future_date_shell(self):
+        from engine.scraper import parse_db_race_list
+        assert parse_db_race_list("<html><body>該当なし</body></html>") == []
