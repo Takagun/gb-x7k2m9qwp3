@@ -1,0 +1,568 @@
+{
+  "date": "2026-04-25",
+  "note": "keiba.dbの確定オッズで再現した正解セット(結果が入っている最終開催日)。E2Eバックテストで完全一致すること。",
+  "n_candidates": 56,
+  "n_picks": 20,
+  "candidates": [
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 9,
+      "sire_name": "ワールドエース",
+      "odds_win": 133.7,
+      "in_band": false,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 2,
+      "sire_name": "ロードカナロア",
+      "odds_win": 42.7,
+      "in_band": true,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 10,
+      "sire_name": "ミッキーアイル",
+      "odds_win": 74.9,
+      "in_band": false,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "シルバーステート",
+      "odds_win": 22.3,
+      "in_band": true,
+      "finish_position": 5
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 8,
+      "sire_name": "リアルインパクト",
+      "odds_win": 224.1,
+      "in_band": false,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 13,
+      "sire_name": "イスラボニータ",
+      "odds_win": 68.0,
+      "in_band": false,
+      "finish_position": 15
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 7,
+      "sire_name": "キズナ",
+      "odds_win": 1.6,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 5,
+      "sire_name": "リアルインパクト",
+      "odds_win": 31.6,
+      "in_band": true,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 5,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 17.4,
+      "in_band": true,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 15,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 30.2,
+      "in_band": true,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 2,
+      "sire_name": "ビッグアーサー",
+      "odds_win": 5.6,
+      "in_band": false,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 10,
+      "sire_name": "タワーオブロンドン",
+      "odds_win": 15.4,
+      "in_band": true,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 9,
+      "sire_name": "タワーオブロンドン",
+      "odds_win": 16.4,
+      "in_band": true,
+      "finish_position": 14
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 14,
+      "sire_name": "リアルスティール",
+      "odds_win": 67.9,
+      "in_band": false,
+      "finish_position": 16
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 9,
+      "sire_name": "フィエールマン",
+      "odds_win": 4.8,
+      "in_band": false,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 6,
+      "sire_name": "ロードカナロア",
+      "odds_win": 1.7,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 4,
+      "sire_name": "イスラボニータ",
+      "odds_win": 7.5,
+      "in_band": false,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 6,
+      "sire_name": "キズナ",
+      "odds_win": 3.4,
+      "in_band": false,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 16,
+      "sire_name": "レイデオロ",
+      "odds_win": 53.4,
+      "in_band": false,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 11,
+      "sire_name": "コントレイル",
+      "odds_win": 18.4,
+      "in_band": true,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 15,
+      "sire_name": "ミッキーアイル",
+      "odds_win": 66.1,
+      "in_band": false,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 13,
+      "sire_name": "ロジャーバローズ",
+      "odds_win": 23.6,
+      "in_band": true,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 9,
+      "sire_name": "ロジャーバローズ",
+      "odds_win": 99.0,
+      "in_band": false,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 10,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 24.9,
+      "in_band": true,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 7,
+      "sire_name": "シルバーステート",
+      "odds_win": 20.1,
+      "in_band": true,
+      "finish_position": 8
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 10,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 174.8,
+      "in_band": false,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "コントレイル",
+      "odds_win": 23.6,
+      "in_band": true,
+      "finish_position": 12
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 1,
+      "sire_name": "キズナ",
+      "odds_win": 6.7,
+      "in_band": false,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 4,
+      "sire_name": "キタサンブラック",
+      "odds_win": 3.7,
+      "in_band": false,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 6,
+      "sire_name": "レイデオロ",
+      "odds_win": 224.8,
+      "in_band": false,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 7,
+      "sire_name": "イスラボニータ",
+      "odds_win": 303.1,
+      "in_band": false,
+      "finish_position": 14
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 4,
+      "sire_name": "コントレイル",
+      "odds_win": 19.7,
+      "in_band": true,
+      "finish_position": 18
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 5,
+      "sire_name": "キタサンブラック",
+      "odds_win": 7.0,
+      "in_band": false,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 3,
+      "sire_name": "ロードカナロア",
+      "odds_win": 26.4,
+      "in_band": true,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 4,
+      "sire_name": "フィエールマン",
+      "odds_win": 83.7,
+      "in_band": false,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 3,
+      "sire_name": "キズナ",
+      "odds_win": 5.2,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 5,
+      "sire_name": "コントレイル",
+      "odds_win": 2.9,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 1,
+      "sire_name": "シルバーステート",
+      "odds_win": 7.4,
+      "in_band": false,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 9,
+      "sire_name": "コントレイル",
+      "odds_win": 20.9,
+      "in_band": true,
+      "finish_position": 5
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 14,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 26.9,
+      "in_band": true,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 13,
+      "sire_name": "レイデオロ",
+      "odds_win": 5.1,
+      "in_band": false,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 9,
+      "sire_name": "シルバーステート",
+      "odds_win": 4.4,
+      "in_band": false,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 1,
+      "sire_name": "ビッグアーサー",
+      "odds_win": 448.4,
+      "in_band": false,
+      "finish_position": 16
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 5,
+      "sire_name": "シルバーステート",
+      "odds_win": 31.7,
+      "in_band": true,
+      "finish_position": 8
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 7,
+      "sire_name": "ロードカナロア",
+      "odds_win": 76.4,
+      "in_band": false,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 6,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 41.2,
+      "in_band": true,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 17,
+      "sire_name": "ロードカナロア",
+      "odds_win": 60.7,
+      "in_band": false,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 12,
+      "sire_name": "リアルスティール",
+      "odds_win": 2.0,
+      "in_band": false,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 2,
+      "sire_name": "レイデオロ",
+      "odds_win": 5.5,
+      "in_band": false,
+      "finish_position": 5
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 3,
+      "sire_name": "ロードカナロア",
+      "odds_win": 5.7,
+      "in_band": false,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 12,
+      "sire_name": "ロードカナロア",
+      "odds_win": 1.5,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 1,
+      "sire_name": "コントレイル",
+      "odds_win": 3.3,
+      "in_band": false,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 11,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 6.9,
+      "in_band": false,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "アルアイン",
+      "odds_win": 1.6,
+      "in_band": false,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 3,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 14.5,
+      "in_band": true,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 15,
+      "sire_name": "グレーターロンドン",
+      "odds_win": 20.5,
+      "in_band": true,
+      "finish_position": 1
+    }
+  ]
+}

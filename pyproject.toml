@@ -1,0 +1,15 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "network: 実ネットワークアクセスを伴うテスト (ローカル限定、CIでは除外)",
+    "db: keiba.db が必要なテスト (ローカル限定、CIでは除外)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# siretype.py は検証済み確定マッピングで編集禁止 (CLAUDE.md) — lint対象外にする
+exclude = ["engine/siretype.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
