@@ -8,10 +8,6 @@ on:
         description: "対象日 YYYYMMDD (カンマ区切り可)。空なら次の土日"
         required: false
         default: ""
-      probe_race_id:
-        description: "(一時診断用) 日付YYYYMMDDを指定するとリスト→レース抽出を検証して終了"
-        required: false
-        default: ""
 concurrency:
   group: data-update
   cancel-in-progress: false
@@ -27,31 +23,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install requests beautifulsoup4
-      - name: Probe page structure (一時診断用)
-        if: inputs.probe_race_id != ''
-        run: |
-          python - "${{ inputs.probe_race_id }}" <<'EOF'
-          import json
-          import sys
-          from engine.scraper import DB_RACE_URL, RaceListScraper, parse_db_race
-
-          date_str = sys.argv[1]
-          rl = RaceListScraper()
-          ids = rl.race_ids_for_date(date_str)
-          print(f"race ids for {date_str}: {len(ids)}")
-          print(ids)
-          if ids:
-              soup = rl.get_soup(DB_RACE_URL.format(race_id=ids[0]))
-              info = parse_db_race(soup, ids[0])
-              info_no_horses = {k: v for k, v in info.items() if k not in ("horses", "win_odds")}
-              print("first race:", json.dumps(info_no_horses, ensure_ascii=False))
-              print("horses:", len(info["horses"]), "win_odds:", len(info["win_odds"]))
-              print("sample horse:", json.dumps(info["horses"][0], ensure_ascii=False))
-              print("sample odds:", dict(list(info["win_odds"].items())[:5]))
-          EOF
-          exit 0
       - name: Build candidates.json
-        if: inputs.probe_race_id == ''
         run: |
           if [ -n "${{ inputs.dates }}" ]; then
             python -m engine.build_weekly --date "${{ inputs.dates }}"
@@ -59,7 +31,6 @@ jobs:
             python -m engine.build_weekly
           fi
       - name: Commit and push
-        if: inputs.probe_race_id == ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
