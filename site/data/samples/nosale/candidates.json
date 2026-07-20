@@ -1,0 +1,83 @@
+{
+ "generated_at": "2026-07-24T21:05:00+09:00",
+ "weekend": ["2026-07-25", "2026-07-26"],
+ "races": [
+  {
+   "race_id": "202604020501",
+   "date": "2026-07-25",
+   "venue_code": "04",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "post_time": "09:50",
+   "surface": "芝",
+   "distance": 1800,
+   "race_name": "2歳未勝利",
+   "chukyo_warning": false,
+   "candidates": [
+    {"horse_number": 4, "horse_id": "2024100001", "horse_name": "アサイチホース", "sire_name": "キズナ", "stype": "JP"}
+   ]
+  },
+  {
+   "race_id": "202604020509",
+   "date": "2026-07-25",
+   "venue_code": "04",
+   "venue_name": "新潟",
+   "race_number": 9,
+   "post_time": "14:25",
+   "surface": "芝",
+   "distance": 1800,
+   "race_name": "3歳以上1勝クラス",
+   "chukyo_warning": false,
+   "candidates": [
+    {"horse_number": 7, "horse_id": "2023100002", "horse_name": "サンプルホース", "sire_name": "キズナ", "stype": "JP"},
+    {"horse_number": 12, "horse_id": "2023100003", "horse_name": "オビソトホース", "sire_name": "コントレイル", "stype": "JP"}
+   ]
+  },
+  {
+   "race_id": "202607020510",
+   "date": "2026-07-25",
+   "venue_code": "07",
+   "venue_name": "中京",
+   "race_number": 10,
+   "post_time": "15:01",
+   "surface": "芝",
+   "distance": 1400,
+   "race_name": "豊明ステークス",
+   "chukyo_warning": true,
+   "candidates": [
+    {"horse_number": 2, "horse_id": "2022100004", "horse_name": "チュウキョウテスト", "sire_name": "ロードカナロア", "stype": "JP"}
+   ]
+  },
+  {
+   "race_id": "202604020511",
+   "date": "2026-07-25",
+   "venue_code": "04",
+   "venue_name": "新潟",
+   "race_number": 11,
+   "post_time": "15:45",
+   "surface": "芝",
+   "distance": 1800,
+   "race_name": "佐渡ステークス",
+   "chukyo_warning": false,
+   "candidates": [
+    {"horse_number": 9, "horse_id": "2022100005", "horse_name": "メインレースホース", "sire_name": "サートゥルナーリア", "stype": "JP"}
+   ]
+  },
+  {
+   "race_id": "202604020607",
+   "date": "2026-07-26",
+   "venue_code": "04",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "post_time": "13:25",
+   "surface": "芝",
+   "distance": 2200,
+   "race_name": "3歳以上1勝クラス",
+   "chukyo_warning": false,
+   "candidates": [
+    {"horse_number": 3, "horse_id": "2023100006", "horse_name": "ニチヨウホース", "sire_name": "サトノダイヤモンド", "stype": "JP"},
+    {"horse_number": 11, "horse_id": "2023100007", "horse_name": "アシタノユメ", "sire_name": "シルバーステート", "stype": "JP"}
+   ]
+  }
+ ]
+}

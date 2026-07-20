@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gyaku-beam-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "/Users/takahiro/Desktop/Keiba/gyaku-beam/site"],
+      "port": 8123
+    }
+  ]
+}

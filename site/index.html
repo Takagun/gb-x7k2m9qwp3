@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101418" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="逆ビーム">
+<title>逆・血統ビーム</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <h1 class="app-title">逆ビーム</h1>
+  <div class="odds-status">
+    <span id="odds-asof" class="odds-asof">--:--時点</span>
+    <button id="refresh-btn" class="refresh-btn" type="button" aria-label="オッズ更新">
+      <span class="refresh-icon" aria-hidden="true">↻</span><span class="refresh-label">更新</span>
+    </button>
+  </div>
+</header>
+
+<div id="stale-note" class="stale-note" hidden></div>
+
+<main id="main" class="main">
+  <section id="view-day" class="view">
+    <div id="hero-slot"></div>
+    <div id="card-list"></div>
+    <details id="outband-details" class="outband" hidden>
+      <summary id="outband-summary" class="outband-summary"></summary>
+      <div id="outband-list"></div>
+    </details>
+    <section id="finished-section" hidden>
+      <h2 class="section-title">終了</h2>
+      <div id="finished-list"></div>
+    </section>
+    <div id="empty-state" class="empty-state" hidden>
+      <p class="empty-main">今日は該当なし。</p>
+      <p class="empty-sub">買わないのも戦略。</p>
+    </div>
+  </section>
+
+  <section id="view-results" class="view" hidden>
+    <h2 class="section-title">セグメント実績(単勝ベタ買い回収率)</h2>
+    <div id="results-body"></div>
+  </section>
+</main>
+
+<footer class="disclaimer">
+  過去実績は将来の回収率を保証しません。馬券の購入は自己責任で。
+</footer>
+
+<nav class="tabbar" aria-label="日付切替">
+  <button id="tab-sat" class="tab" type="button" aria-pressed="false">土</button>
+  <button id="tab-sun" class="tab" type="button" aria-pressed="false">日</button>
+  <button id="tab-results" class="tab" type="button" aria-pressed="false">実績</button>
+  <button id="tab-refresh" class="tab tab-refresh" type="button" aria-label="オッズ更新">↻</button>
+</nav>
+
+<div id="spinner" class="spinner" hidden aria-live="polite">更新中…</div>
+
+<script src="app.js"></script>
+</body>
+</html>
