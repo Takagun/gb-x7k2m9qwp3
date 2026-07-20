@@ -1,10 +1,17 @@
-/* 逆・血統ビーム PWA — vanilla JS, ビルドツールなし */
+/* 逆・血統ビーム PWA — vanilla JS, ビルドツールなし (v2: core/watch/除外) */
 (() => {
   "use strict";
 
   // ?sample=empty|nosale でサンプル状態を切替 (表示確認用)
   const SAMPLE = new URLSearchParams(location.search).get("sample");
   const DATA_DIR = SAMPLE ? `data/samples/${SAMPLE}` : "data";
+
+  const EXCL_LABELS = { long_layoff: "休", small: "小", extend: "延" };
+  const EXCL_DESC = {
+    long_layoff: "休=休養121日以上",
+    small: "小=馬体重440kg以下",
+    extend: "延=前走比+200m以上の延長",
+  };
 
   const $ = (id) => document.getElementById(id);
   const state = {
@@ -84,7 +91,13 @@
       if (race.date !== dateStr) continue;
       for (const cand of race.candidates) {
         const pick = pickFor(race.race_id, cand.horse_number);
-        rows.push({ race, cand, pick, inBand: !!pick?.in_band });
+        rows.push({
+          race, cand, pick,
+          tier: pick?.tier ?? null,
+          // 除外理由: picks(当日馬体重で再判定済み) > candidates(前走値の仮判定)
+          excl: pick?.excluded_reason ?? cand.excluded_reason ?? [],
+          formMissing: pick?.form_missing ?? cand.form_missing ?? false,
+        });
       }
     }
     rows.sort((a, b) => (a.race.post_time || "99:99").localeCompare(b.race.post_time || "99:99"));
@@ -135,33 +148,53 @@
     const finished = rows.filter((r) => postDate(r.race) && postDate(r.race) < new Date());
     const upcoming = rows.filter((r) => !finished.includes(r));
 
-    const picksUp = upcoming.filter((r) => r.inBand);
-    const outUp = upcoming.filter((r) => !r.inBand);
+    const coreUp = upcoming.filter((r) => r.tier === "core");
+    const watchUp = upcoming.filter((r) => r.tier === "watch");
+    const otherUp = upcoming.filter((r) => r.tier == null);
 
     const heroSlot = $("hero-slot");
     const list = $("card-list");
     heroSlot.innerHTML = "";
     list.innerHTML = "";
 
-    $("empty-state").hidden = !(rows.length === 0 || (released && picksUp.length === 0 && finished.length === 0));
+    // 推奨(core)ゼロの日は「該当なし」を大きく (watchもない場合)
+    $("empty-state").hidden = !(rows.length === 0 ||
+      (released && coreUp.length === 0 && watchUp.length === 0 && finished.length === 0));
 
-    if (picksUp.length > 0) {
-      heroSlot.appendChild(card(picksUp[0], { hero: true, released }));
-      for (const r of picksUp.slice(1)) list.appendChild(card(r, { released }));
+    if (coreUp.length > 0) {
+      heroSlot.appendChild(card(coreUp[0], { hero: true, released }));
+      for (const r of coreUp.slice(1)) list.appendChild(card(r, { released }));
     }
 
-    // オッズ未発売: 候補を発売待ちバッジ付きで表示 (エラーにしない)
+    // watch層(30-50倍) — coreの下に控えめ表示
+    const watchSection = $("watch-section");
+    const watchList = $("watch-list");
+    watchList.innerHTML = "";
+    watchSection.hidden = watchUp.length === 0;
+    for (const r of watchUp) watchList.appendChild(card(r, { released, watch: true }));
+
+    // オッズ未発売: 除外以外の候補を発売待ちバッジ付きで表示 (エラーにしない)
     const outband = $("outband-details");
     const outList = $("outband-list");
     outList.innerHTML = "";
-    if (!released && outUp.length > 0) {
+    const excludedUp = otherUp.filter((r) => r.excl.length > 0);
+    const bandOutUp = otherUp.filter((r) => r.excl.length === 0);
+    if (!released && otherUp.length > 0) {
       $("empty-state").hidden = true;
-      for (const r of outUp) list.appendChild(card(r, { released }));
-      outband.hidden = true;
-    } else if (outUp.length > 0) {
+      for (const r of bandOutUp) list.appendChild(card(r, { released }));
+      if (excludedUp.length > 0) {
+        outband.hidden = false;
+        $("outband-summary").textContent = `候補(除外) ${excludedUp.length}頭`;
+        for (const r of excludedUp) outList.appendChild(card(r, { released, outband: true }));
+      } else {
+        outband.hidden = true;
+      }
+    } else if (otherUp.length > 0) {
       outband.hidden = false;
-      $("outband-summary").textContent = `候補(帯外) ${outUp.length}頭`;
-      for (const r of outUp) outList.appendChild(card(r, { released, outband: true }));
+      $("outband-summary").textContent =
+        `候補(帯外${bandOutUp.length}・除外${excludedUp.length})`;
+      for (const r of bandOutUp) outList.appendChild(card(r, { released, outband: true }));
+      for (const r of excludedUp) outList.appendChild(card(r, { released, outband: true }));
     } else {
       outband.hidden = true;
     }
@@ -180,20 +213,36 @@
     el.type = "button";
     el.className = "race-card" +
       (opts.hero ? " hero" : "") +
+      (opts.watch ? " watch-card" : "") +
       (opts.outband ? " outband-card" : "") +
       (opts.finished ? " finished-card" : "");
 
     const odds = pick?.odds_win;
     let oddsHtml;
     if (odds != null) {
-      oddsHtml = `<span class="odds-badge${row.inBand ? " in-band" : ""}">単勝 ${odds.toFixed(1)}倍</span>`;
+      if (row.tier === "core") {
+        oddsHtml = `<span class="odds-badge tier-core">単勝 ${odds.toFixed(1)}倍</span>`;
+      } else if (row.tier === "watch") {
+        oddsHtml = `<span class="odds-badge tier-watch">単勝 ${odds.toFixed(1)}倍<span class="watch-tag">参考</span></span>`;
+      } else {
+        oddsHtml = `<span class="odds-badge">単勝 ${odds.toFixed(1)}倍</span>`;
+      }
     } else {
       oddsHtml = `<span class="odds-badge waiting">オッズ発売待ち</span>`;
     }
 
+    const exclBadges = row.excl.map((r) =>
+      `<span class="excl-badge" title="${EXCL_DESC[r] || r}">${EXCL_LABELS[r] || "?"}</span>`
+    ).join("");
+    const formChip = row.formMissing
+      ? `<span class="chip sub">前走情報なし</span>` : "";
+
     const cd = opts.finished ? "" : countdownHtml(race);
     const warnChip = race.chukyo_warning
       ? `<span class="chip warn">中京は効き弱(検証済)</span>` : "";
+    const tierChip = row.tier === "core"
+      ? `<span class="chip">コア帯10-30倍</span>`
+      : row.tier === "watch" ? `<span class="chip">参考帯30-50倍</span>` : "";
     const expanded = state.expanded.has(key);
 
     el.innerHTML = `
@@ -205,16 +254,17 @@
         ${cd}
       </div>
       <div class="horse-line">
-        <span class="horse-number">${cand.horse_number}</span><span class="horse-name">${esc(cand.horse_name)}</span>
+        <span class="horse-number">${cand.horse_number}</span><span class="horse-name">${esc(cand.horse_name)}</span>${exclBadges}
       </div>
       <div class="odds-line">${oddsHtml}</div>
       <div class="chips">
         <span class="chip">父${esc(cand.sire_name)}=日本型</span>
         <span class="chip">${race.distance}m=非根幹</span>
-        <span class="chip">10-50倍帯</span>
+        ${tierChip}
+        ${formChip}
         ${warnChip}
       </div>
-      ${expanded ? detailHtml(race) : ""}`;
+      ${expanded ? detailHtml(row) : ""}`;
 
     el.addEventListener("click", (ev) => {
       if (ev.target.closest("a")) return; // リンクは素通し
@@ -225,14 +275,22 @@
     return el;
   }
 
-  function detailHtml(race) {
-    const years = state.meta?.by_year || {};
+  function detailHtml(row) {
+    const core = state.meta?.core || {};
+    const years = core.by_year || {};
     const perf = Object.keys(years).sort()
-      .map((y) => `${y.slice(2)}:${years[y].win_roi_pct.toFixed(1)}%`).join(" → ");
+      .map((y) => `${y.slice(2)}:${Math.round(years[y].win_roi_pct)}%`).join(" → ");
+    const ci = core.ci95 ? `95%CI ${core.ci95[0]}-${core.ci95[1]}%` : "";
+    const exclNote = row.excl.length > 0
+      ? `<p class="detail-note">除外理由: ${row.excl.map((r) => EXCL_DESC[r] || r).join(" / ")}</p>` : "";
+    const watchNote = row.tier === "watch"
+      ? `<p class="detail-note">参考: 30-50倍はデータ希薄のため購入対象外</p>` : "";
     return `<div class="card-detail">
-      <p class="perf-line">年別実績 ${perf || "--"}</p>
+      <p class="perf-line">コア帯実績 ${perf || "--"} ${ci ? `(${ci})` : ""}</p>
+      <p class="detail-note">※10-50倍全体では2025年98%と100%割れの年もある。過去実績は将来を保証しない。</p>
+      ${exclNote}${watchNote}
       <a class="nk-link" target="_blank" rel="noopener"
-         href="https://race.netkeiba.com/race/shutuba.html?race_id=${race.race_id}">netkeibaで出馬表を見る</a>
+         href="https://race.netkeiba.com/race/shutuba.html?race_id=${row.race.race_id}">netkeibaで出馬表を見る</a>
     </div>`;
   }
 
@@ -251,22 +309,27 @@
     const meta = state.meta;
     const body = $("results-body");
     if (!meta) { body.innerHTML = `<p class="results-note">meta.json 未取得</p>`; return; }
-    const years = meta.by_year || {};
+    const core = meta.core || {};
+    const years = core.by_year || {};
     const rows = Object.keys(years).sort().map((y) => {
       const v = years[y];
       const cls = v.win_roi_pct >= 100 ? ` class="roi-good"` : "";
       return `<tr><td>${y}年</td><td>${v.n.toLocaleString()}</td><td${cls}>${v.win_roi_pct.toFixed(1)}%</td></tr>`;
     }).join("");
+    const ci = core.ci95 ? `${core.ci95[0]}-${core.ci95[1]}%` : "--";
     body.innerHTML = `
       <table class="results-table">
         <thead><tr><th>年</th><th>n</th><th>回収率</th></tr></thead>
         <tbody>${rows}
-          <tr><td>帯内計</td><td>${meta.band?.n?.toLocaleString() || "--"}</td>
-              <td class="roi-good">${meta.band?.win_roi_pct?.toFixed(1) || "--"}%</td></tr>
+          <tr><td>コア計</td><td>${core.n?.toLocaleString() || "--"}</td>
+              <td class="roi-good">${core.win_roi_pct?.toFixed(1) || "--"}%</td></tr>
         </tbody>
       </table>
-      <p class="results-note">対象: 芝・非根幹距離・父日本型・単勝10-50倍帯 (${meta.db_span?.join(" 〜 ") || ""})。
-      全オッズ帯では n=${meta.all?.n?.toLocaleString() || "--"} / ${meta.all?.win_roi_pct || "--"}%。</p>`;
+      <p class="results-note">コア帯 = 芝・非根幹・父日本型・中京千直除外・ネガ3除外後の単勝10-30倍
+      (${meta.db_span?.join(" 〜 ") || ""})。ブートストラップ95%CI ${ci}、P(&gt;100%)=${core.p_gt_100 ?? "--"}。</p>
+      <p class="results-note">参考帯(30-50倍): n=${meta.watch?.n?.toLocaleString() || "--"} /
+      ${meta.watch?.win_roi_pct || "--"}%(2025年${meta.watch?.worst_year_roi_pct ?? 38.5}%など年次ブレ大・購入対象外)。
+      10-50倍全体: n=${meta.full?.n?.toLocaleString() || "--"} / ${meta.full?.win_roi_pct || "--"}%。</p>`;
   }
 
   function esc(s) {

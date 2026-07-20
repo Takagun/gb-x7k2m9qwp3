@@ -14,7 +14,28 @@
    "race_name": "2歳未勝利",
    "chukyo_warning": false,
    "candidates": [
-    {"horse_number": 4, "horse_id": "2024100001", "horse_name": "アサイチホース", "sire_name": "キズナ", "stype": "JP"}
+    {"horse_number": 4, "horse_id": "2024100001", "horse_name": "アサイチホース", "sire_name": "キズナ", "stype": "JP",
+     "prev_distance": 1800, "days_since_last": 28, "prev_weight": 466, "excluded_reason": [], "form_missing": false}
+   ]
+  },
+  {
+   "race_id": "202604020505",
+   "date": "2026-07-25",
+   "venue_code": "04",
+   "venue_name": "新潟",
+   "race_number": 5,
+   "post_time": "12:10",
+   "surface": "芝",
+   "distance": 2200,
+   "race_name": "3歳未勝利",
+   "chukyo_warning": false,
+   "candidates": [
+    {"horse_number": 5, "horse_id": "2023100010", "horse_name": "コガラホース", "sire_name": "リアルインパクト", "stype": "JP",
+     "prev_distance": 2200, "days_since_last": 21, "prev_weight": 436, "excluded_reason": ["small"], "form_missing": false},
+    {"horse_number": 8, "horse_id": "2023100011", "horse_name": "ノビノビホース", "sire_name": "キズナ", "stype": "JP",
+     "prev_distance": 1400, "days_since_last": 150, "prev_weight": 470, "excluded_reason": ["long_layoff", "extend"], "form_missing": false},
+    {"horse_number": 2, "horse_id": "2023100012", "horse_name": "テンニュウホース", "sire_name": "ドゥラメンテ", "stype": "JP",
+     "prev_distance": null, "days_since_last": null, "prev_weight": null, "excluded_reason": [], "form_missing": true}
    ]
   },
   {
@@ -29,23 +50,10 @@
    "race_name": "3歳以上1勝クラス",
    "chukyo_warning": false,
    "candidates": [
-    {"horse_number": 7, "horse_id": "2023100002", "horse_name": "サンプルホース", "sire_name": "キズナ", "stype": "JP"},
-    {"horse_number": 12, "horse_id": "2023100003", "horse_name": "オビソトホース", "sire_name": "コントレイル", "stype": "JP"}
-   ]
-  },
-  {
-   "race_id": "202607020510",
-   "date": "2026-07-25",
-   "venue_code": "07",
-   "venue_name": "中京",
-   "race_number": 10,
-   "post_time": "15:01",
-   "surface": "芝",
-   "distance": 1400,
-   "race_name": "豊明ステークス",
-   "chukyo_warning": true,
-   "candidates": [
-    {"horse_number": 2, "horse_id": "2022100004", "horse_name": "チュウキョウテスト", "sire_name": "ロードカナロア", "stype": "JP"}
+    {"horse_number": 7, "horse_id": "2023100002", "horse_name": "サンプルホース", "sire_name": "キズナ", "stype": "JP",
+     "prev_distance": 2000, "days_since_last": 35, "prev_weight": 488, "excluded_reason": [], "form_missing": false},
+    {"horse_number": 12, "horse_id": "2023100003", "horse_name": "オビソトホース", "sire_name": "コントレイル", "stype": "JP",
+     "prev_distance": 1800, "days_since_last": 42, "prev_weight": 452, "excluded_reason": [], "form_missing": false}
    ]
   },
   {
@@ -60,7 +68,8 @@
    "race_name": "佐渡ステークス",
    "chukyo_warning": false,
    "candidates": [
-    {"horse_number": 9, "horse_id": "2022100005", "horse_name": "メインレースホース", "sire_name": "サートゥルナーリア", "stype": "JP"}
+    {"horse_number": 9, "horse_id": "2022100005", "horse_name": "メインレースホース", "sire_name": "サートゥルナーリア", "stype": "JP",
+     "prev_distance": 1800, "days_since_last": 49, "prev_weight": 512, "excluded_reason": [], "form_missing": false}
    ]
   },
   {
@@ -75,8 +84,10 @@
    "race_name": "3歳以上1勝クラス",
    "chukyo_warning": false,
    "candidates": [
-    {"horse_number": 3, "horse_id": "2023100006", "horse_name": "ニチヨウホース", "sire_name": "サトノダイヤモンド", "stype": "JP"},
-    {"horse_number": 11, "horse_id": "2023100007", "horse_name": "アシタノユメ", "sire_name": "シルバーステート", "stype": "JP"}
+    {"horse_number": 3, "horse_id": "2023100006", "horse_name": "ニチヨウホース", "sire_name": "サトノダイヤモンド", "stype": "JP",
+     "prev_distance": 2000, "days_since_last": 28, "prev_weight": 478, "excluded_reason": [], "form_missing": false},
+    {"horse_number": 11, "horse_id": "2023100007", "horse_name": "アシタノユメ", "sire_name": "シルバーステート", "stype": "JP",
+     "prev_distance": 2600, "days_since_last": 56, "prev_weight": 444, "excluded_reason": [], "form_missing": false}
    ]
   }
  ]

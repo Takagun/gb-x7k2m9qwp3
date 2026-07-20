@@ -1,13 +1,19 @@
 {
-  "source": "tests/fixtures/golden.json (keiba.db 2023-01-05..2026-05-10)",
+  "source": "tests/fixtures/golden_v2.json (keiba.db 2023-01-05..2026-05-10)",
   "db_span": ["2023-01-05", "2026-05-10"],
-  "all": { "n": 14577, "win_roi_pct": 80.9 },
-  "band": { "n": 5298, "win_roi_pct": 99.5 },
-  "by_year": {
-    "2023": { "n": 1590, "win_roi_pct": 99.6 },
-    "2024": { "n": 1628, "win_roi_pct": 96.0 },
-    "2025": { "n": 1667, "win_roi_pct": 94.9 },
-    "2026": { "n": 413, "win_roi_pct": 132.0 }
+  "core": {
+    "n": 1878,
+    "win_roi_pct": 119.5,
+    "ci95": [101, 139],
+    "p_gt_100": 0.98,
+    "by_year": {
+      "2023": { "n": 614, "win_roi_pct": 115.6 },
+      "2024": { "n": 592, "win_roi_pct": 113.7 },
+      "2025": { "n": 545, "win_roi_pct": 118.9 },
+      "2026": { "n": 127, "win_roi_pct": 167.6 }
+    }
   },
+  "watch": { "n": 691, "win_roi_pct": 104.5, "worst_year_roi_pct": 38.5 },
+  "full": { "n": 2569, "win_roi_pct": 115.4 },
   "disclaimer": "過去実績は将来の回収率を保証しません。馬券の購入は自己責任で。"
 }

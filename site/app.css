@@ -147,8 +147,34 @@ button.race-card { cursor: pointer; }
   background: var(--chip-bg);
   color: var(--text);
 }
-.odds-badge.in-band { background: var(--accent); color: var(--accent-text); }
+.odds-badge.tier-core { background: var(--accent); color: var(--accent-text); }
+.odds-badge.tier-watch {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 1px 10px;
+}
+.watch-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-left: 8px;
+  vertical-align: 2px;
+}
 .odds-badge.waiting { font-size: 15px; }
+.excl-badge {
+  display: inline-block;
+  min-width: 26px;
+  text-align: center;
+  margin-left: 6px;
+  padding: 1px 4px;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 14px;
+  font-weight: 800;
+  vertical-align: 3px;
+}
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   font-size: 13px;
@@ -159,9 +185,11 @@ button.race-card { cursor: pointer; }
   padding: 3px 10px;
 }
 .chip.warn { background: var(--warn-bg); color: var(--warn-text); }
+.chip.sub { background: transparent; border: 1px dashed var(--line); color: var(--text-sub); }
 
 .card-detail { margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
 .perf-line { font-size: 14px; color: var(--text-sub); margin: 0 0 8px; }
+.detail-note { font-size: 14px; color: var(--text-sub); margin: 0 0 8px; }
 .nk-link {
   display: inline-flex;
   align-items: center;
@@ -176,6 +204,10 @@ button.race-card { cursor: pointer; }
 
 /* ─── 帯外・終了・空状態 ─── */
 .section-title { font-size: 15px; color: var(--text-sub); margin: 18px 4px 8px; }
+.section-sub { font-size: 13px; font-weight: 400; }
+.race-card.watch-card { padding: 10px 14px; }
+.watch-card .horse-name { font-size: 18px; }
+.watch-card .odds-badge { font-size: 16px; }
 .outband { margin: 4px 0 10px; }
 .outband-summary {
   list-style: none;
