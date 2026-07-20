@@ -14,6 +14,9 @@ test-net:
 backtest:
 	$(PY) -m engine.backtest --db $(KEIBA_DB)
 
+meta:
+	$(PY) -m engine.make_meta --db $(KEIBA_DB)
+
 weekly:
 	$(PY) -m engine.build_weekly --dry-run
 

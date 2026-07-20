@@ -6,6 +6,8 @@
   const SAMPLE = new URLSearchParams(location.search).get("sample");
   const DATA_DIR = SAMPLE ? `data/samples/${SAMPLE}` : "data";
 
+  const BET_YEN = 500; // 収支グラフの1点あたり換算額 (実運用のベット額)
+
   const EXCL_LABELS = { long_layoff: "休", small: "小", extend: "延" };
   const EXCL_DESC = {
     long_layoff: "休=休養121日以上",
@@ -19,7 +21,8 @@
     picks: null,
     meta: null,
     tab: null,          // "sat" | "sun" | "results"
-    expanded: new Set() // 展開中カードの race_id:horse_number
+    expanded: new Set(), // 展開中カードの race_id:horse_number
+    pnlYear: null       // 収支グラフの表示年
   };
 
   // ─── データ取得 ───
@@ -329,7 +332,103 @@
       (${meta.db_span?.join(" 〜 ") || ""})。ブートストラップ95%CI ${ci}、P(&gt;100%)=${core.p_gt_100 ?? "--"}。</p>
       <p class="results-note">参考帯(30-50倍): n=${meta.watch?.n?.toLocaleString() || "--"} /
       ${meta.watch?.win_roi_pct || "--"}%(2025年${meta.watch?.worst_year_roi_pct ?? 38.5}%など年次ブレ大・購入対象外)。
-      10-50倍全体: n=${meta.full?.n?.toLocaleString() || "--"} / ${meta.full?.win_roi_pct || "--"}%。</p>`;
+      10-50倍全体: n=${meta.full?.n?.toLocaleString() || "--"} / ${meta.full?.win_roi_pct || "--"}%。</p>
+      ${streakHtml(meta)}${pnlSectionHtml(meta)}`;
+    wirePnlChart(body, meta);
+  }
+
+  // ─── 連敗状況・累積収支グラフ (コア=推奨のみ) ───
+
+  function streakHtml(meta) {
+    const s = meta.streak;
+    if (!s) return "";
+    const rate = meta.core?.win_rate_pct;
+    const asof = s.asof ? s.asof.slice(5).replace("-", "/") : "--";
+    const lastWin = s.last_win_date ? s.last_win_date.slice(5).replace("-", "/") : "--";
+    return `<h2 class="section-title">連敗状況(コア・検証データ 〜${asof})</h2>
+      <div class="streak-card">
+        <div class="streak-main">現在 <strong>${s.current}連敗</strong> 中</div>
+        <div class="streak-sub">最終勝利 ${lastWin} / 過去最長 ${s.longest}連敗${
+          rate ? ` / 勝率${rate}%(約${Math.round(100 / rate)}頭に1頭)` : ""}</div>
+        <div class="streak-sub">勝率${rate ?? "--"}%ではこの規模の連敗は想定内。判断はkill-switch基準で。</div>
+      </div>`;
+  }
+
+  function pnlSectionHtml(meta) {
+    const pnl = meta.pnl_by_year;
+    if (!pnl) return "";
+    const years = Object.keys(pnl).sort();
+    if (!state.pnlYear || !years.includes(state.pnlYear)) {
+      state.pnlYear = years[years.length - 1];
+    }
+    const btns = years.map((y) =>
+      `<button type="button" class="pnl-year" data-pnl-year="${y}"
+        aria-pressed="${y === state.pnlYear}">${y}</button>`).join("");
+    return `<h2 class="section-title">累積収支カーブ(コアのみ・1点${BET_YEN}円換算)</h2>
+      <div class="pnl-years">${btns}</div>
+      <div class="pnl-card">
+        <div id="pnl-svg-wrap"></div>
+        <div id="pnl-readout" class="streak-sub">グラフをなぞると各時点の収支を表示</div>
+      </div>`;
+  }
+
+  function wirePnlChart(body, meta) {
+    const wrap = body.querySelector("#pnl-svg-wrap");
+    if (!wrap) return;
+    for (const b of body.querySelectorAll("[data-pnl-year]")) {
+      b.addEventListener("click", () => {
+        state.pnlYear = b.dataset.pnlYear;
+        renderResults();
+      });
+    }
+    const series = (meta.pnl_by_year[state.pnlYear] || []).map((v) => v * BET_YEN / 100);
+    if (series.length < 2) { wrap.innerHTML = ""; return; }
+
+    const W = 320, H = 150, padL = 6, padR = 6, padT = 16, padB = 8;
+    const lo = Math.min(0, ...series), hi = Math.max(0, ...series);
+    const x = (i) => padL + (i / (series.length - 1)) * (W - padL - padR);
+    const y = (v) => padT + ((hi - v) / (hi - lo || 1)) * (H - padT - padB);
+    const pts = series.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    const last = series[series.length - 1];
+    const endAnchor = last >= (hi + lo) / 2 ? y(last) + 14 : y(last) - 6;
+    wrap.innerHTML = `
+      <svg id="pnl-svg" viewBox="0 0 ${W} ${H}" role="img"
+           aria-label="${state.pnlYear}年のコア累積収支カーブ">
+        <line x1="${padL}" y1="${y(0)}" x2="${W - padR}" y2="${y(0)}"
+              stroke="var(--line)" stroke-width="1"/>
+        <text x="${padL}" y="${padT - 5}" class="pnl-text">${fmtYen(hi)}</text>
+        <text x="${padL}" y="${H - 1}" class="pnl-text">${lo < 0 ? fmtYen(lo) : ""}</text>
+        <polyline points="${pts}" fill="none" stroke="var(--accent)"
+                  stroke-width="2" stroke-linejoin="round"/>
+        <text x="${x(series.length - 1)}" y="${endAnchor}" text-anchor="end"
+              class="pnl-text pnl-end">${fmtYen(last)}</text>
+        <circle id="pnl-dot" r="4" fill="var(--accent)" stroke="var(--card)"
+                stroke-width="2" visibility="hidden"/>
+      </svg>`;
+
+    // なぞり読み取り (ホバー非依存: タッチ/マウス両対応)
+    const svg = wrap.querySelector("#pnl-svg");
+    const dot = wrap.querySelector("#pnl-dot");
+    const readout = body.querySelector("#pnl-readout");
+    const show = (ev) => {
+      const rect = svg.getBoundingClientRect();
+      const px = ((ev.clientX - rect.left) / rect.width) * W;
+      const i = Math.max(0, Math.min(series.length - 1,
+        Math.round(((px - padL) / (W - padL - padR)) * (series.length - 1))));
+      dot.setAttribute("cx", x(i));
+      dot.setAttribute("cy", y(series[i]));
+      dot.setAttribute("visibility", "visible");
+      readout.textContent = `${i + 1}頭目: ${fmtYen(series[i])}(${state.pnlYear}年)`;
+    };
+    svg.addEventListener("pointerdown", show);
+    svg.addEventListener("pointermove", (ev) => {
+      if (ev.pressure > 0 || ev.pointerType === "mouse") show(ev);
+    });
+  }
+
+  function fmtYen(v) {
+    const n = Math.round(v);
+    return (n >= 0 ? "+" : "−") + Math.abs(n).toLocaleString() + "円";
   }
 
   function esc(s) {

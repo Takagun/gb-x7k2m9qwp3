@@ -244,6 +244,36 @@ button.race-card { cursor: pointer; }
 .results-table .roi-good { font-weight: 800; color: var(--accent); }
 .results-note { font-size: 14px; color: var(--text-sub); margin: 10px 4px; }
 
+/* ─── 連敗状況・累積収支グラフ ─── */
+.streak-card, .pnl-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.streak-main { font-size: 18px; }
+.streak-main strong { font-size: 24px; font-weight: 800; }
+.streak-sub { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+.pnl-years { display: flex; gap: 8px; margin: 0 0 10px; }
+.pnl-year {
+  flex: 1;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+}
+.pnl-year[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+#pnl-svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.pnl-text { font-size: 10px; fill: var(--text-sub); }
+.pnl-end { font-weight: 700; fill: var(--text); }
+
 /* ─── フッター・タブバー ─── */
 .disclaimer {
   margin: 24px 16px 8px;
