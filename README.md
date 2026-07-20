@@ -50,12 +50,16 @@ DISCORD_WEBHOOK_URL=... ./bootstrap.sh   # Discord通知も登録する場合
 手動実行: GitHub → Actions → weekly / odds → **Run workflow**。
 ローカルなら `python3 -m engine.build_weekly --date 20260725` / `python3 -m engine.update_odds --date 20260725`。
 
-## iPhone ホーム画面に追加
+## スマホのホーム画面に追加
 
-1. Safari で Pages の URL を開く(`bootstrap.sh` 完了時に表示)
-2. 共有ボタン → **ホーム画面に追加**
-3. 以降は全画面(standalone)で起動。圏外でも最後に取得した推奨が表示される
-   (ヘッダの「◯:◯時点」が取得時刻)
+**Android (Chrome):**
+1. Chrome で Pages の URL を開く
+2. メニュー(⋮)→ **「アプリをインストール」**(または「ホーム画面に追加」)
+3. 以降は全画面(standalone)のアプリとして起動
+
+**iPhone (Safari):** 共有ボタン → **ホーム画面に追加**。
+
+どちらも圏外で開くと最後に取得した推奨が表示される(ヘッダの「◯:◯時点」が取得時刻)。
 
 ## 画面の見方
 
