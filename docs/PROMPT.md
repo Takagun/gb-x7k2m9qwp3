@@ -2,20 +2,20 @@
 
 ---
 
-`CLAUDE.md` と `docs/DESIGN.md` を読んでから着手してください。gyaku-beam(逆・血統ビーム週末推奨アプリ)を以下のフェーズ順で実装します。各フェーズ完了時に `make test` を通してからコミットしてください。判定ルール・同梱フィクスチャ(golden.json / e2e_day_20260425.json / siretype.py / sire_cache.json)は検証済みの確定値なので変更禁止です。
+`CLAUDE.md` と `docs/DESIGN.md` を読んでから着手してください。gyaku-beam(逆・血統ビーム週末推奨アプリ)を以下のフェーズ順で実装します。各フェーズ完了時に `make test` を通してからコミットしてください。判定ルール・同梱フィクスチャ(golden.json / golden_v2.json / e2e_day_20260425.json / e2e_day_20260425_v2.json / siretype.py / sire_cache.json)は検証済みの確定値なので変更禁止です。
 
 このアプリの利用者は私1人で、**利用シーンの9割はスマホ(iPhone)・片手操作**です。小さい娘を抱えたまま、レースの合間に数秒だけ見る、という使い方が基本になります。フロントエンドはこの前提を最優先してください(Phase 3に詳細)。
 
 ## Phase 1: ルールエンジン + バックテスト(スクレイピングなしで完結)
 
-1. `engine/rules.py`: DESIGN.md §2 の判定式を実装(candidate判定 / 帯判定10.0≦odds<50.0 / 芝1000m千直の明示除外 / 中京(07)warning / 理由テキスト生成)。`engine/siretype.py` の `classify` を使う。
-2. `engine/backtest.py`: `--db` で keiba.db(SQLite)の全結果行にルールを適用し、`tests/fixtures/golden.json` と n・回収率の完全一致を検証。`--replay 2026-04-25` で `e2e_day_20260425.json` と候補・帯内判定が一致することを検証。スキーマは races/entries/results/horses/sires/venues(../src/database/models.py 参照、venues のカラム名は code)。scratched=0 と finish_position NOT NULL で絞る。
-3. `tests/test_rules.py`: DESIGN.md §6.1 のゴールデンケース(境界値: 9.9/10.0/49.9/50.0、千直、ダート、根幹距離、中京)。
-4. **合格基準**: `make backtest` が golden 完全一致(全体 n=14,577 / 80.9%、帯内 n=5,298 / 99.5%、E2E 候補56・帯内20)。一致しないまま Phase 2 に進むこと禁止。
+1. `engine/rules.py`: DESIGN.md §2 の **v2ルール** を実装(candidate判定 / 除外判定3種(長期休養121日+・馬体重440kg以下・延長200m+) / 帯判定(core: 10.0≦odds<30.0=推奨 / watch: 30.0≦odds<50.0=参考表示のみ) / 千直除外 / 中京除外 / 理由テキスト生成)。`engine/siretype.py` の `classify` を使う。前走情報が無い馬は除外しない。
+2. `engine/backtest.py`: `--db` で keiba.db(SQLite)の全結果行にルールを適用し、`tests/fixtures/golden_v2.json`(v2ルール)および `golden.json`(v1=base、参照用)と n・回収率の完全一致を検証。`--replay 2026-04-25` で `e2e_day_20260425_v2.json`(raw候補56→除外後19→core4・watch1)と候補・除外理由・tier判定が一致することを検証。前走由来の値(days_since/前走距離)はDB内の各馬の直前レースから算出する。スキーマは races/entries/results/horses/sires/venues(../src/database/models.py 参照、venues のカラム名は code)。scratched=0 と finish_position NOT NULL で絞る。
+3. `tests/test_rules.py`: DESIGN.md §6.1 のゴールデンケース(境界値: 9.9/10.0/29.9/30.0/49.9/50.0のtier遷移、千直、ダート、根幹距離、中京)。
+4. **合格基準**: `make backtest` が golden_v2 完全一致(core: n=1,878/119.5%・年別116/114/119/168、watch: n=691/104.5%、full: n=2,569/115.4%)+ E2E v2 一致(raw56→除外後19→core4・watch1)。一致しないまま Phase 2 に進むこと禁止。
 
 ## Phase 2: スクレイパー + バッチ
 
-5. `engine/scraper.py`: BaseScraper(2〜4秒ランダムディレイ / リトライ3回 / EUC-JP / 直列のみ)+ RaceList(kaisai_date→race_id展開)+ Shutuba(レース情報・出走馬)+ Ped(父解決。**血統表はリンク出現順の先頭だけが父で、2番目以降は父父・父父父**という罠に注意)+ OddsAPI。仕様は DESIGN.md §4。`../src/scraper/` の実装を参考・コピー改変してよい。
+5. `engine/scraper.py`: BaseScraper(2〜4秒ランダムディレイ / リトライ3回 / EUC-JP / 直列のみ)+ RaceList(kaisai_date→race_id展開)+ Shutuba(レース情報・出走馬)+ Ped(父解決。**血統表はリンク出現順の先頭だけが父で、2番目以降は父父・父父父**という罠に注意)+ HorseForm(候補馬の前走日付・距離・馬体重を馬ページから取得、週末限定キャッシュ。DESIGN.md §4.4)+ OddsAPI。仕様は DESIGN.md §4。`../src/scraper/` の実装を参考・コピー改変してよい。
 6. `engine/build_weekly.py` / `engine/update_odds.py`: JSON契約(DESIGN.md §5)どおり site/data/ を生成。`--dry-run` と `--date YYYYMMDD` オプション付き。sire解決は sire_cache → ped の順、新規解決分はキャッシュへ追記。
 7. `engine/notify.py`: 環境変数 DISCORD_WEBHOOK_URL があれば新規帯入り馬を通知(同一馬は1回まで)。
 8. `tests/test_parsers.py`: 実HTMLを network マーク付きテストで1度取得して tests/fixtures/ に保存し、以後はフィクスチャでパーサをテスト(CIは network 除外)。
@@ -29,11 +29,11 @@
 - 画面上部: 更新時刻と「オッズ更新」ボタン(タップでdata再fetch、更新中はスピナー)。
 - その下: **次に発走が近い推奨馬を最上部に大きく**(ヒーローカード)。以降、発走時刻順のカードリスト。終わったレース(発走時刻超過)は自動で下部の「終了」セクションへ。
 - 日付切替(土/日)は**画面下部の固定タブバー**に置く(親指の届く位置。上部タブは禁止)。タブバーは 土 / 日 / 実績 の3タブ。safe-area-inset-bottom を考慮。
-- 帯外候補は「候補(帯外) n頭」の折りたたみ行として推奨リストの下に。展開もワンタップ。
+- watch層(30-50倍・参考)はcoreリストの下に小さめカードで表示(「参考: 検証データ希薄」注記)。帯外候補・除外馬は「候補(帯外/除外) n頭」の折りたたみ行としてさらに下に。除外馬には理由バッジ(休/小/延)を付ける。展開もワンタップ。
 
 **推奨カード(グランス最適化)**
-- 1枚のカードで完結: 1行目「**14:25 新潟9R** 芝1800」+ 発走までの残り時間(30分切りで強調色)。2行目「**7番 サンプルホース**」を最大フォント(20px+)で。3行目にオッズバッジ「単勝 14.2倍」(帯内=アクセント色の塗りバッジ)。4行目に理由チップ(「父キズナ=日本型」「1800m=非根幹」「10-50倍帯」)。中京のみ警告バッジ「中京は効き弱(検証済)」。
-- カード全体をタップで詳細展開(年別実績 2023:99.6%→2026:132.0%、netkeibaの出馬表へのリンク)。誤タップに寛容に: 破壊的操作は一切置かない。
+- 1枚のカードで完結: 1行目「**14:25 新潟9R** 芝1800」+ 発走までの残り時間(30分切りで強調色)。2行目「**7番 サンプルホース**」を最大フォント(20px+)で。3行目にオッズバッジ「単勝 14.2倍」(core=アクセント色の塗りバッジ、watch=枠線のみの控えめバッジ+「参考」ラベル)。4行目に理由チップ(「父キズナ=日本型」「1800m=非根幹」「10-50倍帯」)。中京のみ警告バッジ「中京は効き弱(検証済)」。
+- カード全体をタップで詳細展開(core年別実績 2023:116%→2026:168%とCI、除外理由の説明、netkeibaの出馬表へのリンク)。誤タップに寛容に: 破壊的操作は一切置かない。
 - 推奨0頭の日は「今日は該当なし。買わないのも戦略」と大きく表示(空画面にしない)。
 
 **操作性・視認性の必須要件**
@@ -64,7 +64,7 @@
 
 ## 補足コンテキスト(判断に迷ったら)
 
-- 理由表示・実績ラインの数値の出典は `tests/fixtures/golden.json`(2023:99.6 / 2024:96.0 / 2025:94.9 / 2026:132.0、帯内n=5,298)。フロントは meta.json 経由で表示。
+- 理由表示・実績ラインの数値の出典は `tests/fixtures/golden_v2.json`(core: 2023:116 / 2024:114 / 2025:119 / 2026:168、n=1,878、CI 101-139%)。フロントは meta.json 経由で表示し、「年次では100%を割る年もある」旨を詳細展開内に明記。
 - オッズは発売開始まで(概ね前日夜〜当日朝)APIが空。空なら全picks in_band=false のまま表示(「オッズ発売待ち」バッジ)。エラーにしない。
 - 出走取消はオッズ欠落で自然に帯外へ落ちるので特別処理不要。
 - 迷ったら「機能を足す」より「タップ数を減らす」を選ぶこと。

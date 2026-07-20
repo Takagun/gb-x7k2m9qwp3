@@ -14,20 +14,37 @@
 
 ## 2. 判定ルール(ルールエンジン仕様 — 変更禁止)
 
+**v2ルール(2026-07-20確定。検証記録: ../Keiba/docs/factors/02b, 02c)**
+
 ```
 candidate(候補) = 芝レース
               AND distance % 400 != 0        # 非根幹距離
+              AND distance != 1000           # 千直は明示除外
               AND stype(父) == "JP"          # 日本型主流血統 (engine/siretype.py)
-pick(推奨)     = candidate AND 10.0 <= 単勝オッズ < 50.0
-注記           = venue == 中京(07) の場合「検証で効きが弱い会場」の警告バッジを付ける(除外はしない)
+              AND venue != 中京(07)          # v2: 検証で効かない会場を除外
+除外(exclusion) = 前走から121日以上           # 長期休養明け
+              OR 馬体重 <= 440kg             # 小柄馬
+              OR 距離が前走比 +200m以上       # 延長ローテ
+              # 除外馬は「候補(除外)」として理由付きでグレー表示(非表示にはしない)
+pick_core(推奨) = candidate AND NOT excluded AND 10.0 <= 単勝オッズ < 30.0
+pick_watch(参考) = candidate AND NOT excluded AND 30.0 <= 単勝オッズ < 50.0
+                 # watch層は表示のみ(購入対象外)。検証記録: ../Keiba/docs/factors/02c
 ```
+
+- core層の実績(確定オッズ・ベタ買い): 全期間 n=1,878 / 単勝119.5%、年別 116/114/119/168%(全年100%超)、
+  半期別も全7期100%以上、ブートストラップ95%CI 101-139%、P(>100%)=98%。理由表示・実績ラインはこの値を使う。
+- watch層(30-50倍)は3年半で19勝とサンプル希薄なため参考表示に降格(pool 104.5%だがB期間の対市場超過勝率0.92)。
+- 前走情報(日付・距離)が取れない馬(初出走・地方転入等)は除外しない(候補に残す)。
+- 馬体重は出馬表で当日朝に発表される。未発表の間は前走馬体重で仮判定し、
+  オッズバッチ実行時に当日値で再判定する。前走値も無い場合は除外しない。
 
 - `engine/siretype.py` は検証済みの確定マッピング。**編集禁止**(種牡馬の追加はTakahiroの判断で行う)。
 - 芝1000m(千直)は非根幹に含まれない(1000%400=200 → 含まれてしまうので **明示除外する**。
   検証で千直は効かないことが確認済み: 回収率60.2%)。
 - 理由表示テンプレート:
-  `父{sire_name}(日本型主流)× {venue_name}芝{distance}m(非根幹)× 単勝{odds}倍(検証妙味帯10-50倍)`
-  + 補足行: `このセグメントの過去実績: 2023年99.6% / 24年96.0% / 25年94.9% / 26年132.0%(単勝ベタ買い回収率)`
+  `父{sire_name}(日本型主流)× {venue_name}芝{distance}m(非根幹)× 単勝{odds}倍(コア妙味帯10-30倍)`
+  + 補足行: `コア帯の過去実績: 2023年116% / 24年114% / 25年119% / 26年168%(単勝ベタ買い回収率・全年100%超)`
+  watch層(30-50倍)は `参考: 30-50倍はデータ希薄のため購入対象外` を付す。
 
 ## 3. 全体アーキテクチャ
 
@@ -42,7 +59,7 @@ pick(推奨)     = candidate AND 10.0 <= 単勝オッズ < 50.0
   odds.yml    土日 8:00〜16:00 JST 毎時
     └─ engine/update_odds.py
         1. candidates.json の候補レースのみ単勝オッズを取得
-        2. 帯(10-50)判定 → site/data/picks.json 更新、commit/push
+        2. tier判定(core 10-30 / watch 30-50)→ site/data/picks.json 更新、commit/push
         3. 新規に帯入りした馬があれば Discord Webhook 通知(任意)
   pages.yml   push時に site/ を GitHub Pages へデプロイ
 [閲覧]  PC/スマホのブラウザ → Pages上のPWA(ホーム画面に追加可)
@@ -78,7 +95,17 @@ pick(推奨)     = candidate AND 10.0 <= 単勝オッズ < 50.0
    父だけ取るなら先頭リンクで正しい。母父は `rows[len(rows)//2]` の先頭セル側(今回は不要)。
 3. 解決した父は sire_cache.json に追記して commit(キャッシュは単調増加、馬の父は不変なので無効化不要)。
 
-### 4.4 単勝オッズ
+### 4.4 前走情報(v2の除外判定用)
+
+- 候補馬(ふるい①〜③通過馬のみ、週末あたり数十頭)について
+  `https://db.netkeiba.com/horse/{horse_id}/`(EUC-JP)の戦績テーブルから
+  **直近出走の日付・距離・馬体重** を取得する。
+- 戦績テーブルは日付降順。先頭行から `日付`, `距離`(例: `芝1800`), `馬体重`(例: `472(+4)`)を抽出。
+- 結果は `data/form_cache.json`(horse_id → {last_date, last_distance, last_weight})にキャッシュし、
+  **同一週末内のみ有効**(週をまたいだら破棄。sire_cacheと違い前走情報は変わるため)。
+- 取得失敗時は除外判定をスキップ(候補に残す)し、picks.json に `form_missing: true` を立てる。
+
+### 4.5 単勝オッズ
 - JSON API: `https://race.netkeiba.com/api/api_get_jra_odds.html?race_id={race_id}&type=1&action=update`
   → `data.odds["1"]` が `{"01": ["7.2", ...], ...}`(馬番ゼロ埋めキー、[0]がオッズ文字列)。
 - フォールバック: `https://odds.sp.netkeiba.com/?race_id={race_id}&type=1` のHTMLテーブル。
@@ -108,13 +135,14 @@ pick(推奨)     = candidate AND 10.0 <= 単勝オッズ < 50.0
   "odds_asof": "10:00",
   "picks": [{
     "race_id": "202604020601", "horse_number": 3, "odds_win": 14.2,
-    "in_band": true, "entered_band_at": "2026-07-25T09:00:00+09:00"
+    "tier": "core",   // "core" | "watch" | null(帯外)
+    "entered_band_at": "2026-07-25T09:00:00+09:00", "form_missing": false
   }]
 }
 // meta.json — 実績表示用の静的データ(golden.jsonのサブセット) + 免責
 ```
 
-- フロントは candidates.json と picks.json を突き合わせて表示(in_band=trueが「推奨」、falseは「候補(帯外)」としてグレー表示)。
+- フロントは candidates.json と picks.json を突き合わせて表示(tier=core が「推奨」、watch が「参考」、null は「候補(帯外)」としてグレー表示)。
 - race_id・馬番のみで結合できる設計にする(horse_id はリンク用)。
 
 ## 6. 検証ハーネス(実装の合否はこれで判定)
@@ -123,22 +151,24 @@ pick(推奨)     = candidate AND 10.0 <= 単勝オッズ < 50.0
 - `tests/test_rules.py`: 判定式のゴールデンテスト。
   例: (芝,1800,キズナ)→candidate / (芝,2000,キズナ)→非該当 / (ダ,1800,キズナ)→非該当 /
   (芝,1400,ドレフォン)→非該当 / (芝,1000,ロードカナロア)→非該当(千直除外) /
-  オッズ9.9→帯外, 10.0→帯内, 49.9→帯内, 50.0→帯外 / 中京→warning。
+  オッズ9.9→帯外, 10.0→core, 29.9→core, 30.0→watch, 49.9→watch, 50.0→帯外 / 中京→候補外 /
+  前走2000m→今走1800m(短縮)→除外なし, 前走1600m→今走1800m(+200m延長)→除外, 休養121日→除外, 馬体重440kg→除外。
 
 ### 6.2 パーサ: フィクスチャHTML
 - `tests/fixtures/` に出馬表・ped・オッズJSONのサンプルを保存し、パーサ単体テスト。
   フィクスチャは初回実行時に実HTMLを保存して作る(ネットワークテストはCIでは実行しない。
   `@pytest.mark.network` でローカル限定)。
 
-### 6.3 回帰: golden.json(同梱済み・変更禁止)
-- `tests/fixtures/golden.json` は keiba.db(2023-01-05〜2026-05-10, 156,273行)で確定させた正解値:
-  セグメント全体 n=14,577 / 単勝回収率80.9%、10-50倍帯 n=5,298 / 99.5%、年別値。
+### 6.3 回帰: golden_v2.json(同梱済み・変更禁止)
+- `tests/fixtures/golden_v2.json` は keiba.db(2023-01-05〜2026-05-10, 156,273行)で確定させた正解値:
+  core(10-30倍) n=1,878 / 単勝119.5%、watch(30-50倍) n=691 / 104.5%、full n=2,569 / 115.4%、各年別値。
+  (`golden.json` はv1=baseルールの参照値: セグメント全体 n=14,577 / 80.9%、10-50倍 n=5,298 / 99.5%)
 - `engine/backtest.py --db path/to/keiba.db` がルールエンジンをDB全行に適用し、
   golden.json と **n・回収率が完全一致** することを確認する(ルールの実装ズレ検知)。
   ※ keiba.db が手元にある場合のみ実行(CIではskip)。stype判定は sire_name ベースで行う。
 
 ### 6.4 E2E: 過去日シミュレーション(同梱済み・変更禁止)
-- `tests/fixtures/e2e_day_20260425.json`: 2026-04-25(56候補/帯内20頭/勝利2頭)の正解セット。
+- `tests/fixtures/e2e_day_20260425_v2.json`: 2026-04-25(raw候補56→除外後19→core4・watch1、tier/除外理由付き)の正解セット。
 - `engine/backtest.py --replay 2026-04-25 --db ...` が candidates/picks 生成パスを通して
   このJSONと一致する出力を出すこと(build_weekly と同じ判定コードパスを使うのが要件)。
 

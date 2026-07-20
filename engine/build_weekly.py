@@ -61,7 +61,9 @@ def build(dates, race_list=None, shutuba=None, resolver=None):
             candidates = []
             for h in info["horses"]:
                 sire = resolver.resolve(h["horse_id"])
-                if not rules.is_candidate(info["surface"], info["distance"], sire):
+                if not rules.is_candidate(
+                    info["surface"], info["distance"], sire, info["venue_code"]
+                ):
                     continue
                 candidates.append({
                     "horse_number": h["horse_number"],

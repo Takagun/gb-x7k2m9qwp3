@@ -1,0 +1,880 @@
+{
+  "date": "2026-04-25",
+  "note": "v2確定ルールのE2E正解セット。tier: core=推奨(10-30倍) / watch=参考(30-50倍) / null=除外or帯外。",
+  "n_raw_candidates": 56,
+  "n_after_exclusion": 19,
+  "n_core": 4,
+  "n_watch": 1,
+  "candidates": [
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 9,
+      "sire_name": "ワールドエース",
+      "odds_win": 133.7,
+      "prev_distance": 3390,
+      "days_since_last": 70,
+      "horse_weight": 500,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 2,
+      "sire_name": "ロードカナロア",
+      "odds_win": 42.7,
+      "prev_distance": 2860,
+      "days_since_last": 84,
+      "horse_weight": 462,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 10,
+      "sire_name": "ミッキーアイル",
+      "odds_win": 74.9,
+      "prev_distance": 2500,
+      "days_since_last": 42,
+      "horse_weight": 514,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "シルバーステート",
+      "odds_win": 22.3,
+      "prev_distance": 2000,
+      "days_since_last": 28,
+      "horse_weight": 466,
+      "excluded_reason": [],
+      "tier": "core",
+      "finish_position": 5
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 8,
+      "sire_name": "リアルインパクト",
+      "odds_win": 224.1,
+      "prev_distance": 1800,
+      "days_since_last": 20,
+      "horse_weight": 488,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 13,
+      "sire_name": "イスラボニータ",
+      "odds_win": 68.0,
+      "prev_distance": 1200,
+      "days_since_last": 62,
+      "horse_weight": 458,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 15
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 7,
+      "sire_name": "キズナ",
+      "odds_win": 1.6,
+      "prev_distance": 3200,
+      "days_since_last": 49,
+      "horse_weight": 492,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 5,
+      "sire_name": "リアルインパクト",
+      "odds_win": 31.6,
+      "prev_distance": 1600,
+      "days_since_last": 7,
+      "horse_weight": 436,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030104",
+      "venue_code": "08",
+      "distance": 3170,
+      "horse_number": 5,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 17.4,
+      "prev_distance": 3000,
+      "days_since_last": 174,
+      "horse_weight": 510,
+      "excluded_reason": [
+        "long_layoff"
+      ],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 15,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 30.2,
+      "prev_distance": 1400,
+      "days_since_last": 413,
+      "horse_weight": 408,
+      "excluded_reason": [
+        "long_layoff",
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 2,
+      "sire_name": "ビッグアーサー",
+      "odds_win": 5.6,
+      "prev_distance": 1200,
+      "days_since_last": 203,
+      "horse_weight": 526,
+      "excluded_reason": [
+        "long_layoff",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 10,
+      "sire_name": "タワーオブロンドン",
+      "odds_win": 15.4,
+      "prev_distance": 1200,
+      "days_since_last": 41,
+      "horse_weight": 550,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 9,
+      "sire_name": "タワーオブロンドン",
+      "odds_win": 16.4,
+      "prev_distance": 1200,
+      "days_since_last": 41,
+      "horse_weight": 432,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 14
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 14,
+      "sire_name": "リアルスティール",
+      "odds_win": 67.9,
+      "prev_distance": 1200,
+      "days_since_last": 55,
+      "horse_weight": 482,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 16
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 9,
+      "sire_name": "フィエールマン",
+      "odds_win": 4.8,
+      "prev_distance": 2000,
+      "days_since_last": 42,
+      "horse_weight": 500,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 6,
+      "sire_name": "ロードカナロア",
+      "odds_win": 1.7,
+      "prev_distance": 1600,
+      "days_since_last": 41,
+      "horse_weight": 490,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202605020109",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 4,
+      "sire_name": "イスラボニータ",
+      "odds_win": 7.5,
+      "prev_distance": 1800,
+      "days_since_last": 55,
+      "horse_weight": 498,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 6,
+      "sire_name": "キズナ",
+      "odds_win": 3.4,
+      "prev_distance": 1400,
+      "days_since_last": 27,
+      "horse_weight": 438,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202608030109",
+      "venue_code": "08",
+      "distance": 1400,
+      "horse_number": 16,
+      "sire_name": "レイデオロ",
+      "odds_win": 53.4,
+      "prev_distance": 1600,
+      "days_since_last": 84,
+      "horse_weight": 414,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 11,
+      "sire_name": "コントレイル",
+      "odds_win": 18.4,
+      "prev_distance": 2400,
+      "days_since_last": 20,
+      "horse_weight": 400,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 15,
+      "sire_name": "ミッキーアイル",
+      "odds_win": 66.1,
+      "prev_distance": 1200,
+      "days_since_last": 84,
+      "horse_weight": 440,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 13,
+      "sire_name": "ロジャーバローズ",
+      "odds_win": 23.6,
+      "prev_distance": 1600,
+      "days_since_last": 28,
+      "horse_weight": 408,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 9,
+      "sire_name": "ロジャーバローズ",
+      "odds_win": 99.0,
+      "prev_distance": 1800,
+      "days_since_last": 55,
+      "horse_weight": 468,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 10,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 24.9,
+      "prev_distance": 1600,
+      "days_since_last": 55,
+      "horse_weight": 416,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 4
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 7,
+      "sire_name": "シルバーステート",
+      "odds_win": 20.1,
+      "prev_distance": 2400,
+      "days_since_last": 20,
+      "horse_weight": 464,
+      "excluded_reason": [],
+      "tier": "core",
+      "finish_position": 8
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 10,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 174.8,
+      "prev_distance": 2000,
+      "days_since_last": 14,
+      "horse_weight": 472,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "コントレイル",
+      "odds_win": 23.6,
+      "prev_distance": 1800,
+      "days_since_last": 14,
+      "horse_weight": 426,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 12
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 1,
+      "sire_name": "キズナ",
+      "odds_win": 6.7,
+      "prev_distance": 1600,
+      "days_since_last": 34,
+      "horse_weight": 418,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 4,
+      "sire_name": "キタサンブラック",
+      "odds_win": 3.7,
+      "prev_distance": 1800,
+      "days_since_last": 70,
+      "horse_weight": 500,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 6,
+      "sire_name": "レイデオロ",
+      "odds_win": 224.8,
+      "prev_distance": 2600,
+      "days_since_last": 14,
+      "horse_weight": 464,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 7,
+      "sire_name": "イスラボニータ",
+      "odds_win": 303.1,
+      "prev_distance": 1600,
+      "days_since_last": 90,
+      "horse_weight": 414,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 14
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 4,
+      "sire_name": "コントレイル",
+      "odds_win": 19.7,
+      "prev_distance": null,
+      "days_since_last": null,
+      "horse_weight": 480,
+      "excluded_reason": [],
+      "tier": "core",
+      "finish_position": 18
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 5,
+      "sire_name": "キタサンブラック",
+      "odds_win": 7.0,
+      "prev_distance": 1600,
+      "days_since_last": 63,
+      "horse_weight": 424,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 3,
+      "sire_name": "ロードカナロア",
+      "odds_win": 26.4,
+      "prev_distance": 1600,
+      "days_since_last": 28,
+      "horse_weight": 444,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 4,
+      "sire_name": "フィエールマン",
+      "odds_win": 83.7,
+      "prev_distance": 2000,
+      "days_since_last": 97,
+      "horse_weight": 450,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 3,
+      "sire_name": "キズナ",
+      "odds_win": 5.2,
+      "prev_distance": 1600,
+      "days_since_last": 105,
+      "horse_weight": 420,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 5,
+      "sire_name": "コントレイル",
+      "odds_win": 2.9,
+      "prev_distance": 2000,
+      "days_since_last": 83,
+      "horse_weight": 456,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 1,
+      "sire_name": "シルバーステート",
+      "odds_win": 7.4,
+      "prev_distance": 1800,
+      "days_since_last": 48,
+      "horse_weight": 472,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 9,
+      "sire_name": "コントレイル",
+      "odds_win": 20.9,
+      "prev_distance": 1600,
+      "days_since_last": 21,
+      "horse_weight": 424,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 5
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 14,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 26.9,
+      "prev_distance": 1600,
+      "days_since_last": 84,
+      "horse_weight": 436,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 11
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 13,
+      "sire_name": "レイデオロ",
+      "odds_win": 5.1,
+      "prev_distance": 1800,
+      "days_since_last": 27,
+      "horse_weight": 448,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 9,
+      "sire_name": "シルバーステート",
+      "odds_win": 4.4,
+      "prev_distance": 2200,
+      "days_since_last": 13,
+      "horse_weight": 438,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 6
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 1,
+      "sire_name": "ビッグアーサー",
+      "odds_win": 448.4,
+      "prev_distance": 1200,
+      "days_since_last": 35,
+      "horse_weight": 420,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 16
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 5,
+      "sire_name": "シルバーステート",
+      "odds_win": 31.7,
+      "prev_distance": 1200,
+      "days_since_last": 103,
+      "horse_weight": 440,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 8
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 7,
+      "sire_name": "ロードカナロア",
+      "odds_win": 76.4,
+      "prev_distance": 1200,
+      "days_since_last": 84,
+      "horse_weight": 428,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 10
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 6,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 41.2,
+      "prev_distance": 2000,
+      "days_since_last": 14,
+      "horse_weight": 496,
+      "excluded_reason": [],
+      "tier": "watch",
+      "finish_position": 7
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 17,
+      "sire_name": "ロードカナロア",
+      "odds_win": 60.7,
+      "prev_distance": 1800,
+      "days_since_last": 77,
+      "horse_weight": 434,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 12,
+      "sire_name": "リアルスティール",
+      "odds_win": 2.0,
+      "prev_distance": 1600,
+      "days_since_last": 35,
+      "horse_weight": 422,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 2,
+      "sire_name": "レイデオロ",
+      "odds_win": 5.5,
+      "prev_distance": 1800,
+      "days_since_last": 13,
+      "horse_weight": 488,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 5
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 3,
+      "sire_name": "ロードカナロア",
+      "odds_win": 5.7,
+      "prev_distance": 2400,
+      "days_since_last": 41,
+      "horse_weight": 506,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 3
+    },
+    {
+      "race_id": "202605020104",
+      "venue_code": "05",
+      "distance": 1800,
+      "horse_number": 12,
+      "sire_name": "ロードカナロア",
+      "odds_win": 1.5,
+      "prev_distance": 1800,
+      "days_since_last": 70,
+      "horse_weight": 470,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 1,
+      "sire_name": "コントレイル",
+      "odds_win": 3.3,
+      "prev_distance": 2000,
+      "days_since_last": 14,
+      "horse_weight": 490,
+      "excluded_reason": [
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 2
+    },
+    {
+      "race_id": "202605020105",
+      "venue_code": "05",
+      "distance": 1400,
+      "horse_number": 11,
+      "sire_name": "サートゥルナーリア",
+      "odds_win": 6.9,
+      "prev_distance": 1600,
+      "days_since_last": 97,
+      "horse_weight": 406,
+      "excluded_reason": [
+        "small"
+      ],
+      "tier": null,
+      "finish_position": 9
+    },
+    {
+      "race_id": "202608030108",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 2,
+      "sire_name": "アルアイン",
+      "odds_win": 1.6,
+      "prev_distance": 1800,
+      "days_since_last": 83,
+      "horse_weight": 496,
+      "excluded_reason": [],
+      "tier": null,
+      "finish_position": 1
+    },
+    {
+      "race_id": "202608030105",
+      "venue_code": "08",
+      "distance": 2200,
+      "horse_number": 3,
+      "sire_name": "サトノダイヤモンド",
+      "odds_win": 14.5,
+      "prev_distance": 2400,
+      "days_since_last": 20,
+      "horse_weight": 492,
+      "excluded_reason": [],
+      "tier": "core",
+      "finish_position": 7
+    },
+    {
+      "race_id": "202608030103",
+      "venue_code": "08",
+      "distance": 1800,
+      "horse_number": 15,
+      "sire_name": "グレーターロンドン",
+      "odds_win": 20.5,
+      "prev_distance": 1600,
+      "days_since_last": 63,
+      "horse_weight": 432,
+      "excluded_reason": [
+        "small",
+        "extend"
+      ],
+      "tier": null,
+      "finish_position": 1
+    }
+  ]
+}

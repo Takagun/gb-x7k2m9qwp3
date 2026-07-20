@@ -4,8 +4,8 @@
 
 ## 絶対に守ること
 
-- **判定ルール・閾値(芝/非根幹/JP型/10-50倍/千直除外)を変更しない。** これらは3年半の実データ検証で確定した値(根拠: ../Keiba/docs/factors/02)。「改善」を提案したくなっても実装せず、TODOコメントに留める。
-- **編集禁止ファイル**: `engine/siretype.py`(検証済み血統マッピング)、`data/sire_cache.json`、`tests/fixtures/golden.json`、`tests/fixtures/e2e_day_20260425.json`。テストをこれらに合わせる方向のみ可。フィクスチャをテストに合わせる変更は禁止。
+- **判定ルール・閾値(芝/非根幹/JP型/core10-30倍・watch30-50倍/千直除外/中京除外/ネガ3除外: 休養121日+・馬体重440kg以下・延長200m+)を変更しない。** これらは3年半の実データ検証で確定した値(根拠: ../Keiba/docs/factors/02)。「改善」を提案したくなっても実装せず、TODOコメントに留める。
+- **編集禁止ファイル**: `engine/siretype.py`(検証済み血統マッピング)、`data/sire_cache.json`、`tests/fixtures/golden.json`、`tests/fixtures/golden_v2.json`、`tests/fixtures/e2e_day_20260425.json`、`tests/fixtures/e2e_day_20260425_v2.json`。テストをこれらに合わせる方向のみ可。フィクスチャをテストに合わせる変更は禁止。
 - スクレイピングは必ず2〜4秒のランダムディレイ+リトライ3回+タイムアウト15秒。並列リクエスト禁止。netkeibaはEUC-JP。
 - 依存は最小限: `requests`, `beautifulsoup4`, `pytest`, `ruff` のみ。pandasはengine本体には入れない(backtest.pyのみ可)。フロントはビルドツールなしのvanilla JS。
 - 秘密情報(Discord Webhook URL等)はコード・JSONに書かない。GitHub Secrets / 環境変数のみ。
@@ -26,7 +26,7 @@ make serve       # python -m http.server で site/ をプレビュー
 ## 完了の定義
 
 1. `make test` が全パス(CIと同一)
-2. `make backtest` が golden.json と n=14,577 / 80.9% / n=5,298 / 99.5% を完全一致で再現し、E2Eリプレイ(2026-04-25: 候補56/帯内20)も一致
+2. `make backtest` が golden_v2.json(core n=1,878/119.5% 年別116/114/119/168、watch n=691/104.5%、full n=2,569/115.4%)を完全一致で再現し、E2E v2リプレイ(2026-04-25: raw56→除外後19→core4・watch1)も一致
 3. `make serve` でスマホ幅・PC幅の両方で表示が破綻しない(picks空状態のプレースホルダ含む)
 4. `bootstrap.sh` 実行で GitHub リポジトリ作成→push→Pages有効化まで通る
 5. README.md に運用手順(cron時刻、手動実行、kill-switch基準)が書かれている
