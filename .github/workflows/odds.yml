@@ -4,6 +4,11 @@ on:
     - cron: "0 23 * * 5,6"   # 土日 8:00 JST (UTC前日)
     - cron: "0 0-7 * * 6,0"  # 土日 9:00-16:00 JST 毎時
   workflow_dispatch:
+    inputs:
+      date:
+        description: "対象日 YYYYMMDD (空なら今日JST)。指定時はDiscord通知しない"
+        required: false
+        default: ""
 concurrency:
   group: data-update
   cancel-in-progress: false
@@ -21,8 +26,14 @@ jobs:
       - run: pip install requests beautifulsoup4
       - name: Update picks.json
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python -m engine.update_odds
+          # 日付指定リプレイでは通知を抑制する (帯入り済みの馬を再通知しないため)
+          DISCORD_WEBHOOK_URL: ${{ inputs.date == '' && secrets.DISCORD_WEBHOOK_URL || '' }}
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            python -m engine.update_odds --date "${{ inputs.date }}"
+          else
+            python -m engine.update_odds
+          fi
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -32,10 +43,10 @@ jobs:
             echo "no changes"
           else
             git commit -m "odds: picks更新 [skip ci]"
-            git pull --rebase origin main
-            git push
+            git pull --rebase origin "${{ github.ref_name }}"
+            git push origin "HEAD:${{ github.ref_name }}"
             # [skip ci] でpagesも発火しないため明示的にデプロイを起動
-            gh workflow run pages.yml --ref main
+            gh workflow run pages.yml --ref "${{ github.ref_name }}"
           fi
         env:
           GH_TOKEN: ${{ github.token }}
