@@ -38,8 +38,7 @@ jobs:
           race_id = sys.argv[1]
           s = BaseScraper()
           for label, url in [
-              ("shutuba", SHUTUBA_URL.format(race_id=race_id)),
-              ("result", f"https://race.netkeiba.com/race/result.html?race_id={race_id}"),
+              ("db", f"https://db.netkeiba.com/race/{race_id}/"),
           ]:
               resp = s._fetch(url)
               if resp.encoding is None or resp.encoding.lower() in ("iso-8859-1", "windows-1252"):
@@ -58,6 +57,13 @@ jobs:
               i = text.find("RaceData01")
               if i >= 0:
                   print("RaceData01 snippet:", re.sub(r"\s+", " ", text[i:i+900])[:900])
+              print("data_intro:", "data_intro" in text, "/ race_table_01:", "race_table_01" in text)
+              print("table count:", text.count("<table"))
+              from bs4 import BeautifulSoup
+              soup = BeautifulSoup(text, "html.parser")
+              body_text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+              print("body head:", body_text[:600])
+              print("body tail:", body_text[-300:])
           EOF
           exit 0
       - name: Build candidates.json
