@@ -6,3 +6,4 @@ __pycache__/
 *.db
 .env
 .repo-name
+data/form_cache.json
