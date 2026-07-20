@@ -21,6 +21,10 @@ SHUTUBA_URL = "https://race.netkeiba.com/race/shutuba.html?race_id={race_id}"
 PED_URL = "https://db.netkeiba.com/horse/ped/{horse_id}/"
 ODDS_API_URL = "https://race.netkeiba.com/api/api_get_jra_odds.html"
 ODDS_SP_URL = "https://odds.sp.netkeiba.com/"
+# 過去日付のレースは race.netkeiba.com がJSレンダリングの空シェルを返すため、
+# サーバレンダリングされる db.netkeiba.com のレースページへフォールバックする
+DB_RACE_URL = "https://db.netkeiba.com/race/{race_id}/"
+DB_RACE_LIST_URL = "https://db.netkeiba.com/race/list/{date_str}/"
 
 # JRA会場コード (NAR=地方は30以上なので除外)
 JRA_VENUE_CODES = {f"{i:02d}" for i in range(1, 11)}
@@ -32,6 +36,11 @@ VENUE_NAMES = {
 RACE_ID_RE = re.compile(r"\b(20[2-9]\d{9})\b")
 POST_TIME_RE = re.compile(r"(\d{1,2}:\d{2})発走")
 SURFACE_DIST_RE = re.compile(r"(芝|ダ)(\d{3,4})m")
+# dbページは "芝右1600m" "ダ1800m" "障芝3350m" のように回り・内外が挟まる。
+# 障芝を先に照合しないと障害戦が芝扱いになるので順序を変えないこと。
+DB_SURFACE_DIST_RE = re.compile(r"(障芝|障ダ|芝|ダ)(?:右|左|直線)?\s*(?:外|内)?\s*(\d{3,4})m")
+DB_POST_TIME_RE = re.compile(r"発走\s*[::]\s*(\d{1,2}:\d{2})")
+DB_HORSE_LINK_RE = re.compile(r"/horse/(\d{10})")
 KAISAI_RE = re.compile(r"(\d+)回\s*(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)\s*(\d+)日目")
 HORSE_LINK_RE = re.compile(r"db\.netkeiba\.com/horse/(\d{10})")
 
@@ -217,6 +226,133 @@ def _horse_number_from_row(tr):
     return None
 
 
+def parse_db_race_list(html_text):
+    """dbの日別レース一覧ページから実在レースIDを返す (過去日付用)。
+
+    /race/{race_id}/ リンクのみ拾う。R01-12への展開はしない —
+    一覧に載っているものが施行された全レースなので、そのまま使う。
+    """
+    ids = set()
+    for m in re.finditer(r"/race/(20[2-9]\d{9})/", html_text):
+        race_id = m.group(1)
+        if race_id[4:6] in JRA_VENUE_CODES:
+            ids.add(race_id)
+    return sorted(ids)
+
+
+def parse_db_race(soup, race_id):
+    """db.netkeiba.com のレースページから parse_shutuba 互換の情報を抽出する。
+
+    過去に施行済みのレース用フォールバック。結果テーブルに確定単勝オッズも
+    載っているため、追加キー win_odds ({馬番:int → 単勝:float}) も返す。
+    """
+    text = soup.get_text(" ", strip=False)
+
+    m = DB_SURFACE_DIST_RE.search(text)
+    if not m:
+        raise ParseError(f"{race_id}: 馬場・距離が抽出できない (dbページ)")
+    kind = m.group(1)
+    if kind == "芝":
+        surface = "芝"
+    elif kind == "ダ":
+        surface = "ダート"
+    else:
+        surface = "障害"
+    distance = int(m.group(2))
+
+    post_time = None
+    m = DB_POST_TIME_RE.search(text)
+    if m:
+        h, mi = m.group(1).split(":")
+        post_time = f"{int(h):02d}:{mi}"
+
+    race_name = None
+    intro = soup.find(class_="data_intro")
+    h1 = intro.find("h1") if intro else None
+    if h1 is None:
+        h1s = soup.find_all("h1")
+        h1 = h1s[-1] if h1s else None
+    if h1 is not None:
+        race_name = h1.get_text(strip=True)
+
+    date_str = None
+    m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", str(soup))
+    if m:
+        date_str = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+
+    horses, win_odds = _parse_db_race_table(soup)
+    if not horses:
+        raise ParseError(f"{race_id}: 出走馬が1頭も抽出できない (dbページ)")
+
+    venue_code = race_id[4:6]
+    return {
+        "race_id": race_id,
+        "venue_code": venue_code,
+        "venue_name": VENUE_NAMES.get(venue_code, venue_code),
+        "race_number": int(race_id[10:12]),
+        "post_time": post_time,
+        "surface": surface,
+        "distance": distance,
+        "race_name": race_name,
+        "date": date_str,
+        "horses": horses,
+        "win_odds": win_odds,
+    }
+
+
+def _parse_db_race_table(soup):
+    """dbレースページの結果テーブルから (horses, win_odds) を取る。
+
+    ヘッダ行の「馬番」「馬名」「単勝」の列位置で引く (列構成の揺れに強くする)。
+    """
+    for table in soup.find_all("table"):
+        header_row = table.find("tr")
+        if header_row is None:
+            continue
+        headers = [c.get_text(strip=True) for c in header_row.find_all(["th", "td"])]
+        if "馬番" not in headers or "馬名" not in headers:
+            continue
+        i_umaban = headers.index("馬番")
+        i_name = headers.index("馬名")
+        i_tansho = headers.index("単勝") if "単勝" in headers else None
+
+        horses = []
+        win_odds = {}
+        seen = set()
+        for row in header_row.find_next_siblings("tr"):
+            cells = row.find_all("td")
+            if len(cells) <= max(i_umaban, i_name):
+                continue
+            num_text = cells[i_umaban].get_text(strip=True)
+            if not num_text.isdigit():
+                continue
+            number = int(num_text)
+            link = cells[i_name].find("a", href=True)
+            if link is None:
+                continue
+            m = DB_HORSE_LINK_RE.search(link["href"])
+            if m is None:
+                continue
+            horse_id = m.group(1)
+            name = link.get_text(strip=True)
+            if not name or horse_id in seen:
+                continue
+            seen.add(horse_id)
+            horses.append(
+                {"horse_number": number, "horse_id": horse_id, "horse_name": name})
+            if i_tansho is not None and len(cells) > i_tansho:
+                try:
+                    val = float(cells[i_tansho].get_text(strip=True))
+                    if val > 0:
+                        win_odds[number] = val
+                except ValueError:
+                    pass  # 取消・除外は "---" 等になる
+        if horses:
+            horses.sort(key=lambda h: h["horse_number"])
+            return horses, win_odds
+    return [], {}
+
+
 def parse_ped_sire(soup, horse_id=""):
     """血統表ページ (table.blood_table) から父名を返す。
 
@@ -288,15 +424,31 @@ def parse_odds_html(soup):
 
 class RaceListScraper(BaseScraper):
     def race_ids_for_date(self, date_str):
-        """kaisai_date=YYYYMMDD のページからJRAレースIDを展開して返す。"""
+        """kaisai_date=YYYYMMDD のJRAレースIDを返す。
+
+        まず db の日別一覧 (施行済みなら実在IDが確定で取れる) を試し、
+        空なら race.netkeiba.com のトップから展開する (未来日付はこちら)。
+        race.netkeiba.com は過去日付だとJSシェルに別週のIDが混ざるため、
+        過去日付でトップページを信用してはならない。
+        """
+        soup = self.get_soup(DB_RACE_LIST_URL.format(date_str=date_str))
+        ids = parse_db_race_list(str(soup))
+        if ids:
+            return ids
         soup = self.get_soup(TOP_URL.format(date_str=date_str))
         return parse_race_ids(str(soup))
 
 
 class ShutubaScraper(BaseScraper):
     def scrape(self, race_id):
-        soup = self.get_soup(SHUTUBA_URL.format(race_id=race_id))
-        return parse_shutuba(soup, race_id)
+        try:
+            soup = self.get_soup(SHUTUBA_URL.format(race_id=race_id))
+            return parse_shutuba(soup, race_id)
+        except ParseError:
+            # 施行済みレースはshutubaがJS空シェルになる → dbページへフォールバック。
+            # 未来の実在しないレース番号はdb側もParseErrorになり従来どおりskipされる。
+            soup = self.get_soup(DB_RACE_URL.format(race_id=race_id))
+            return parse_db_race(soup, race_id)
 
 
 class PedScraper(BaseScraper):
@@ -317,4 +469,13 @@ class OddsScraper(BaseScraper):
         except ParseError as e:
             logger.warning("odds API failed for %s: %s", race_id, e)
         soup = self.get_soup(ODDS_SP_URL, params={"race_id": race_id, "type": "1"})
-        return parse_odds_html(soup)
+        odds = parse_odds_html(soup)
+        if odds:
+            return odds
+        # 施行済みレースはAPI/spとも空になるため、dbページの確定単勝へフォールバック。
+        # 発売前レースはdbページが存在せずParseError → 従来どおり {} (未発売扱い)。
+        try:
+            db_soup = self.get_soup(DB_RACE_URL.format(race_id=race_id))
+            return parse_db_race(db_soup, race_id).get("win_odds", {})
+        except ParseError:
+            return {}

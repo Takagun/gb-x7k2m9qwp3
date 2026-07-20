@@ -223,3 +223,86 @@ def test_real_kaisai_top_fixture():
     assert len(ids) >= 12
     assert all(len(rid) == 12 and rid[4:6] in
                {f"{i:02d}" for i in range(1, 11)} for rid in ids)
+
+
+DB_RACE_HTML = """
+<html><body>
+<div class="data_intro">
+<h1>3歳以上1勝クラス</h1>
+<p><span>芝右1600m / 天候 : 晴 / 芝 : 良 / 発走 : 15:35</span></p>
+<p class="smalltxt">2026年7月18日 2回新潟2日目 3歳以上1勝クラス</p>
+</div>
+<table class="race_table_01">
+<tr><th>着順</th><th>枠番</th><th>馬番</th><th>馬名</th><th>性齢</th><th>斤量</th>
+<th>騎手</th><th>タイム</th><th>着差</th><th>単勝</th><th>人気</th></tr>
+<tr><td>1</td><td>3</td><td>5</td><td><a href="/horse/2023100001/">アルファテスト</a></td>
+<td>牡3</td><td>56</td><td>某騎手</td><td>1:33.5</td><td></td><td>12.3</td><td>5</td></tr>
+<tr><td>2</td><td>1</td><td>2</td><td><a href="/horse/2023100002/">ベータテスト</a></td>
+<td>牝3</td><td>54</td><td>某騎手</td><td>1:33.7</td><td>1.1/4</td><td>3.4</td><td>1</td></tr>
+<tr><td>中</td><td>5</td><td>9</td><td><a href="/horse/2023100003/">ガンマテスト</a></td>
+<td>牡3</td><td>56</td><td>某騎手</td><td></td><td></td><td>---</td><td></td></tr>
+</table>
+</body></html>
+"""
+
+DB_RACE_JUMP_HTML = """
+<html><body>
+<div class="data_intro">
+<h1>障害3歳以上未勝利</h1>
+<p><span>障芝3350m / 天候 : 晴 / 芝 : 良 / 発走 : 09:50</span></p>
+</div>
+<table>
+<tr><th>着順</th><th>枠番</th><th>馬番</th><th>馬名</th><th>単勝</th></tr>
+<tr><td>1</td><td>1</td><td>1</td><td><a href="/horse/2022100009/">ジャンプテスト</a></td>
+<td>2.0</td></tr>
+</table>
+</body></html>
+"""
+
+
+class TestParseDbRace:
+    def test_basic(self):
+        from engine.scraper import parse_db_race
+        info = parse_db_race(soup_of(DB_RACE_HTML), "202604020211")
+        assert info["surface"] == "芝"
+        assert info["distance"] == 1600
+        assert info["post_time"] == "15:35"
+        assert info["race_name"] == "3歳以上1勝クラス"
+        assert info["date"] == "2026-07-18"
+        assert info["venue_code"] == "04"
+        assert info["venue_name"] == "新潟"
+        assert info["race_number"] == 11
+        # 馬番順ソート・馬番列(枠番と取り違えない)・horse_id抽出
+        assert [h["horse_number"] for h in info["horses"]] == [2, 5, 9]
+        by_num = {h["horse_number"]: h for h in info["horses"]}
+        assert by_num[5]["horse_id"] == "2023100001"
+        assert by_num[5]["horse_name"] == "アルファテスト"
+        # 確定単勝オッズ。"---" (取消) はスキップされる
+        assert info["win_odds"] == {5: 12.3, 2: 3.4}
+
+    def test_jump_race_is_not_turf(self):
+        # 障芝を芝と誤認すると障害戦が候補になり得るので回帰テストで固定
+        from engine.scraper import parse_db_race
+        info = parse_db_race(soup_of(DB_RACE_JUMP_HTML), "202604020201")
+        assert info["surface"] == "障害"
+
+    def test_empty_shell_raises(self):
+        from engine.scraper import ParseError, parse_db_race
+        with pytest.raises(ParseError):
+            parse_db_race(soup_of("<html><body>データがありません</body></html>"), "202604020201")
+
+
+class TestParseDbRaceList:
+    def test_extracts_ids_from_race_links(self):
+        from engine.scraper import parse_db_race_list
+        html = """
+        <a href="/race/202603030101/">福島1R</a>
+        <a href="/race/202603030102/">福島2R</a>
+        <a href="/race/202644030101/">NAR</a>
+        <a href="/horse/2023100001/">馬ページは無視</a>
+        """
+        assert parse_db_race_list(html) == ["202603030101", "202603030102"]
+
+    def test_empty_for_future_date_shell(self):
+        from engine.scraper import parse_db_race_list
+        assert parse_db_race_list("<html><body>該当なし</body></html>") == []

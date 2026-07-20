@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "0 12 * * 4,5"   # 木・金 21:00 JST
   workflow_dispatch:
+    inputs:
+      dates:
+        description: "対象日 YYYYMMDD (カンマ区切り可)。空なら次の土日"
+        required: false
+        default: ""
 concurrency:
   group: data-update
   cancel-in-progress: false
@@ -19,7 +24,12 @@ jobs:
           python-version: "3.11"
       - run: pip install requests beautifulsoup4
       - name: Build candidates.json
-        run: python -m engine.build_weekly
+        run: |
+          if [ -n "${{ inputs.dates }}" ]; then
+            python -m engine.build_weekly --date "${{ inputs.dates }}"
+          else
+            python -m engine.build_weekly
+          fi
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -29,10 +39,10 @@ jobs:
             echo "no changes"
           else
             git commit -m "weekly: candidates更新 [skip ci]"
-            git pull --rebase origin main
-            git push
+            git pull --rebase origin "${{ github.ref_name }}"
+            git push origin "HEAD:${{ github.ref_name }}"
             # [skip ci] でpagesも発火しないため明示的にデプロイを起動
-            gh workflow run pages.yml --ref main
+            gh workflow run pages.yml --ref "${{ github.ref_name }}"
           fi
         env:
           GH_TOKEN: ${{ github.token }}
