@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 
 from engine.scraper import (
     ParseError,
+    parse_horse_form,
     parse_odds_json,
     parse_ped_sire,
     parse_race_ids,
@@ -24,6 +25,7 @@ SHUTUBA_FIXTURE = FIXTURES / "shutuba_202608030103.html"
 PED_FIXTURE = FIXTURES / "ped_sample.html"
 ODDS_FIXTURE = FIXTURES / "odds_sample.json"
 TOP_FIXTURE = FIXTURES / "kaisai_top_sample.html"
+HORSE_FIXTURE = FIXTURES / "horse_2020103575.html"
 
 
 def soup_of(html):
@@ -52,6 +54,7 @@ class TestParseRaceIds:
         assert parse_race_ids("<html></html>") == []
 
 
+
 SHUTUBA_HTML = """
 <html><body>
 <div class="RaceName">3歳未勝利</div>
@@ -61,9 +64,11 @@ SHUTUBA_HTML = """
 <table class="Shutuba_Table">
 <tr><th>枠</th><th>馬番</th><th>馬名</th></tr>
 <tr><td class="Waku">1</td><td class="Umaban">1</td>
-    <td><a href="https://db.netkeiba.com/horse/2023100001">アルファホース</a></td></tr>
+    <td><a href="https://db.netkeiba.com/horse/2023100001">アルファホース</a></td>
+    <td class="Weight">472(+4)</td></tr>
 <tr><td class="Waku">2</td><td class="Umaban">2</td>
-    <td><a href="https://db.netkeiba.com/horse/2023100002">ベータホース</a></td></tr>
+    <td><a href="https://db.netkeiba.com/horse/2023100002">ベータホース</a></td>
+    <td class="Weight"></td></tr>
 </table>
 </body></html>
 """
@@ -81,8 +86,10 @@ class TestParseShutuba:
         assert info["race_number"] == 1
         assert info["date"] == "2026-04-25"
         assert info["horses"] == [
-            {"horse_number": 1, "horse_id": "2023100001", "horse_name": "アルファホース"},
-            {"horse_number": 2, "horse_id": "2023100002", "horse_name": "ベータホース"},
+            {"horse_number": 1, "horse_id": "2023100001",
+             "horse_name": "アルファホース", "horse_weight": 472},
+            {"horse_number": 2, "horse_id": "2023100002",
+             "horse_name": "ベータホース", "horse_weight": None},
         ]
 
     def test_dirt(self):
@@ -90,6 +97,14 @@ class TestParseShutuba:
         info = parse_shutuba(soup_of(html), "202603020601")
         assert info["surface"] == "ダート"
         assert info["distance"] == 1200
+
+    def test_jump_race_is_not_turf(self):
+        # 「障芝3110m」を芝と誤認して候補を拾わないこと
+        for label in ("障芝3110m", "障3110m"):
+            html = SHUTUBA_HTML.replace("芝1800m", label)
+            info = parse_shutuba(soup_of(html), "202603020601")
+            assert info["surface"] == "障害"
+            assert info["distance"] == 3110
 
     def test_no_distance_raises(self):
         with pytest.raises(ParseError):
@@ -127,6 +142,49 @@ class TestParsePedSire:
     def test_missing_table_raises(self):
         with pytest.raises(ParseError):
             parse_ped_sire(soup_of("<html></html>"), "x")
+
+
+# 馬ページ戦績テーブル: 日付降順、先頭行が直近出走 (DESIGN §4.4)
+HORSE_FORM_HTML = """
+<table class="db_h_race_results nk_tb_common">
+<tr><th>日付</th><th>開催</th><th>R</th><th>レース名</th><th>頭数</th><th>馬番</th>
+    <th>オッズ</th><th>着順</th><th>斤量</th><th>距離</th><th>タイム</th><th>馬体重</th></tr>
+<tr><td><a href="/race/x">2026/04/25</a></td><td>3京都1</td><td>11</td>
+    <td>サンプルS</td><td>16</td><td>7</td><td>13.5</td><td>3</td><td>57.0</td>
+    <td>芝1800</td><td>1:47.9</td><td>472(+4)</td></tr>
+<tr><td><a href="/race/y">2026/03/01</a></td><td>1阪神2</td><td>9</td>
+    <td>前走S</td><td>14</td><td>3</td><td>8.1</td><td>1</td><td>56.0</td>
+    <td>ダ1400</td><td>1:23.0</td><td>468(0)</td></tr>
+</table>
+"""
+
+
+class TestParseHorseForm:
+    def test_first_row_is_latest(self):
+        form = parse_horse_form(soup_of(HORSE_FORM_HTML))
+        assert form == {"last_date": "2026-04-25", "last_distance": 1800,
+                        "last_weight": 472}
+
+    def test_weight_not_confused_with_other_numbers(self):
+        # 斤量57.0 / オッズ13.5 / 頭数16 / タイムを馬体重と誤認しないこと
+        html = HORSE_FORM_HTML.replace("472(+4)", "計不")
+        form = parse_horse_form(soup_of(html))
+        assert form["last_weight"] is None
+        assert form["last_date"] == "2026-04-25"
+
+    def test_unraced_horse_returns_none(self):
+        html = "<p>出走レースはありません</p>"
+        form = parse_horse_form(soup_of(html))
+        assert form == {"last_date": None, "last_distance": None, "last_weight": None}
+
+    def test_empty_table_returns_none(self):
+        html = "<table class='db_h_race_results'><tr><th>日付</th></tr></table>"
+        form = parse_horse_form(soup_of(html))
+        assert form == {"last_date": None, "last_distance": None, "last_weight": None}
+
+    def test_broken_page_raises(self):
+        with pytest.raises(ParseError):
+            parse_horse_form(soup_of("<html><body>404</body></html>"), "x")
 
 
 class TestParseOddsJson:
@@ -179,6 +237,14 @@ class TestFetchFixtures:
             params={"race_id": "202608030103", "type": "1", "action": "update"})
         ODDS_FIXTURE.write_text(json.dumps(data, ensure_ascii=False))
 
+    def test_fetch_horse(self):
+        if HORSE_FIXTURE.exists():
+            pytest.skip("取得済み")
+        from engine.scraper import HorseFormScraper
+        s = HorseFormScraper()
+        soup = s.get_soup("https://db.netkeiba.com/horse/result/2020103575/")
+        HORSE_FIXTURE.write_text(str(soup))
+
     def test_fetch_kaisai_top(self):
         if TOP_FIXTURE.exists():
             pytest.skip("取得済み")
@@ -208,6 +274,15 @@ def test_real_shutuba_fixture():
 def test_real_ped_fixture():
     # horse_id 2020103575 の父は sire_cache 上キタサンブラック
     assert parse_ped_sire(soup_of(PED_FIXTURE.read_text())) == "キタサンブラック"
+
+
+@pytest.mark.skipif(not HORSE_FIXTURE.exists(), reason="実フィクスチャ未取得")
+def test_real_horse_fixture():
+    form = parse_horse_form(soup_of(HORSE_FIXTURE.read_text()), "2020103575")
+    # 出走済みの現役馬なので直近出走の3項目が取れていること (値自体は時間で変わる)
+    assert form["last_date"] and len(form["last_date"]) == 10
+    assert isinstance(form["last_distance"], int) and form["last_distance"] >= 1000
+    assert form["last_weight"] is None or 300 <= form["last_weight"] <= 700
 
 
 @pytest.mark.skipif(not ODDS_FIXTURE.exists(), reason="実フィクスチャ未取得")

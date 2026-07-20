@@ -12,11 +12,19 @@
 import argparse
 import json
 import sys
+from datetime import date as date_cls
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from engine import rules
-from engine.scraper import ParseError, PedScraper, RaceListScraper, ShutubaScraper
+from engine.form_resolver import FormResolver
+from engine.scraper import (
+    HorseFormScraper,
+    ParseError,
+    PedScraper,
+    RaceListScraper,
+    ShutubaScraper,
+)
 from engine.sire_resolver import SireResolver
 from engine.siretype import classify
 
@@ -34,11 +42,33 @@ def next_weekend(today):
     return [sat, sat + timedelta(days=1)]
 
 
-def build(dates, race_list=None, shutuba=None, resolver=None):
+def candidate_form_fields(form, race_date_iso, distance):
+    """前走情報から除外判定用フィールドを組み立てる (馬体重は前走値で仮判定)。
+
+    days_since_last は対象レース日付基準。前走情報が無い項目は None (=除外しない)。
+    """
+    days = None
+    if form["last_date"]:
+        days = (date_cls.fromisoformat(race_date_iso)
+                - date_cls.fromisoformat(form["last_date"])).days
+    return {
+        "prev_distance": form["last_distance"],
+        "days_since_last": days,
+        "prev_weight": form["last_weight"],
+        "excluded_reason": rules.exclusion_reasons(
+            days, form["last_weight"], form["last_distance"], distance),
+        "form_missing": form["form_missing"],
+    }
+
+
+def build(dates, race_list=None, shutuba=None, resolver=None, form_resolver=None):
     """対象日リストの candidates データを構築して dict を返す。"""
     race_list = race_list or RaceListScraper()
     shutuba = shutuba or ShutubaScraper()
     resolver = resolver or SireResolver(ped_scraper=PedScraper())
+    if form_resolver is None:
+        form_resolver = FormResolver(
+            form_scraper=HorseFormScraper(), weekend_key=dates[0].isoformat())
 
     races_out = []
     n_races = 0
@@ -55,9 +85,15 @@ def build(dates, race_list=None, shutuba=None, resolver=None):
                 # 開催が短い日もあるため race単位ではスキップし最後に総数検証する。
                 print(f"  skip {race_id}: {e}", file=sys.stderr)
                 continue
+            # 日付検証: トップページ由来のシード展開は対象日以外のカードが
+            # 混ざるため、出馬表の開催日が対象日と一致するものだけを数える
+            if info["date"] and info["date"] != d.isoformat():
+                print(f"  skip {race_id}: 開催日不一致 ({info['date']})", file=sys.stderr)
+                continue
             n_races += 1
             if info["surface"] != "芝":
                 continue
+            race_date_iso = info["date"] or d.isoformat()
             candidates = []
             for h in info["horses"]:
                 sire = resolver.resolve(h["horse_id"])
@@ -65,18 +101,21 @@ def build(dates, race_list=None, shutuba=None, resolver=None):
                     info["surface"], info["distance"], sire, info["venue_code"]
                 ):
                     continue
+                # ふるい通過馬のみ前走情報を取得 (週末あたり数十頭 — DESIGN §4.4)
+                form = form_resolver.resolve(h["horse_id"])
                 candidates.append({
                     "horse_number": h["horse_number"],
                     "horse_id": h["horse_id"],
                     "horse_name": h["horse_name"],
                     "sire_name": sire,
                     "stype": classify(sire),
+                    **candidate_form_fields(form, race_date_iso, info["distance"]),
                 })
             if not candidates:
                 continue
             races_out.append({
                 "race_id": race_id,
-                "date": info["date"] or d.isoformat(),
+                "date": race_date_iso,
                 "venue_code": info["venue_code"],
                 "venue_name": info["venue_name"],
                 "race_number": info["race_number"],
@@ -111,14 +150,17 @@ def main(argv=None):
         dates = next_weekend(datetime.now(JST).date())
 
     resolver = SireResolver(ped_scraper=PedScraper())
+    form_resolver = FormResolver(
+        form_scraper=HorseFormScraper(), weekend_key=dates[0].isoformat())
     try:
-        data = build(dates, resolver=resolver)
+        data = build(dates, resolver=resolver, form_resolver=form_resolver)
     except ParseError as e:
         print(f"FATAL: {e}", file=sys.stderr)
         return 1
 
     n_cand = sum(len(r["candidates"]) for r in data["races"])
-    print(f"candidates: {len(data['races'])} races / {n_cand} horses")
+    n_excl = sum(1 for r in data["races"] for c in r["candidates"] if c["excluded_reason"])
+    print(f"candidates: {len(data['races'])} races / {n_cand} horses (うち仮除外 {n_excl})")
 
     if args.dry_run:
         print(json.dumps(data, ensure_ascii=False, indent=2))
@@ -128,6 +170,7 @@ def main(argv=None):
     OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n")
     print(f"wrote {OUT_PATH}")
     resolver.save()
+    form_resolver.save()
     return 0
 
 

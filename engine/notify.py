@@ -14,15 +14,23 @@ import requests
 logger = logging.getLogger(__name__)
 
 
+TIER_LABELS = {"core": "推奨", "watch": "参考"}
+
+
 def notify_new_picks(new_picks):
-    """new_picks: [{venue_name, race_number, post_time, horse_number, horse_name, odds_win}]"""
+    """new_picks: [{venue_name, race_number, post_time, horse_number, horse_name,
+    odds_win, tier}]"""
     url = os.environ.get("DISCORD_WEBHOOK_URL")
     if not url or not new_picks:
         return False
     lines = ["🏇 逆・血統ビーム 新規帯入り"]
-    for p in new_picks:
+    # core(推奨) を先に、watch(参考) を後に
+    ordered = sorted(new_picks, key=lambda p: 0 if p.get("tier") == "core" else 1)
+    for p in ordered:
+        label = TIER_LABELS.get(p.get("tier"), "?")
         lines.append(
-            f"{p.get('post_time', '--:--')} {p.get('venue_name', '?')}{p.get('race_number', '?')}R "
+            f"[{label}] {p.get('post_time', '--:--')} "
+            f"{p.get('venue_name', '?')}{p.get('race_number', '?')}R "
             f"{p.get('horse_number', '?')}番 {p.get('horse_name', '?')} "
             f"単勝{p.get('odds_win', '?')}倍"
         )

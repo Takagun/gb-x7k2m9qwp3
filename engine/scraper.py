@@ -19,6 +19,9 @@ logger = logging.getLogger(__name__)
 TOP_URL = "https://race.netkeiba.com/top/?kaisai_date={date_str}"
 SHUTUBA_URL = "https://race.netkeiba.com/race/shutuba.html?race_id={race_id}"
 PED_URL = "https://db.netkeiba.com/horse/ped/{horse_id}/"
+# DESIGN §4.4 は /horse/{id}/ だが、実際は戦績テーブル (db_h_race_results) が
+# プロフィールページの静的HTMLに含まれないため、戦績専用ページを使う
+HORSE_RESULT_URL = "https://db.netkeiba.com/horse/result/{horse_id}/"
 ODDS_API_URL = "https://race.netkeiba.com/api/api_get_jra_odds.html"
 ODDS_SP_URL = "https://odds.sp.netkeiba.com/"
 # 過去日付のレースは race.netkeiba.com がJSレンダリングの空シェルを返すため、
@@ -35,7 +38,8 @@ VENUE_NAMES = {
 
 RACE_ID_RE = re.compile(r"\b(20[2-9]\d{9})\b")
 POST_TIME_RE = re.compile(r"(\d{1,2}:\d{2})発走")
-SURFACE_DIST_RE = re.compile(r"(芝|ダ)(\d{3,4})m")
+# 障芝/障ダ を先にマッチさせる (「障芝3110m」を芝と誤認しない)
+SURFACE_DIST_RE = re.compile(r"(障芝|障ダ|障|芝|ダ)(\d{3,4})m")
 # dbページは "芝右1600m" "ダ1800m" "障芝3350m" のように回り・内外が挟まる。
 # 障芝を先に照合しないと障害戦が芝扱いになるので順序を変えないこと。
 DB_SURFACE_DIST_RE = re.compile(r"(障芝|障ダ|芝|ダ)(?:右|左|直線)?\s*(?:外|内)?\s*(\d{3,4})m")
@@ -43,6 +47,9 @@ DB_POST_TIME_RE = re.compile(r"発走\s*[::]\s*(\d{1,2}:\d{2})")
 DB_HORSE_LINK_RE = re.compile(r"/horse/(\d{10})")
 KAISAI_RE = re.compile(r"(\d+)回\s*(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)\s*(\d+)日目")
 HORSE_LINK_RE = re.compile(r"db\.netkeiba\.com/horse/(\d{10})")
+WEIGHT_RE = re.compile(r"^(\d{3,4})(?:\(([+-]?\d+)\))?$")  # 例: 472(+4) / 472
+FORM_DATE_RE = re.compile(r"^(\d{4})/(\d{2})/(\d{2})$")
+FORM_DIST_RE = re.compile(r"^(芝|ダ|障)(\d{3,4})$")  # 戦績テーブルの距離セル 例: 芝1800
 
 
 class ParseError(Exception):
@@ -123,6 +130,10 @@ def parse_race_ids(html_text):
 
     12桁ID (YYYYVVRRDDNN) を収集 → JRA会場のみ → 開催カード (YYYYVVRRDD)
     ごとに R01-12 へ展開 (race_list_scraper._expand_to_full_card 方式)。
+
+    ⚠️ トップページはJS描画で、静的HTMLには対象日と無関係な注目レースIDしか
+    無いことがある。この関数の結果は必ず出馬表側の開催日と照合すること
+    (build_weekly が info["date"] で検証する)。
     """
     cards = set()
     for m in RACE_ID_RE.finditer(html_text):
@@ -143,7 +154,7 @@ def parse_shutuba(soup, race_id):
     m = SURFACE_DIST_RE.search(text)
     if not m:
         raise ParseError(f"{race_id}: 馬場・距離が抽出できない")
-    surface = "芝" if m.group(1) == "芝" else "ダート"
+    surface = {"芝": "芝", "ダ": "ダート"}.get(m.group(1), "障害")
     distance = int(m.group(2))
 
     post_time = None
@@ -204,9 +215,23 @@ def _parse_shutuba_horses(soup):
         if number is None:
             continue
         seen.add(horse_id)
-        horses.append({"horse_number": number, "horse_id": horse_id, "horse_name": name})
+        horses.append({
+            "horse_number": number,
+            "horse_id": horse_id,
+            "horse_name": name,
+            "horse_weight": _horse_weight_from_row(tr),
+        })
     horses.sort(key=lambda h: h["horse_number"])
     return horses
+
+
+def _horse_weight_from_row(tr):
+    """出馬表行の当日馬体重 (td.Weight, 例 '472(+4)')。未発表・計不は None。"""
+    for td in tr.find_all("td"):
+        if "Weight" in " ".join(td.get("class", [])):
+            m = WEIGHT_RE.match(td.get_text(strip=True))
+            return int(m.group(1)) if m else None
+    return None
 
 
 def _horse_number_from_row(tr):
@@ -315,6 +340,7 @@ def _parse_db_race_table(soup):
         i_umaban = headers.index("馬番")
         i_name = headers.index("馬名")
         i_tansho = headers.index("単勝") if "単勝" in headers else None
+        i_weight = headers.index("馬体重") if "馬体重" in headers else None
 
         horses = []
         win_odds = {}
@@ -338,8 +364,13 @@ def _parse_db_race_table(soup):
             if not name or horse_id in seen:
                 continue
             seen.add(horse_id)
-            horses.append(
-                {"horse_number": number, "horse_id": horse_id, "horse_name": name})
+            weight = None
+            if i_weight is not None and len(cells) > i_weight:
+                mw = WEIGHT_RE.match(cells[i_weight].get_text(strip=True))
+                if mw:
+                    weight = int(mw.group(1))
+            horses.append({"horse_number": number, "horse_id": horse_id,
+                           "horse_name": name, "horse_weight": weight})
             if i_tansho is not None and len(cells) > i_tansho:
                 try:
                     val = float(cells[i_tansho].get_text(strip=True))
@@ -374,6 +405,53 @@ def parse_ped_sire(soup, horse_id=""):
     if not name:
         raise ParseError(f"ped {horse_id}: 父名が空")
     return name
+
+
+def parse_horse_form(soup, horse_id=""):
+    """馬ページの戦績テーブル先頭行 (=直近出走) から前走情報を返す (DESIGN.md §4.4)。
+
+    返り値: {last_date: "YYYY-MM-DD"|None, last_distance: int|None, last_weight: int|None}
+    戦績テーブルは日付降順。未出走 (データ行なし) は全て None (除外判定しない)。
+    テーブル自体が見つからない場合はページ構造変化の疑いなので ParseError。
+    """
+    table = soup.find("table", class_=re.compile(r"db_h_race_results"))
+    if table is None:
+        # 未出走馬はテーブルごと無いことがある。「出走レースはありません」等の
+        # 文言があれば未出走として扱い、無ければ構造変化として fail させる。
+        if "出走" in soup.get_text():
+            return {"last_date": None, "last_distance": None, "last_weight": None}
+        raise ParseError(f"horse {horse_id}: 戦績テーブルが見つからない")
+
+    for tr in table.find_all("tr"):
+        cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+        if not cells:
+            continue  # ヘッダ行
+        last_date = last_distance = last_weight = None
+        for text in cells:
+            if last_date is None:
+                m = FORM_DATE_RE.match(text)
+                if m:
+                    last_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+                    continue
+            if last_distance is None:
+                m = FORM_DIST_RE.match(text)
+                if m:
+                    last_distance = int(m.group(2))
+                    continue
+            if last_weight is None and last_date is not None:
+                # 馬体重セルは日付より後。斤量 (例 57.0) と混同しないよう整数3-4桁のみ
+                m = WEIGHT_RE.match(text)
+                if m and 300 <= int(m.group(1)) <= 700:
+                    last_weight = int(m.group(1))
+        if last_date is None:
+            continue  # 日付が無い行はデータ行でない
+        return {
+            "last_date": last_date,
+            "last_distance": last_distance,
+            "last_weight": last_weight,
+        }
+    # データ行ゼロ = 未出走
+    return {"last_date": None, "last_distance": None, "last_weight": None}
 
 
 def parse_odds_json(data):
@@ -424,17 +502,20 @@ def parse_odds_html(soup):
 
 class RaceListScraper(BaseScraper):
     def race_ids_for_date(self, date_str):
-        """kaisai_date=YYYYMMDD のJRAレースIDを返す。
+        """date_str=YYYYMMDD のJRAレースIDを返す。
 
-        まず db の日別一覧 (施行済みなら実在IDが確定で取れる) を試し、
-        空なら race.netkeiba.com のトップから展開する (未来日付はこちら)。
-        race.netkeiba.com は過去日付だとJSシェルに別週のIDが混ざるため、
-        過去日付でトップページを信用してはならない。
+        1. db.netkeiba.com の日別一覧 (施行済み〜当日は実在IDが確定で取れる)
+        2. 空なら race.netkeiba.com トップのシードIDをR01-12へ展開 (未来日用)。
+           トップはJSシェルで別週・対象日以外のIDが混ざるため、
+           呼び出し側 (build_weekly) で出馬表の開催日と照合すること。
         """
-        soup = self.get_soup(DB_RACE_LIST_URL.format(date_str=date_str))
-        ids = parse_db_race_list(str(soup))
-        if ids:
-            return ids
+        try:
+            soup = self.get_soup(DB_RACE_LIST_URL.format(date_str=date_str))
+            ids = parse_db_race_list(str(soup))
+            if ids:
+                return ids
+        except ParseError as e:
+            logger.warning("db race list failed for %s: %s", date_str, e)
         soup = self.get_soup(TOP_URL.format(date_str=date_str))
         return parse_race_ids(str(soup))
 
@@ -455,6 +536,13 @@ class PedScraper(BaseScraper):
     def sire_name(self, horse_id):
         soup = self.get_soup(PED_URL.format(horse_id=horse_id))
         return parse_ped_sire(soup, horse_id)
+
+
+class HorseFormScraper(BaseScraper):
+    def form(self, horse_id):
+        """馬の戦績ページから直近出走の {last_date, last_distance, last_weight} を返す。"""
+        soup = self.get_soup(HORSE_RESULT_URL.format(horse_id=horse_id))
+        return parse_horse_form(soup, horse_id)
 
 
 class OddsScraper(BaseScraper):
