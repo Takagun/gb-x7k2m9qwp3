@@ -8,6 +8,10 @@ on:
         description: "対象日 YYYYMMDD (カンマ区切り可)。空なら次の土日"
         required: false
         default: ""
+      probe:
+        description: "非空ならページ構造の診断のみ実行 (build しない)"
+        required: false
+        default: ""
 concurrency:
   group: data-update
   cancel-in-progress: false
@@ -23,7 +27,11 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install requests beautifulsoup4
+      - name: Probe page structure (一時診断用)
+        if: ${{ inputs.probe != '' }}
+        run: python .github/probe_netkeiba.py
       - name: Build candidates.json
+        if: ${{ inputs.probe == '' }}
         run: |
           if [ -n "${{ inputs.dates }}" ]; then
             python -m engine.build_weekly --date "${{ inputs.dates }}"
@@ -31,6 +39,7 @@ jobs:
             python -m engine.build_weekly
           fi
       - name: Commit and push
+        if: ${{ inputs.probe == '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
