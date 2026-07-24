@@ -17,6 +17,7 @@ from engine.scraper import (
     parse_odds_json,
     parse_ped_sire,
     parse_race_ids,
+    parse_race_list_sub,
     parse_shutuba,
 )
 
@@ -52,6 +53,29 @@ class TestParseRaceIds:
 
     def test_empty_page(self):
         assert parse_race_ids("<html></html>") == []
+
+
+class TestParseRaceListSub:
+    def test_collects_listed_ids_without_expansion(self):
+        # 一覧に載っているIDのみ返す (R01-12展開しない)
+        html = (
+            "<a href='../race/shutuba.html?race_id=202601010101&rf=race_list'>1R</a>"
+            "<a href='../race/shutuba.html?race_id=202601010102&rf=race_list'>2R</a>"
+            "<a href='../race/shutuba.html?race_id=202604040805&rf=race_list'>5R</a>"
+        )
+        assert parse_race_list_sub(html) == [
+            "202601010101", "202601010102", "202604040805"]
+
+    def test_excludes_nar_venues_and_dedups(self):
+        html = (
+            "<a href='?race_id=202644030104'>NAR</a>"
+            "<a href='?race_id=202601010101'>1R</a>"
+            "<a href='?race_id=202601010101'>1R再掲</a>"
+        )
+        assert parse_race_list_sub(html) == ["202601010101"]
+
+    def test_empty_page(self):
+        assert parse_race_list_sub("<html></html>") == []
 
 
 

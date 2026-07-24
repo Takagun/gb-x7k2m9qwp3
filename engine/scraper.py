@@ -17,6 +17,9 @@ from bs4 import BeautifulSoup
 logger = logging.getLogger(__name__)
 
 TOP_URL = "https://race.netkeiba.com/top/?kaisai_date={date_str}"
+# 対象日のレース一覧断片 (サーバレンダリング)。トップページ本体はJSシェルで
+# 対象日と無関係な注目レースIDしか含まないため、未来日はこちらを使う
+RACE_LIST_SUB_URL = "https://race.netkeiba.com/top/race_list_sub.html?kaisai_date={date_str}"
 SHUTUBA_URL = "https://race.netkeiba.com/race/shutuba.html?race_id={race_id}"
 PED_URL = "https://db.netkeiba.com/horse/ped/{horse_id}/"
 # DESIGN §4.4 は /horse/{id}/ だが、実際は戦績テーブル (db_h_race_results) が
@@ -249,6 +252,20 @@ def _horse_number_from_row(tr):
     if len(digits) == 1:
         return int(digits[0])
     return None
+
+
+def parse_race_list_sub(html_text):
+    """race_list_sub.html (日別レース一覧の断片) から対象日の実在レースIDを返す。
+
+    サーバレンダリングされ、race_id= リンクに対象日の全レースが列挙される。
+    一覧に載っているものが施行予定の全レースなので R01-12 への展開はしない。
+    """
+    ids = set()
+    for m in re.finditer(r"race_id=(20[2-9]\d{9})", html_text):
+        race_id = m.group(1)
+        if race_id[4:6] in JRA_VENUE_CODES:
+            ids.add(race_id)
+    return sorted(ids)
 
 
 def parse_db_race_list(html_text):
@@ -511,7 +528,9 @@ class RaceListScraper(BaseScraper):
         """date_str=YYYYMMDD のJRAレースIDを返す。
 
         1. db.netkeiba.com の日別一覧 (施行済み〜当日は実在IDが確定で取れる)
-        2. 空なら race.netkeiba.com トップのシードIDをR01-12へ展開 (未来日用)。
+        2. 空なら race_list_sub.html (サーバレンダリングの日別一覧断片)。
+           出馬表公開済みの未来日はここで実在IDが確定で取れる。
+        3. それも空なら race.netkeiba.com トップのシードIDをR01-12へ展開 (最後の保険)。
            トップはJSシェルで別週・対象日以外のIDが混ざるため、
            呼び出し側 (build_weekly) で出馬表の開催日と照合すること。
         """
@@ -522,6 +541,13 @@ class RaceListScraper(BaseScraper):
                 return ids
         except ParseError as e:
             logger.warning("db race list failed for %s: %s", date_str, e)
+        try:
+            soup = self.get_soup(RACE_LIST_SUB_URL.format(date_str=date_str))
+            ids = parse_race_list_sub(str(soup))
+            if ids:
+                return ids
+        except ParseError as e:
+            logger.warning("race_list_sub failed for %s: %s", date_str, e)
         soup = self.get_soup(TOP_URL.format(date_str=date_str))
         return parse_race_ids(str(soup))
 
