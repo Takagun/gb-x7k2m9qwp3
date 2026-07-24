@@ -75,9 +75,13 @@ pick_watch(参考) = candidate AND NOT excluded AND 30.0 <= 単勝オッズ < 50
 
 ### 4.1 race_id 発見
 - 形式: `YYYYVVRRDDNN` 12桁(YYYY=年, VV=会場01-10, RR=回, DD=日目, NN=レース番号01-12)。
-- 未来日は `https://race.netkeiba.com/top/?kaisai_date=YYYYMMDD` のHTML中に埋まる12桁IDを正規表現
-  `\b(20[2-9]\d{9})\b` で収集 → 会場コード01-10のみ残す → シードIDから同開催のR01-12へ展開。
+- 未来日は `https://race.netkeiba.com/top/race_list_sub.html?kaisai_date=YYYYMMDD`(サーバレンダリング
+  の日別一覧断片)の `race_id=` リンクから対象日の実在IDを収集 → 会場コード01-10のみ残す。展開不要。
+- 保険: 上記が空なら `https://race.netkeiba.com/top/?kaisai_date=YYYYMMDD` のHTML中に埋まる12桁IDを
+  正規表現 `\b(20[2-9]\d{9})\b` で収集 → 会場コード01-10のみ残す → シードIDから同開催のR01-12へ展開。
   (Keiba/src/scraper/race_list_scraper.py の `_expand_to_full_card` 方式をそのまま移植してよい)
+  ⚠️ トップ本体はJSシェルで対象日と無関係な注目レースIDしか含まないことがある(2026-07-23の週次
+  バッチ全滅の原因)。このルートの結果は必ず出馬表側の開催日と照合すること。
 
 ### 4.2 出馬表
 - `https://race.netkeiba.com/race/shutuba.html?race_id={race_id}`(EUC-JP)。
