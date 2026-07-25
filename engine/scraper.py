@@ -595,10 +595,16 @@ class OddsScraper(BaseScraper):
                 return odds
         except ParseError as e:
             logger.warning("odds API failed for %s: %s", race_id, e)
-        soup = self.get_soup(ODDS_SP_URL, params={"race_id": race_id, "type": "1"})
-        odds = parse_odds_html(soup)
-        if odds:
-            return odds
+        # spフォールバックはホスト自体が死んでいることがある (2026-07-25 に
+        # odds.sp.netkeiba.com がDNS解決不可でバッチ全体が落ちた)。
+        # 1レースの取得失敗で全体を止めず、dbフォールバックへ流す。
+        try:
+            soup = self.get_soup(ODDS_SP_URL, params={"race_id": race_id, "type": "1"})
+            odds = parse_odds_html(soup)
+            if odds:
+                return odds
+        except ParseError as e:
+            logger.warning("odds sp fallback failed for %s: %s", race_id, e)
         # 施行済みレースはAPI/spとも空になるため、dbページの確定単勝へフォールバック。
         # 発売前レースはdbページが存在せずParseError → 従来どおり {} (未発売扱い)。
         try:

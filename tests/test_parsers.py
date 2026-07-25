@@ -226,6 +226,46 @@ class TestParseOddsJson:
         assert parse_odds_json(data) == {2: 10.0}
 
 
+class TestOddsScraperFallback:
+    """win_odds のフォールバック連鎖。1段の障害でバッチ全体を落とさない。
+
+    2026-07-25: odds.sp.netkeiba.com がDNS解決不可になり、API空 → sp例外で
+    update_odds 全体がクラッシュした。sp障害時は db → {} へ流れること。
+    """
+
+    def _scraper(self, db_result):
+        from engine.scraper import OddsScraper, ParseError
+
+        class Fake(OddsScraper):
+            def get_json(self, url, params=None):
+                return {}  # API未発売相当
+
+            def get_soup(self, url, params=None, encoding="EUC-JP"):
+                if "odds.sp" in url:
+                    raise ParseError("3回のリトライ全て失敗: DNS死亡")
+                if db_result is None:
+                    raise ParseError("dbページなし")
+                return db_result
+        return Fake()
+
+    def test_sp_host_dead_and_no_db_page_returns_empty(self):
+        # 未発売レース: API空 → sp死亡 → dbページ無し → {} (未発売扱い)
+        s = self._scraper(db_result=None)
+        assert s.win_odds("202601010110") == {}
+
+    def test_sp_host_dead_falls_back_to_db(self):
+        # 施行済みレース: sp死亡でも dbの確定単勝が取れる
+        db_html = """
+        <table><tr><th>着順</th><th>馬番</th><th>馬名</th><th>単勝</th><th>馬体重</th></tr>
+        <tr><td>1</td><td>5</td>
+            <td><a href="https://db.netkeiba.com/horse/2021100001/">テスト</a></td>
+            <td>12.3</td><td>472(+4)</td></tr></table>
+        <p>芝右1600m</p>
+        """
+        s = self._scraper(db_result=soup_of(db_html))
+        assert s.win_odds("202601010101") == {5: 12.3}
+
+
 # ──────────────────────────────────────────────
 # 実HTMLフィクスチャの取得 (networkマーク・ローカル1回のみ)
 # ──────────────────────────────────────────────
