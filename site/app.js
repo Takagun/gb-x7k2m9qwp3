@@ -494,6 +494,80 @@
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
+  // ─── リアルタイムオッズ取得 (右上ボタン → GitHub Actionsのoddsバッチを起動) ───
+  // ブラウザからnetkeibaを直接叩くのはCORSで不可のため、Actionsを起動して
+  // picks.json が更新されるのを待つ。トークンはこの端末のlocalStorageのみに
+  // 保存し、コード・リポジトリには置かない (CLAUDE.md 秘密情報ルール)。
+  const GH_REPO = "Takagun/gb-x7k2m9qwp3";
+  const GH_WORKFLOW = "odds.yml";
+  const TOKEN_KEY = "gb_gh_token";
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  function ghToken() {
+    let t = localStorage.getItem(TOKEN_KEY);
+    if (!t) {
+      t = window.prompt(
+        "初回のみ: GitHubトークンを入力してください (この端末にのみ保存)。\n\n" +
+        "作成: GitHub → Settings → Developer settings →\n" +
+        "Fine-grained personal access tokens → このリポジトリを対象に\n" +
+        "Actions: Read and write を付与。\n\n" +
+        "空のままOKで通常の再読込だけ行います。");
+      if (t && t.trim()) localStorage.setItem(TOKEN_KEY, t.trim());
+    }
+    return (t || "").trim() || null;
+  }
+
+  async function triggerOddsUpdate() {
+    if (SAMPLE) return loadAll(true); // サンプル表示中は再読込のみ
+    const token = ghToken();
+    if (!token) return loadAll(true); // トークン未設定なら従来どおり再読込
+    const btn = $("refresh-btn");
+    const status = $("fetch-status");
+    const baseline = state.picks?.updated_at || null;
+    btn.disabled = true;
+    status.hidden = false;
+    try {
+      status.textContent = "オッズ取得ジョブを起動中…";
+      const resp = await fetch(
+        `https://api.github.com/repos/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`,
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ref: "main" }),
+        });
+      if (resp.status === 401 || resp.status === 403) {
+        localStorage.removeItem(TOKEN_KEY);
+        throw new Error("トークンが無効でした。もう一度押すと再入力できます。");
+      }
+      if (resp.status !== 204) throw new Error(`起動失敗 (HTTP ${resp.status})`);
+
+      // picks.json の updated_at が変わるまでポーリング (バッチ+デプロイで2〜4分)
+      const deadline = Date.now() + 8 * 60000;
+      while (Date.now() < deadline) {
+        status.textContent = "オッズ取得中… 反映まで2〜4分かかります";
+        await sleep(20000);
+        try {
+          const picks = await fetchJson("picks.json", true);
+          if (picks.updated_at && picks.updated_at !== baseline) {
+            await loadAll(true);
+            status.textContent = `✓ オッズを更新しました (${picks.odds_asof}時点)`;
+            setTimeout(() => { status.hidden = true; }, 6000);
+            return;
+          }
+        } catch { /* 一時的な取得失敗はポーリング継続 */ }
+      }
+      throw new Error("時間内に反映を確認できませんでした。少し待って↻で再読込してください。");
+    } catch (e) {
+      status.textContent = `⚠ ${e.message}`;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
   // ─── イベント ───
   function setTab(tab) {
     state.tab = tab;
@@ -503,7 +577,7 @@
   $("tab-sun").addEventListener("click", () => setTab("sun"));
   $("tab-results").addEventListener("click", () => setTab("results"));
   $("tab-refresh").addEventListener("click", () => loadAll(true));
-  $("refresh-btn").addEventListener("click", () => loadAll(true));
+  $("refresh-btn").addEventListener("click", triggerOddsUpdate);
 
   // 発走時刻の経過を1分ごとに反映
   setInterval(() => { if (state.candidates && state.tab !== "results") render(); }, 60000);

@@ -20,13 +20,14 @@
   <h1 class="app-title">逆ビーム</h1>
   <div class="odds-status">
     <span id="odds-asof" class="odds-asof">--:--時点</span>
-    <button id="refresh-btn" class="refresh-btn" type="button" aria-label="オッズ更新">
-      <span class="refresh-icon" aria-hidden="true">↻</span><span class="refresh-label">更新</span>
+    <button id="refresh-btn" class="refresh-btn" type="button" aria-label="最新オッズを取得">
+      <span class="refresh-icon" aria-hidden="true">↻</span><span class="refresh-label">オッズ取得</span>
     </button>
   </div>
 </header>
 
 <div id="stale-note" class="stale-note" hidden></div>
+<div id="fetch-status" class="stale-note fetch-status" hidden aria-live="polite"></div>
 
 <main id="main" class="main">
   <section id="view-day" class="view">
