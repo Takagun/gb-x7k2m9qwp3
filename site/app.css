@@ -74,7 +74,20 @@ body {
   gap: 6px;
 }
 .refresh-btn:active { opacity: .7; }
+.refresh-btn:disabled { opacity: .45; }
+.refresh-btn:disabled .refresh-icon {
+  display: inline-block;
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 .refresh-icon { font-size: 18px; }
+
+/* オッズ取得の進行状況 (stale-noteの色違い・情報系) */
+.fetch-status {
+  background: var(--card);
+  color: var(--text-sub);
+  border: 1px solid var(--line);
+}
 
 .stale-note {
   margin: 0 16px 8px;

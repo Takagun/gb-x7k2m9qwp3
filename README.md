@@ -57,6 +57,23 @@ DISCORD_WEBHOOK_URL=... ./bootstrap.sh   # Discord通知も登録する場合
 手動実行: GitHub → Actions → weekly / odds → **Run workflow**。
 ローカルなら `python3 -m engine.build_weekly --date 20260725` / `python3 -m engine.update_odds --date 20260725`。
 
+⚠ GitHub Actions のスケジュール実行は数時間遅延・スキップされることがある
+(2026-07-25 に実測: cron指定 8:00 が未発火)。レース当日は下記のアプリ内
+ボタンか Run workflow での手動実行を基本とする。
+
+### アプリ右上「オッズ取得」ボタン(リアルタイム更新)
+
+画面右上の **↻ オッズ取得** を押すと、GitHub API 経由で odds.yml を起動し、
+picks.json の更新を検知して自動で再描画する(反映まで2〜4分)。
+
+- 初回のみ GitHub の Fine-grained personal access token の入力が必要
+  (GitHub → Settings → Developer settings → Fine-grained tokens →
+  対象リポジトリ: このリポジトリ / Repository permissions: **Actions =
+  Read and write**)。トークンは端末の localStorage にのみ保存され、
+  リポジトリには含まれない。
+- トークン未入力(空でOK)の場合は従来どおり表示データの再読込のみ行う。
+- トークンが失効した場合はエラー表示後にクリアされ、次回押下で再入力できる。
+
 ## スマホのホーム画面に追加
 
 **Android (Chrome):**
