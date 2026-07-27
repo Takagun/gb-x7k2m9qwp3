@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-07-20T23:59:24+09:00",
+ "updated_at": "2026-07-27T21:41:08+09:00",
  "entries": [
   {
    "race_id": "202602011101",
@@ -1030,6 +1030,1171 @@
    "odds_app": 45.7,
    "odds_final": 45.7,
    "finish_position": 5
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 1,
+   "horse_name": "レイナデルアイレ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 32.9,
+   "odds_final": 32.9,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 4,
+   "horse_name": "エアヴァイブス",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 4.5,
+   "odds_final": 4.5,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 5,
+   "horse_name": "スパークルレイ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 295.0,
+   "odds_final": 295.0,
+   "finish_position": 11
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 7,
+   "horse_name": "ビップジョワ",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 102.5,
+   "odds_final": 102.5,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 8,
+   "horse_name": "サンセリテ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 9.8,
+   "odds_final": 9.8,
+   "finish_position": 6
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 11,
+   "horse_name": "フレッチャアズーラ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 2.9,
+   "odds_final": 2.9,
+   "finish_position": 1
+  },
+  {
+   "race_id": "202601010104",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 4,
+   "distance": 1500,
+   "horse_number": 13,
+   "horse_name": "カスタニッチャ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 152.3,
+   "odds_final": 152.3,
+   "finish_position": 13
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 1,
+   "horse_name": "インフィオラータ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 3.4,
+   "odds_final": 3.4,
+   "finish_position": 5
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 2,
+   "horse_name": "フォルストランキル",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 14.6,
+   "odds_final": 14.6,
+   "finish_position": 7
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 3,
+   "horse_name": "トランスマリーン",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff"
+   ],
+   "odds_app": 32.5,
+   "odds_final": 32.5,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 5,
+   "horse_name": "グランフルス",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 94.1,
+   "odds_final": 94.1,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 8,
+   "horse_name": "ウインアベリア",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 160.4,
+   "odds_final": 160.4,
+   "finish_position": 13
+  },
+  {
+   "race_id": "202601010106",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 6,
+   "distance": 1800,
+   "horse_number": 10,
+   "horse_name": "コワンニシタガウ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 3.8,
+   "odds_final": 3.8,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 2,
+   "horse_name": "ニシノエピカリ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 25.5,
+   "odds_final": 25.5,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 4,
+   "horse_name": "ジェルブロア",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 4.5,
+   "odds_final": 4.5,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 5,
+   "horse_name": "シニャンガ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 2.9,
+   "odds_final": 2.9,
+   "finish_position": 5
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 6,
+   "horse_name": "ラコンチャビエン",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff"
+   ],
+   "odds_app": 12.5,
+   "odds_final": 12.5,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 8,
+   "horse_name": "ディヒターリーベ",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff",
+    "extend"
+   ],
+   "odds_app": 88.1,
+   "odds_final": 88.1,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202601010109",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 9,
+   "distance": 1800,
+   "horse_number": 10,
+   "horse_name": "ナムラヒナギク",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 6.6,
+   "odds_final": 6.6,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 2,
+   "horse_name": "リギーロ",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 20.5,
+   "odds_final": 20.5,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 4,
+   "horse_name": "レイデラルース",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 22.9,
+   "odds_final": 22.9,
+   "finish_position": 5
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 5,
+   "horse_name": "ボンドロア",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 10.5,
+   "odds_final": 10.5,
+   "finish_position": 1
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 7,
+   "horse_name": "ジュンツバメガエシ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 4.3,
+   "odds_final": 4.3,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 8,
+   "horse_name": "レイヤードレッド",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 32.6,
+   "odds_final": 32.6,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202601010110",
+   "date": "2026-07-25",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 2600,
+   "horse_number": 11,
+   "horse_name": "ウェイクフィールド",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 3.2,
+   "odds_final": 3.2,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202604020101",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1800,
+   "horse_number": 5,
+   "horse_name": "トリプティーク",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 196.8,
+   "odds_final": 196.8,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202604020101",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1800,
+   "horse_number": 6,
+   "horse_name": "ローグアン",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 239.8,
+   "odds_final": 239.8,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202604020105",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 3,
+   "horse_name": "メイショウキンタイ",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff"
+   ],
+   "odds_app": 51.1,
+   "odds_final": 51.1,
+   "finish_position": 7
+  },
+  {
+   "race_id": "202604020105",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 5,
+   "horse_name": "フィールドノート",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 3.3,
+   "odds_final": 3.3,
+   "finish_position": 1
+  },
+  {
+   "race_id": "202604020105",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 10,
+   "horse_name": "ヴァリスマリネリス",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 4.5,
+   "odds_final": 4.5,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202604020105",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 11,
+   "horse_name": "キシダンチョウ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 3.8,
+   "odds_final": 3.8,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 1,
+   "horse_name": "ポッドロワール",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 12.1,
+   "odds_final": 12.1,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 2,
+   "horse_name": "コートアリシアン",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 1.8,
+   "odds_final": 1.8,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 3,
+   "horse_name": "エマヌエーレ",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 14.6,
+   "odds_final": 14.6,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 4,
+   "horse_name": "スマイルアップ",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 29.5,
+   "odds_final": 29.5,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 5,
+   "horse_name": "エイムフォーエース",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 121.3,
+   "odds_final": 121.3,
+   "finish_position": 16
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 6,
+   "horse_name": "ピコローズ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 9.5,
+   "odds_final": 9.5,
+   "finish_position": 1
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 8,
+   "horse_name": "ボンヌソワレ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 6.6,
+   "odds_final": 6.6,
+   "finish_position": 5
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 9,
+   "horse_name": "モンテシート",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 19.9,
+   "odds_final": 19.9,
+   "finish_position": 7
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 10,
+   "horse_name": "チューラワンサ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 36.5,
+   "odds_final": 36.5,
+   "finish_position": 6
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 12,
+   "horse_name": "ミストレス",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 78.8,
+   "odds_final": 78.8,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 16,
+   "horse_name": "キタサンダムール",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 15.7,
+   "odds_final": 15.7,
+   "finish_position": 11
+  },
+  {
+   "race_id": "202604020107",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 7,
+   "distance": 1400,
+   "horse_number": 18,
+   "horse_name": "フライングブレード",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 79.2,
+   "odds_final": 79.2,
+   "finish_position": 15
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 1,
+   "horse_name": "ミスバレンシア",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff",
+    "extend"
+   ],
+   "odds_app": 20.8,
+   "odds_final": 20.8,
+   "finish_position": 17
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 2,
+   "horse_name": "リラ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 3.6,
+   "odds_final": 3.6,
+   "finish_position": 16
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 6,
+   "horse_name": "ショウナンマリーナ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 182.6,
+   "odds_final": 182.6,
+   "finish_position": 12
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 8,
+   "horse_name": "ウインロゼライト",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff",
+    "small"
+   ],
+   "odds_app": 135.3,
+   "odds_final": 135.3,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 11,
+   "horse_name": "ガラク",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 10.8,
+   "odds_final": 10.8,
+   "finish_position": 15
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 13,
+   "horse_name": "ジョワイユノエル",
+   "tier": "watch",
+   "excluded_reason": [],
+   "odds_app": 41.8,
+   "odds_final": 41.8,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 15,
+   "horse_name": "タイセイフレッサ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 4.4,
+   "odds_final": 4.4,
+   "finish_position": 11
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 16,
+   "horse_name": "ブルバンビーナ",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 301.2,
+   "odds_final": 301.2,
+   "finish_position": 14
+  },
+  {
+   "race_id": "202604020112",
+   "date": "2026-07-25",
+   "venue_name": "新潟",
+   "race_number": 12,
+   "distance": 1400,
+   "horse_number": 17,
+   "horse_name": "メイリー",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 72.7,
+   "odds_final": 72.7,
+   "finish_position": 7
+  },
+  {
+   "race_id": "202601010205",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 4,
+   "horse_name": "リアライズセレスト",
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "odds_app": 14.6,
+   "odds_final": 14.6,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202601010205",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 8,
+   "horse_name": "ミラマルニ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 158.5,
+   "odds_final": 158.5,
+   "finish_position": 5
+  },
+  {
+   "race_id": "202601010205",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 5,
+   "distance": 1800,
+   "horse_number": 10,
+   "horse_name": "サンライズジャポネ",
+   "tier": "watch",
+   "excluded_reason": [],
+   "odds_app": 35.1,
+   "odds_final": 35.1,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 3,
+   "horse_name": "メイショウハッケイ",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 11.6,
+   "odds_final": 11.6,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 8,
+   "horse_name": "ダノンフィオーレ",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff"
+   ],
+   "odds_app": 13.5,
+   "odds_final": 13.5,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 9,
+   "horse_name": "サンウリエル",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 21.3,
+   "odds_final": 21.3,
+   "finish_position": 6
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 10,
+   "horse_name": "クイーンズワーフ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 9.3,
+   "odds_final": 9.3,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 11,
+   "horse_name": "フクシマコウヨウ",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": 355.0,
+   "odds_final": 355.0,
+   "finish_position": 12
+  },
+  {
+   "race_id": "202601010208",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 8,
+   "distance": 1500,
+   "horse_number": 12,
+   "horse_name": "トレヴィ",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 16.3,
+   "odds_final": 16.3,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202601010210",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 1500,
+   "horse_number": 2,
+   "horse_name": "レイユール",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 22.3,
+   "odds_final": 22.3,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202601010210",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 1500,
+   "horse_number": 4,
+   "horse_name": "ヴェナートル",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 93.1,
+   "odds_final": 93.1,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202601010210",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 1500,
+   "horse_number": 6,
+   "horse_name": "ショウナンカリス",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 5.3,
+   "odds_final": 5.3,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202601010210",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 1500,
+   "horse_number": 7,
+   "horse_name": "ブラックルビー",
+   "tier": null,
+   "excluded_reason": [],
+   "odds_app": null,
+   "odds_final": null,
+   "finish_position": null
+  },
+  {
+   "race_id": "202601010210",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 10,
+   "distance": 1500,
+   "horse_number": 8,
+   "horse_name": "ワタシマツワ",
+   "tier": null,
+   "excluded_reason": [
+    "long_layoff",
+    "small"
+   ],
+   "odds_app": 9.2,
+   "odds_final": 9.2,
+   "finish_position": 1
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 3,
+   "horse_name": "レクスノヴァス",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 3.5,
+   "odds_final": 3.5,
+   "finish_position": 7
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 4,
+   "horse_name": "ギャンブルルーム",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 25.2,
+   "odds_final": 25.2,
+   "finish_position": 3
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 5,
+   "horse_name": "コーチェラバレー",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 11.5,
+   "odds_final": 11.5,
+   "finish_position": 9
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 7,
+   "horse_name": "ブレイヴロッカー",
+   "tier": "watch",
+   "excluded_reason": [],
+   "odds_app": 30.2,
+   "odds_final": 30.2,
+   "finish_position": null
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 8,
+   "horse_name": "レッドテリオス",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 8.4,
+   "odds_final": 8.4,
+   "finish_position": 8
+  },
+  {
+   "race_id": "202601010211",
+   "date": "2026-07-26",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "distance": 2600,
+   "horse_number": 11,
+   "horse_name": "アマキヒ",
+   "tier": "core",
+   "excluded_reason": [],
+   "odds_app": 10.1,
+   "odds_final": 10.1,
+   "finish_position": 10
+  },
+  {
+   "race_id": "202604020201",
+   "date": "2026-07-26",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1400,
+   "horse_number": 1,
+   "horse_name": "ドルチェテソーロ",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 15.3,
+   "odds_final": 15.3,
+   "finish_position": 4
+  },
+  {
+   "race_id": "202604020201",
+   "date": "2026-07-26",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1400,
+   "horse_number": 2,
+   "horse_name": "ハルガスミ",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 252.6,
+   "odds_final": 252.6,
+   "finish_position": 11
+  },
+  {
+   "race_id": "202604020201",
+   "date": "2026-07-26",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1400,
+   "horse_number": 6,
+   "horse_name": "ワレモコウ",
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "odds_app": 20.7,
+   "odds_final": 20.7,
+   "finish_position": 2
+  },
+  {
+   "race_id": "202604020201",
+   "date": "2026-07-26",
+   "venue_name": "新潟",
+   "race_number": 1,
+   "distance": 1400,
+   "horse_number": 11,
+   "horse_name": "マーズワース",
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "odds_app": 17.1,
+   "odds_final": 17.1,
+   "finish_position": 7
   }
  ]
 }
