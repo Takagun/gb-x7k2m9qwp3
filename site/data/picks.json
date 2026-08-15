@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-08-15T15:16:45+09:00",
- "odds_asof": "15:16",
+ "updated_at": "2026-08-15T16:20:09+09:00",
+ "odds_asof": "16:20",
  "picks": [
   {
    "race_id": "202604020701",
@@ -443,29 +443,32 @@
   {
    "race_id": "202601010712",
    "horse_number": 5,
-   "odds_win": 7.1,
+   "odds_win": 8.8,
    "tier": null,
    "excluded_reason": [
     "small"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 438
   },
   {
    "race_id": "202601010712",
    "horse_number": 7,
-   "odds_win": 24.5,
-   "tier": "core",
+   "odds_win": 43.4,
+   "tier": "watch",
    "excluded_reason": [],
    "form_missing": false,
+   "day_weight": 484,
    "entered_band_at": "2026-08-15T12:01:51+09:00"
   },
   {
    "race_id": "202601010712",
    "horse_number": 14,
-   "odds_win": 48.8,
-   "tier": "watch",
+   "odds_win": 142.6,
+   "tier": null,
    "excluded_reason": [],
    "form_missing": false,
+   "day_weight": 498,
    "entered_band_at": "2026-08-15T12:01:51+09:00"
   }
  ]
