@@ -1,563 +1,361 @@
 {
- "generated_at": "2026-08-29T06:43:32+09:00",
+ "generated_at": "2026-09-05T00:27:52+09:00",
  "weekend": [
-  "2026-08-29",
-  "2026-08-30"
+  "2026-09-05",
+  "2026-09-06"
  ],
  "races": [
   {
-   "race_id": "202601020302",
-   "date": "2026-08-29",
-   "venue_code": "01",
-   "venue_name": "札幌",
+   "race_id": "202609040102",
+   "date": "2026-09-05",
+   "venue_code": "09",
+   "venue_name": "阪神",
    "race_number": 2,
    "post_time": "10:30",
-   "surface": "芝",
-   "distance": 1500,
-   "race_name": "2歳未勝利",
-   "chukyo_warning": false,
-   "candidates": [
-    {
-     "horse_number": 3,
-     "horse_id": "2024105934",
-     "horse_name": "フォルトゥナロッサ",
-     "sire_name": "サートゥルナーリア",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 20,
-     "prev_weight": 458,
-     "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 8,
-     "horse_id": "2024102008",
-     "horse_name": "リラカリス",
-     "sire_name": "レイデオロ",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 21,
-     "prev_weight": 392,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 10,
-     "horse_id": "2024105638",
-     "horse_name": "アヴレディール",
-     "sire_name": "ジャスタウェイ",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 20,
-     "prev_weight": 454,
-     "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 12,
-     "horse_id": "2024107318",
-     "horse_name": "バタフライ",
-     "sire_name": "タワーオブロンドン",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 20,
-     "prev_weight": 494,
-     "excluded_reason": [],
-     "form_missing": false
-    }
-   ]
-  },
-  {
-   "race_id": "202601020303",
-   "date": "2026-08-29",
-   "venue_code": "01",
-   "venue_name": "札幌",
-   "race_number": 3,
-   "post_time": "11:00",
    "surface": "芝",
    "distance": 1800,
    "race_name": "2歳未勝利",
    "chukyo_warning": false,
    "candidates": [
     {
-     "horse_number": 1,
-     "horse_id": "2024106180",
-     "horse_name": "ダノンキューブ",
-     "sire_name": "キタサンブラック",
-     "stype": "JP",
-     "prev_distance": 1800,
-     "days_since_last": 55,
-     "prev_weight": 438,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
      "horse_number": 4,
-     "horse_id": "2024106018",
-     "horse_name": "アイアムツヨスギル",
-     "sire_name": "ロードカナロア",
+     "horse_id": "2024106356",
+     "horse_name": "ブックオブケルズ",
+     "sire_name": "リアルスティール",
      "stype": "JP",
      "prev_distance": 1800,
-     "days_since_last": 13,
-     "prev_weight": 450,
+     "days_since_last": 63,
+     "prev_weight": 512,
      "excluded_reason": [],
      "form_missing": false
     },
     {
      "horse_number": 5,
-     "horse_id": "2024103490",
-     "horse_name": "ロマノヴェリテ",
+     "horse_id": "2024106219",
+     "horse_name": "ドミナント",
      "sire_name": "コントレイル",
      "stype": "JP",
-     "prev_distance": 1800,
-     "days_since_last": 21,
-     "prev_weight": 434,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 11,
-     "horse_id": "2024101323",
-     "horse_name": "シャイニーヒーロー",
-     "sire_name": "サトノアラジン",
-     "stype": "JP",
-     "prev_distance": 1800,
+     "prev_distance": 1600,
      "days_since_last": 13,
-     "prev_weight": 442,
-     "excluded_reason": [],
+     "prev_weight": 494,
+     "excluded_reason": [
+      "extend"
+     ],
      "form_missing": false
     }
    ]
   },
   {
-   "race_id": "202604030304",
-   "date": "2026-08-29",
-   "venue_code": "04",
-   "venue_name": "新潟",
+   "race_id": "202606040104",
+   "date": "2026-09-05",
+   "venue_code": "06",
+   "venue_name": "中山",
    "race_number": 4,
-   "post_time": "11:15",
+   "post_time": "11:40",
+   "surface": "芝",
+   "distance": 1800,
+   "race_name": "2歳未勝利",
+   "chukyo_warning": false,
+   "candidates": [
+    {
+     "horse_number": 4,
+     "horse_id": "2024104028",
+     "horse_name": "ビップルーチェ",
+     "sire_name": "サトノダイヤモンド",
+     "stype": "JP",
+     "prev_distance": 1400,
+     "days_since_last": 6,
+     "prev_weight": 434,
+     "excluded_reason": [
+      "small",
+      "extend"
+     ],
+     "form_missing": false
+    },
+    {
+     "horse_number": 7,
+     "horse_id": "2024104289",
+     "horse_name": "ゴーゼンチュー",
+     "sire_name": "グレーターロンドン",
+     "stype": "JP",
+     "prev_distance": 1200,
+     "days_since_last": 62,
+     "prev_weight": 412,
+     "excluded_reason": [
+      "small",
+      "extend"
+     ],
+     "form_missing": false
+    }
+   ]
+  },
+  {
+   "race_id": "202601020505",
+   "date": "2026-09-05",
+   "venue_code": "01",
+   "venue_name": "札幌",
+   "race_number": 5,
+   "post_time": "12:10",
+   "surface": "芝",
+   "distance": 1500,
+   "race_name": "2歳新馬",
+   "chukyo_warning": false,
+   "candidates": [
+    {
+     "horse_number": 1,
+     "horse_id": "2024104841",
+     "horse_name": "グレーターマーク",
+     "sire_name": "グレーターロンドン",
+     "stype": "JP",
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
+     "excluded_reason": [],
+     "form_missing": true
+    },
+    {
+     "horse_number": 2,
+     "horse_id": "2024101760",
+     "horse_name": "ローズファミリー",
+     "sire_name": "タワーオブロンドン",
+     "stype": "JP",
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
+     "excluded_reason": [],
+     "form_missing": true
+    },
+    {
+     "horse_number": 3,
+     "horse_id": "2024106379",
+     "horse_name": "ポーラールート",
+     "sire_name": "キタサンブラック",
+     "stype": "JP",
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
+     "excluded_reason": [],
+     "form_missing": true
+    },
+    {
+     "horse_number": 5,
+     "horse_id": "2024106514",
+     "horse_name": "シュヴァルツペルレ",
+     "sire_name": "リアルスティール",
+     "stype": "JP",
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
+     "excluded_reason": [],
+     "form_missing": true
+    },
+    {
+     "horse_number": 11,
+     "horse_id": "2024100358",
+     "horse_name": "ジャスコヒラリアス",
+     "sire_name": "リアルインパクト",
+     "stype": "JP",
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
+     "excluded_reason": [],
+     "form_missing": true
+    }
+   ]
+  },
+  {
+   "race_id": "202609040105",
+   "date": "2026-09-05",
+   "venue_code": "09",
+   "venue_name": "阪神",
+   "race_number": 5,
+   "post_time": "12:20",
    "surface": "芝",
    "distance": 1400,
    "race_name": "2歳新馬",
    "chukyo_warning": false,
    "candidates": [
     {
-     "horse_number": 5,
-     "horse_id": "2024101299",
-     "horse_name": "ショウナンバッカス",
-     "sire_name": "スワーヴリチャード",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 7,
-     "horse_id": "2024104800",
-     "horse_name": "タワーウマザンマイ",
-     "sire_name": "タワーオブロンドン",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 9,
-     "horse_id": "2024105422",
-     "horse_name": "ニシノムホウモノ",
-     "sire_name": "ビッグアーサー",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 11,
-     "horse_id": "2024107330",
-     "horse_name": "アヴァンデセール",
-     "sire_name": "タワーオブロンドン",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 12,
-     "horse_id": "2024100017",
-     "horse_name": "セレスティナ",
-     "sire_name": "コントレイル",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 13,
-     "horse_id": "2024105539",
-     "horse_name": "イントリー",
-     "sire_name": "フィエールマン",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 14,
-     "horse_id": "2024102094",
-     "horse_name": "イデアモッコス",
-     "sire_name": "ビッグアーサー",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 15,
-     "horse_id": "2024102161",
-     "horse_name": "コメットサン",
-     "sire_name": "ビッグアーサー",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    },
-    {
-     "horse_number": 16,
-     "horse_id": "2024104300",
-     "horse_name": "ホワイトホール",
-     "sire_name": "ロジャーバローズ",
-     "stype": "JP",
-     "prev_distance": null,
-     "days_since_last": null,
-     "prev_weight": null,
-     "excluded_reason": [],
-     "form_missing": true
-    }
-   ]
-  },
-  {
-   "race_id": "202604030305",
-   "date": "2026-08-29",
-   "venue_code": "04",
-   "venue_name": "新潟",
-   "race_number": 5,
-   "post_time": "11:45",
-   "surface": "芝",
-   "distance": 2200,
-   "race_name": "3歳未勝利",
-   "chukyo_warning": false,
-   "candidates": [
-    {
      "horse_number": 2,
-     "horse_id": "2023105458",
-     "horse_name": "イクオクコウネン",
-     "sire_name": "スワーヴリチャード",
+     "horse_id": "2024107052",
+     "horse_name": "ブロッサムスピア",
+     "sire_name": "リアルスティール",
      "stype": "JP",
-     "prev_distance": 2200,
-     "days_since_last": 76,
-     "prev_weight": 520,
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
      "excluded_reason": [],
-     "form_missing": false
+     "form_missing": true
     },
     {
      "horse_number": 3,
-     "horse_id": "2023103506",
-     "horse_name": "レイランディ",
-     "sire_name": "ジャスタウェイ",
+     "horse_id": "2024100590",
+     "horse_name": "スマートエール",
+     "sire_name": "グレーターロンドン",
      "stype": "JP",
-     "prev_distance": 2400,
-     "days_since_last": 13,
-     "prev_weight": 442,
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
      "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 7,
-     "horse_id": "2023103075",
-     "horse_name": "ヤマメホープ",
-     "sire_name": "コントレイル",
-     "stype": "JP",
-     "prev_distance": 2200,
-     "days_since_last": 27,
-     "prev_weight": 478,
-     "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 11,
-     "horse_id": "2023103321",
-     "horse_name": "キコリータ",
-     "sire_name": "レイデオロ",
-     "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 14,
-     "prev_weight": 418,
-     "excluded_reason": [
-      "small",
-      "extend"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 12,
-     "horse_id": "2023102411",
-     "horse_name": "アージェンタイド",
-     "sire_name": "ブラックタイド",
-     "stype": "JP",
-     "prev_distance": 1600,
-     "days_since_last": 7,
-     "prev_weight": 442,
-     "excluded_reason": [
-      "extend"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 15,
-     "horse_id": "2023107044",
-     "horse_name": "アンヴデット",
-     "sire_name": "リアルスティール",
-     "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 56,
-     "prev_weight": 402,
-     "excluded_reason": [
-      "small",
-      "extend"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 17,
-     "horse_id": "2023106315",
-     "horse_name": "ホウライブラック",
-     "sire_name": "キタサンブラック",
-     "stype": "JP",
-     "prev_distance": 1700,
-     "days_since_last": 49,
-     "prev_weight": 450,
-     "excluded_reason": [
-      "extend"
-     ],
-     "form_missing": false
-    }
-   ]
-  },
-  {
-   "race_id": "202601020306",
-   "date": "2026-08-29",
-   "venue_code": "01",
-   "venue_name": "札幌",
-   "race_number": 6,
-   "post_time": "12:50",
-   "surface": "芝",
-   "distance": 1500,
-   "race_name": "3歳未勝利",
-   "chukyo_warning": false,
-   "candidates": [
-    {
-     "horse_number": 4,
-     "horse_id": "2023106148",
-     "horse_name": "ヒメヒオウギ",
-     "sire_name": "コントレイル",
-     "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 13,
-     "prev_weight": 398,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
+     "form_missing": true
     },
     {
      "horse_number": 5,
-     "horse_id": "2023102038",
-     "horse_name": "グリニッジローズ",
-     "sire_name": "タワーオブロンドン",
-     "stype": "JP",
-     "prev_distance": 1200,
-     "days_since_last": 63,
-     "prev_weight": 456,
-     "excluded_reason": [
-      "extend"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 6,
-     "horse_id": "2023105530",
-     "horse_name": "エイシンキーンラン",
-     "sire_name": "エイシンヒカリ",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 14,
-     "prev_weight": 476,
-     "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 7,
-     "horse_id": "2023107304",
-     "horse_name": "ランウェイミューズ",
+     "horse_id": "2024106747",
+     "horse_name": "レーヴドヒロイン",
      "sire_name": "シルバーステート",
      "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 14,
-     "prev_weight": 396,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 8,
-     "horse_id": "2023104680",
-     "horse_name": "サートゥルチェア",
-     "sire_name": "サートゥルナーリア",
-     "stype": "JP",
-     "prev_distance": 1800,
-     "days_since_last": 196,
-     "prev_weight": 450,
-     "excluded_reason": [
-      "long_layoff"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 10,
-     "horse_id": "2023100596",
-     "horse_name": "ジャーナーリア",
-     "sire_name": "サートゥルナーリア",
-     "stype": "JP",
-     "prev_distance": 1700,
-     "days_since_last": 7,
-     "prev_weight": 528,
+     "prev_distance": null,
+     "days_since_last": null,
+     "prev_weight": null,
      "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 12,
-     "horse_id": "2023104254",
-     "horse_name": "サウンドファミリエ",
-     "sire_name": "シルバーステート",
-     "stype": "JP",
-     "prev_distance": 1500,
-     "days_since_last": 14,
-     "prev_weight": 416,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 14,
-     "horse_id": "2023105967",
-     "horse_name": "ビロングトゥミー",
-     "sire_name": "ジャスタウェイ",
-     "stype": "JP",
-     "prev_distance": 1800,
-     "days_since_last": 118,
-     "prev_weight": 436,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
+     "form_missing": true
     }
    ]
   },
   {
-   "race_id": "202601020309",
-   "date": "2026-08-29",
+   "race_id": "202601020507",
+   "date": "2026-09-05",
    "venue_code": "01",
    "venue_name": "札幌",
-   "race_number": 9,
-   "post_time": "14:20",
+   "race_number": 7,
+   "post_time": "13:10",
    "surface": "芝",
    "distance": 1800,
    "race_name": "3歳以上1勝クラス",
    "chukyo_warning": false,
    "candidates": [
     {
-     "horse_number": 5,
-     "horse_id": "2022104062",
-     "horse_name": "カージオイド",
-     "sire_name": "サトノダイヤモンド",
+     "horse_number": 1,
+     "horse_id": "2021105168",
+     "horse_name": "クイーンズワーフ",
+     "sire_name": "アルアイン",
      "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 34,
-     "prev_weight": 514,
-     "excluded_reason": [],
+     "prev_distance": 1500,
+     "days_since_last": 13,
+     "prev_weight": 444,
+     "excluded_reason": [
+      "extend"
+     ],
      "form_missing": false
     },
     {
-     "horse_number": 10,
-     "horse_id": "2022103222",
-     "horse_name": "エオアリイ",
-     "sire_name": "ドゥラメンテ",
+     "horse_number": 6,
+     "horse_id": "2022106618",
+     "horse_name": "ジェルブロア",
+     "sire_name": "キズナ",
      "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 20,
-     "prev_weight": 472,
-     "excluded_reason": [],
+     "prev_distance": 1800,
+     "days_since_last": 13,
+     "prev_weight": 430,
+     "excluded_reason": [
+      "small"
+     ],
      "form_missing": false
     },
     {
      "horse_number": 11,
-     "horse_id": "2020103772",
-     "horse_name": "エイトスターズ",
-     "sire_name": "ジャスタウェイ",
+     "horse_id": "2021105694",
+     "horse_name": "ホウオウペトリュス",
+     "sire_name": "スワーヴリチャード",
      "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 14,
-     "prev_weight": 490,
-     "excluded_reason": [],
+     "prev_distance": 1500,
+     "days_since_last": 13,
+     "prev_weight": 464,
+     "excluded_reason": [
+      "extend"
+     ],
      "form_missing": false
     }
    ]
   },
   {
-   "race_id": "202604030309",
-   "date": "2026-08-29",
-   "venue_code": "04",
-   "venue_name": "新潟",
+   "race_id": "202606040109",
+   "date": "2026-09-05",
+   "venue_code": "06",
+   "venue_name": "中山",
    "race_number": 9,
-   "post_time": "16:25",
+   "post_time": "14:30",
    "surface": "芝",
-   "distance": 2200,
-   "race_name": "3歳以上1勝クラス",
+   "distance": 1800,
+   "race_name": "古作特別",
+   "chukyo_warning": false,
+   "candidates": [
+    {
+     "horse_number": 2,
+     "horse_id": "2023102730",
+     "horse_name": "ショウナンダイン",
+     "sire_name": "サートゥルナーリア",
+     "stype": "JP",
+     "prev_distance": 1800,
+     "days_since_last": 20,
+     "prev_weight": 464,
+     "excluded_reason": [],
+     "form_missing": false
+    },
+    {
+     "horse_number": 5,
+     "horse_id": "2022101272",
+     "horse_name": "スタニングヴュー",
+     "sire_name": "リアルスティール",
+     "stype": "JP",
+     "prev_distance": 1600,
+     "days_since_last": 28,
+     "prev_weight": 466,
+     "excluded_reason": [
+      "extend"
+     ],
+     "form_missing": false
+    },
+    {
+     "horse_number": 9,
+     "horse_id": "2022101498",
+     "horse_name": "クモヒトツナイ",
+     "sire_name": "アルアイン",
+     "stype": "JP",
+     "prev_distance": 1800,
+     "days_since_last": 20,
+     "prev_weight": 484,
+     "excluded_reason": [],
+     "form_missing": false
+    },
+    {
+     "horse_number": 11,
+     "horse_id": "2022105156",
+     "horse_name": "レッドシュトラール",
+     "sire_name": "リアルインパクト",
+     "stype": "JP",
+     "prev_distance": 1600,
+     "days_since_last": 91,
+     "prev_weight": 482,
+     "excluded_reason": [
+      "extend"
+     ],
+     "form_missing": false
+    }
+   ]
+  },
+  {
+   "race_id": "202609040110",
+   "date": "2026-09-05",
+   "venue_code": "09",
+   "venue_name": "阪神",
+   "race_number": 10,
+   "post_time": "14:55",
+   "surface": "芝",
+   "distance": 1800,
+   "race_name": "西宮S",
    "chukyo_warning": false,
    "candidates": [
     {
      "horse_number": 1,
-     "horse_id": "2023102336",
-     "horse_name": "ダンシングアウェイ",
-     "sire_name": "ジャスタウェイ",
+     "horse_id": "2021104971",
+     "horse_name": "オールセインツ",
+     "sire_name": "キズナ",
      "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 81,
-     "prev_weight": 465,
+     "prev_distance": 1600,
+     "days_since_last": 35,
+     "prev_weight": 494,
      "excluded_reason": [
       "extend"
      ],
@@ -565,135 +363,102 @@
     },
     {
      "horse_number": 2,
-     "horse_id": "2023103471",
-     "horse_name": "プレイザリード",
-     "sire_name": "キズナ",
+     "horse_id": "2019104800",
+     "horse_name": "エイカイマッケンロ",
+     "sire_name": "ロードカナロア",
      "stype": "JP",
      "prev_distance": 2200,
-     "days_since_last": 119,
-     "prev_weight": 478,
+     "days_since_last": 42,
+     "prev_weight": 482,
      "excluded_reason": [],
      "form_missing": false
     },
     {
      "horse_number": 3,
-     "horse_id": "2019105490",
-     "horse_name": "ディーンズリスター",
-     "sire_name": "ディープインパクト",
+     "horse_id": "2021105704",
+     "horse_name": "コルレオニス",
+     "sire_name": "レイデオロ",
      "stype": "JP",
-     "prev_distance": 2000,
-     "days_since_last": 104,
-     "prev_weight": 502,
-     "excluded_reason": [
-      "extend"
-     ],
+     "prev_distance": 1800,
+     "days_since_last": 27,
+     "prev_weight": 466,
+     "excluded_reason": [],
      "form_missing": false
     },
     {
-     "horse_number": 10,
-     "horse_id": "2019105076",
-     "horse_name": "フォーグッド",
-     "sire_name": "ディープインパクト",
+     "horse_number": 4,
+     "horse_id": "2021102246",
+     "horse_name": "テーオーダグラス",
+     "sire_name": "リアルスティール",
      "stype": "JP",
      "prev_distance": 2000,
-     "days_since_last": 98,
-     "prev_weight": 502,
-     "excluded_reason": [
-      "extend"
-     ],
+     "days_since_last": 14,
+     "prev_weight": 484,
+     "excluded_reason": [],
      "form_missing": false
     },
     {
-     "horse_number": 11,
-     "horse_id": "2023107013",
-     "horse_name": "ランブルスコ",
-     "sire_name": "キタサンブラック",
+     "horse_number": 5,
+     "horse_id": "2022105345",
+     "horse_name": "シンゼンカガ",
+     "sire_name": "トーセンラー",
      "stype": "JP",
      "prev_distance": 2000,
-     "days_since_last": 111,
-     "prev_weight": 486,
-     "excluded_reason": [
-      "extend"
-     ],
+     "days_since_last": 21,
+     "prev_weight": 452,
+     "excluded_reason": [],
+     "form_missing": false
+    },
+    {
+     "horse_number": 7,
+     "horse_id": "2023101449",
+     "horse_name": "サウンドムーブ",
+     "sire_name": "リアルスティール",
+     "stype": "JP",
+     "prev_distance": 1800,
+     "days_since_last": 63,
+     "prev_weight": 452,
+     "excluded_reason": [],
      "form_missing": false
     }
    ]
   },
   {
-   "race_id": "202604030310",
-   "date": "2026-08-29",
-   "venue_code": "04",
-   "venue_name": "新潟",
-   "race_number": 10,
-   "post_time": "17:00",
+   "race_id": "202601020511",
+   "date": "2026-09-05",
+   "venue_code": "01",
+   "venue_name": "札幌",
+   "race_number": 11,
+   "post_time": "15:20",
    "surface": "芝",
-   "distance": 1400,
-   "race_name": "3歳以上1勝クラス",
+   "distance": 1800,
+   "race_name": "札幌2歳S",
    "chukyo_warning": false,
    "candidates": [
     {
      "horse_number": 3,
-     "horse_id": "2022105293",
-     "horse_name": "キャトルエピス",
-     "sire_name": "キズナ",
+     "horse_id": "2024101022",
+     "horse_name": "デザートスピリット",
+     "sire_name": "イスラボニータ",
      "stype": "JP",
-     "prev_distance": 1600,
-     "days_since_last": 175,
-     "prev_weight": 456,
+     "prev_distance": 1500,
+     "days_since_last": 13,
+     "prev_weight": 424,
      "excluded_reason": [
-      "long_layoff"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 5,
-     "horse_id": "2022106741",
-     "horse_name": "メイリー",
-     "sire_name": "タワーオブロンドン",
-     "stype": "JP",
-     "prev_distance": 1400,
-     "days_since_last": 35,
-     "prev_weight": 438,
-     "excluded_reason": [
-      "small"
+      "small",
+      "extend"
      ],
      "form_missing": false
     },
     {
      "horse_number": 6,
-     "horse_id": "2023100914",
-     "horse_name": "タイセイフレッサ",
-     "sire_name": "キズナ",
+     "horse_id": "2024103393",
+     "horse_name": "ハヤブサカツオー",
+     "sire_name": "サートゥルナーリア",
      "stype": "JP",
-     "prev_distance": 1400,
-     "days_since_last": 35,
-     "prev_weight": 472,
-     "excluded_reason": [],
-     "form_missing": false
-    },
-    {
-     "horse_number": 9,
-     "horse_id": "2022105184",
-     "horse_name": "ライネリーベ",
-     "sire_name": "サトノダイヤモンド",
-     "stype": "JP",
-     "prev_distance": 1600,
-     "days_since_last": 69,
-     "prev_weight": 432,
-     "excluded_reason": [
-      "small"
-     ],
-     "form_missing": false
-    },
-    {
-     "horse_number": 17,
-     "horse_id": "2023106468",
-     "horse_name": "ガミーヌ",
-     "sire_name": "フィエールマン",
-     "stype": "JP",
-     "prev_distance": 1600,
-     "days_since_last": 7,
-     "prev_weight": 444,
+     "prev_distance": 1800,
+     "days_since_last": 20,
+     "prev_weight": 520,
      "excluded_reason": [],
      "form_missing": false
     }
