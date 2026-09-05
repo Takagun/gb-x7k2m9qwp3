@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-09-05T15:24:48+09:00",
- "odds_asof": "15:24",
+ "updated_at": "2026-09-05T19:59:18+09:00",
+ "odds_asof": "19:59",
  "picks": [
   {
    "race_id": "202609040102",
@@ -268,7 +268,7 @@
   {
    "race_id": "202601020511",
    "horse_number": 3,
-   "odds_win": 17.9,
+   "odds_win": 18.0,
    "tier": null,
    "excluded_reason": [
     "small",
@@ -280,7 +280,7 @@
   {
    "race_id": "202601020511",
    "horse_number": 6,
-   "odds_win": 22.9,
+   "odds_win": 21.8,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
