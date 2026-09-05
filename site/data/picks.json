@@ -1,469 +1,249 @@
 {
- "updated_at": "2026-08-29T20:23:24+09:00",
- "odds_asof": "20:23",
+ "updated_at": "2026-09-05T09:36:21+09:00",
+ "odds_asof": "09:36",
  "picks": [
   {
-   "race_id": "202601020302",
-   "horse_number": 3,
-   "odds_win": 2.0,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 466
-  },
-  {
-   "race_id": "202601020302",
-   "horse_number": 8,
-   "odds_win": 82.8,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 400
-  },
-  {
-   "race_id": "202601020302",
-   "horse_number": 10,
-   "odds_win": 4.9,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 456
-  },
-  {
-   "race_id": "202601020302",
-   "horse_number": 12,
-   "odds_win": 18.1,
-   "tier": "core",
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 492,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202601020303",
-   "horse_number": 1,
-   "odds_win": 1.1,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 448
-  },
-  {
-   "race_id": "202601020303",
+   "race_id": "202609040102",
    "horse_number": 4,
-   "odds_win": 199.1,
+   "odds_win": 3.2,
    "tier": null,
    "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 446
+   "form_missing": false
   },
   {
-   "race_id": "202601020303",
+   "race_id": "202609040102",
    "horse_number": 5,
-   "odds_win": 15.5,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 440
-  },
-  {
-   "race_id": "202601020303",
-   "horse_number": 11,
-   "odds_win": 558.7,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 450
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 5,
-   "odds_win": 134.5,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": true,
-   "day_weight": 442
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 7,
-   "odds_win": 40.2,
-   "tier": "watch",
-   "excluded_reason": [],
-   "form_missing": true,
-   "day_weight": 502,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 9,
-   "odds_win": 22.5,
-   "tier": "core",
-   "excluded_reason": [],
-   "form_missing": true,
-   "day_weight": 458,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 11,
-   "odds_win": 61.0,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": true,
-   "day_weight": 490
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 12,
-   "odds_win": 7.5,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": true,
-   "day_weight": 426
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 13,
-   "odds_win": 16.2,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": true,
-   "day_weight": 410
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 14,
-   "odds_win": 236.0,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": true,
-   "day_weight": 434
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 15,
-   "odds_win": 9.9,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": true,
-   "day_weight": 442
-  },
-  {
-   "race_id": "202604030304",
-   "horse_number": 16,
-   "odds_win": 68.8,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": true,
-   "day_weight": 432
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 2,
-   "odds_win": 4.5,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 500
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 3,
-   "odds_win": 105.8,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 440
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 7,
-   "odds_win": 2.8,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 478
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 11,
-   "odds_win": 12.3,
-   "tier": null,
-   "excluded_reason": [
-    "small",
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 426
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 12,
-   "odds_win": 456.5,
-   "tier": null,
-   "excluded_reason": [
-    "small",
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 438
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 15,
-   "odds_win": 17.6,
-   "tier": null,
-   "excluded_reason": [
-    "small",
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 402
-  },
-  {
-   "race_id": "202604030305",
-   "horse_number": 17,
-   "odds_win": 332.1,
+   "odds_win": 3.0,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false,
-   "day_weight": 450
+   "form_missing": false
   },
   {
-   "race_id": "202601020306",
+   "race_id": "202606040104",
    "horse_number": 4,
-   "odds_win": 19.2,
+   "odds_win": 99.3,
    "tier": null,
    "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 402
-  },
-  {
-   "race_id": "202601020306",
-   "horse_number": 5,
-   "odds_win": 186.2,
-   "tier": null,
-   "excluded_reason": [
+    "small",
     "extend"
    ],
-   "form_missing": false,
-   "day_weight": 460
+   "form_missing": false
   },
   {
-   "race_id": "202601020306",
-   "horse_number": 6,
-   "odds_win": 9.0,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 476
-  },
-  {
-   "race_id": "202601020306",
+   "race_id": "202606040104",
    "horse_number": 7,
-   "odds_win": 7.7,
+   "odds_win": 102.2,
    "tier": null,
    "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 402
-  },
-  {
-   "race_id": "202601020306",
-   "horse_number": 8,
-   "odds_win": 10.8,
-   "tier": null,
-   "excluded_reason": [
-    "long_layoff"
-   ],
-   "form_missing": false,
-   "day_weight": 466
-  },
-  {
-   "race_id": "202601020306",
-   "horse_number": 10,
-   "odds_win": 46.1,
-   "tier": "watch",
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 526,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202601020306",
-   "horse_number": 12,
-   "odds_win": 5.2,
-   "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 412
-  },
-  {
-   "race_id": "202601020306",
-   "horse_number": 14,
-   "odds_win": 9.2,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 452
-  },
-  {
-   "race_id": "202601020309",
-   "horse_number": 5,
-   "odds_win": 12.0,
-   "tier": "core",
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 510,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202601020309",
-   "horse_number": 10,
-   "odds_win": 30.3,
-   "tier": "watch",
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 470,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202601020309",
-   "horse_number": 11,
-   "odds_win": 157.0,
-   "tier": null,
-   "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 490,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
-  },
-  {
-   "race_id": "202604030309",
-   "horse_number": 1,
-   "odds_win": 192.8,
-   "tier": null,
-   "excluded_reason": [
+    "small",
     "extend"
    ],
-   "form_missing": false,
-   "day_weight": 456
+   "form_missing": false
   },
   {
-   "race_id": "202604030309",
+   "race_id": "202601020505",
+   "horse_number": 1,
+   "odds_win": 5.6,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": true
+  },
+  {
+   "race_id": "202601020505",
    "horse_number": 2,
    "odds_win": 3.2,
    "tier": null,
    "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 480
+   "form_missing": true
   },
   {
-   "race_id": "202604030309",
+   "race_id": "202601020505",
    "horse_number": 3,
-   "odds_win": 21.5,
+   "odds_win": 2.8,
    "tier": null,
-   "excluded_reason": [
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 502
+   "excluded_reason": [],
+   "form_missing": true
   },
   {
-   "race_id": "202604030309",
-   "horse_number": 10,
-   "odds_win": 91.2,
-   "tier": null,
-   "excluded_reason": [
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 516
-  },
-  {
-   "race_id": "202604030309",
-   "horse_number": 11,
-   "odds_win": 3.3,
-   "tier": null,
-   "excluded_reason": [
-    "extend"
-   ],
-   "form_missing": false,
-   "day_weight": 496
-  },
-  {
-   "race_id": "202604030310",
-   "horse_number": 3,
-   "odds_win": 14.1,
-   "tier": null,
-   "excluded_reason": [
-    "long_layoff"
-   ],
-   "form_missing": false,
-   "day_weight": 460
-  },
-  {
-   "race_id": "202604030310",
+   "race_id": "202601020505",
    "horse_number": 5,
-   "odds_win": 30.4,
-   "tier": "watch",
+   "odds_win": 16.2,
+   "tier": "core",
    "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 450,
-   "entered_band_at": "2026-08-29T20:23:24+09:00"
+   "form_missing": true,
+   "entered_band_at": "2026-09-05T09:36:21+09:00"
   },
   {
-   "race_id": "202604030310",
+   "race_id": "202601020505",
+   "horse_number": 11,
+   "odds_win": 20.6,
+   "tier": "core",
+   "excluded_reason": [],
+   "form_missing": true,
+   "entered_band_at": "2026-09-05T09:36:21+09:00"
+  },
+  {
+   "race_id": "202609040105",
+   "horse_number": 2,
+   "odds_win": 2.4,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": true
+  },
+  {
+   "race_id": "202609040105",
+   "horse_number": 3,
+   "odds_win": 21.7,
+   "tier": "core",
+   "excluded_reason": [],
+   "form_missing": true,
+   "entered_band_at": "2026-09-05T09:36:21+09:00"
+  },
+  {
+   "race_id": "202609040105",
+   "horse_number": 5,
+   "odds_win": 14.8,
+   "tier": "core",
+   "excluded_reason": [],
+   "form_missing": true,
+   "entered_band_at": "2026-09-05T09:36:21+09:00"
+  },
+  {
+   "race_id": "202601020507",
+   "horse_number": 1,
+   "odds_win": 15.1,
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202601020507",
    "horse_number": 6,
-   "odds_win": 3.3,
+   "odds_win": 6.2,
+   "tier": null,
+   "excluded_reason": [
+    "small"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202601020507",
+   "horse_number": 11,
+   "odds_win": 38.3,
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202606040109",
+   "horse_number": 2,
+   "odds_win": null,
    "tier": null,
    "excluded_reason": [],
-   "form_missing": false,
-   "day_weight": 476
+   "form_missing": false
   },
   {
-   "race_id": "202604030310",
+   "race_id": "202606040109",
+   "horse_number": 5,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202606040109",
    "horse_number": 9,
-   "odds_win": 2.7,
+   "odds_win": null,
    "tier": null,
-   "excluded_reason": [
-    "small"
-   ],
-   "form_missing": false,
-   "day_weight": 426
+   "excluded_reason": [],
+   "form_missing": false
   },
   {
-   "race_id": "202604030310",
-   "horse_number": 17,
-   "odds_win": 13.6,
+   "race_id": "202606040109",
+   "horse_number": 11,
+   "odds_win": null,
    "tier": null,
    "excluded_reason": [
-    "small"
+    "extend"
    ],
-   "form_missing": false,
-   "day_weight": 440,
-   "entered_band_at": "2026-08-29T13:00:49+09:00"
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 1,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [
+    "extend"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 2,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 3,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 4,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 5,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
+  },
+  {
+   "race_id": "202609040110",
+   "horse_number": 7,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
+  },
+  {
+   "race_id": "202601020511",
+   "horse_number": 3,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [
+    "small",
+    "extend"
+   ],
+   "form_missing": false
+  },
+  {
+   "race_id": "202601020511",
+   "horse_number": 6,
+   "odds_win": null,
+   "tier": null,
+   "excluded_reason": [],
+   "form_missing": false
   }
  ]
 }
