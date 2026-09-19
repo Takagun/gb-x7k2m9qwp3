@@ -1,11 +1,11 @@
 {
- "updated_at": "2026-09-19T09:57:47+09:00",
- "odds_asof": "09:57",
+ "updated_at": "2026-09-19T10:56:21+09:00",
+ "odds_asof": "10:56",
  "picks": [
   {
    "race_id": "202606040505",
    "horse_number": 7,
-   "odds_win": 12.8,
+   "odds_win": 11.7,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": true,
@@ -14,7 +14,7 @@
   {
    "race_id": "202606040505",
    "horse_number": 10,
-   "odds_win": 22.0,
+   "odds_win": 24.0,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": true,
@@ -23,7 +23,7 @@
   {
    "race_id": "202606040505",
    "horse_number": 11,
-   "odds_win": 21.6,
+   "odds_win": 23.8,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": true,
@@ -32,15 +32,16 @@
   {
    "race_id": "202606040510",
    "horse_number": 1,
-   "odds_win": 9.7,
-   "tier": null,
+   "odds_win": 10.1,
+   "tier": "core",
    "excluded_reason": [],
-   "form_missing": false
+   "form_missing": false,
+   "entered_band_at": "2026-09-19T10:56:21+09:00"
   },
   {
    "race_id": "202606040510",
    "horse_number": 2,
-   "odds_win": 5.0,
+   "odds_win": 5.3,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -48,7 +49,7 @@
   {
    "race_id": "202606040510",
    "horse_number": 4,
-   "odds_win": 67.7,
+   "odds_win": 72.3,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -56,7 +57,7 @@
   {
    "race_id": "202606040510",
    "horse_number": 5,
-   "odds_win": 58.6,
+   "odds_win": 63.4,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -64,7 +65,7 @@
   {
    "race_id": "202606040510",
    "horse_number": 7,
-   "odds_win": 51.9,
+   "odds_win": 54.0,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -72,7 +73,7 @@
   {
    "race_id": "202606040510",
    "horse_number": 10,
-   "odds_win": 22.0,
+   "odds_win": 15.7,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -82,7 +83,7 @@
   {
    "race_id": "202606040510",
    "horse_number": 12,
-   "odds_win": 7.8,
+   "odds_win": 7.0,
    "tier": null,
    "excluded_reason": [
     "extend"
