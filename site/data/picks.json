@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-10-04T11:23:36+09:00",
- "odds_asof": "11:23",
+ "updated_at": "2026-10-04T12:07:25+09:00",
+ "odds_asof": "12:07",
  "picks": [
   {
    "race_id": "202608040102",
@@ -481,7 +481,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 1,
-   "odds_win": 10.4,
+   "odds_win": 10.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -491,7 +491,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 3,
-   "odds_win": 21.0,
+   "odds_win": 19.1,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -500,7 +500,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 4,
-   "odds_win": 5.2,
+   "odds_win": 5.1,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -510,7 +510,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 7,
-   "odds_win": 235.7,
+   "odds_win": 240.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -520,7 +520,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 10,
-   "odds_win": 27.1,
+   "odds_win": 27.5,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -530,7 +530,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 11,
-   "odds_win": 101.7,
+   "odds_win": 95.7,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -540,7 +540,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 12,
-   "odds_win": 36.4,
+   "odds_win": 37.4,
    "tier": "watch",
    "excluded_reason": [],
    "form_missing": false,
@@ -549,7 +549,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 14,
-   "odds_win": 11.0,
+   "odds_win": 11.1,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -558,7 +558,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 15,
-   "odds_win": 95.0,
+   "odds_win": 91.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -568,7 +568,7 @@
   {
    "race_id": "202605040211",
    "horse_number": 16,
-   "odds_win": 12.8,
+   "odds_win": 13.1,
    "tier": null,
    "excluded_reason": [
     "long_layoff",
