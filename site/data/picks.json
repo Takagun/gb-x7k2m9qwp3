@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-10-11T10:33:10+09:00",
- "odds_asof": "10:33",
+ "updated_at": "2026-10-11T11:31:47+09:00",
+ "odds_asof": "11:31",
  "picks": [
   {
    "race_id": "202608040303",
@@ -201,7 +201,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 1,
-   "odds_win": 11.4,
+   "odds_win": 11.3,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -210,7 +210,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 2,
-   "odds_win": 24.3,
+   "odds_win": 24.4,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -220,7 +220,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 3,
-   "odds_win": 6.3,
+   "odds_win": 6.5,
    "tier": null,
    "excluded_reason": [
     "long_layoff",
@@ -231,7 +231,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 6,
-   "odds_win": 153.8,
+   "odds_win": 162.9,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -241,15 +241,16 @@
   {
    "race_id": "202605040411",
    "horse_number": 7,
-   "odds_win": 51.7,
-   "tier": null,
+   "odds_win": 44.0,
+   "tier": "watch",
    "excluded_reason": [],
-   "form_missing": false
+   "form_missing": false,
+   "entered_band_at": "2026-10-11T11:31:47+09:00"
   },
   {
    "race_id": "202605040411",
    "horse_number": 8,
-   "odds_win": 23.6,
+   "odds_win": 23.1,
    "tier": null,
    "excluded_reason": [
     "small"
@@ -259,7 +260,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 9,
-   "odds_win": 19.3,
+   "odds_win": 19.4,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -268,7 +269,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 11,
-   "odds_win": 6.4,
+   "odds_win": 6.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -278,7 +279,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 12,
-   "odds_win": 35.6,
+   "odds_win": 37.0,
    "tier": "watch",
    "excluded_reason": [],
    "form_missing": false,
@@ -287,7 +288,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 13,
-   "odds_win": 28.8,
+   "odds_win": 29.9,
    "tier": null,
    "excluded_reason": [
     "small",
@@ -298,7 +299,7 @@
   {
    "race_id": "202605040411",
    "horse_number": 14,
-   "odds_win": 73.4,
+   "odds_win": 74.6,
    "tier": null,
    "excluded_reason": [
     "small",
