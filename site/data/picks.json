@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-10-24T16:40:30+09:00",
- "odds_asof": "16:40",
+ "updated_at": "2026-10-25T09:49:24+09:00",
+ "odds_asof": "09:49",
  "picks": [
   {
    "race_id": "202604040302",
@@ -491,7 +491,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 1,
-   "odds_win": null,
+   "odds_win": 36.4,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -501,7 +501,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 2,
-   "odds_win": null,
+   "odds_win": 19.2,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -511,7 +511,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 3,
-   "odds_win": null,
+   "odds_win": 19.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -521,7 +521,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 5,
-   "odds_win": null,
+   "odds_win": 13.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -531,7 +531,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 6,
-   "odds_win": null,
+   "odds_win": 35.9,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -541,7 +541,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 9,
-   "odds_win": null,
+   "odds_win": 11.6,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -551,7 +551,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 12,
-   "odds_win": null,
+   "odds_win": 94.5,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -561,7 +561,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 14,
-   "odds_win": null,
+   "odds_win": 42.5,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -571,7 +571,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 16,
-   "odds_win": null,
+   "odds_win": 45.6,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -581,7 +581,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 17,
-   "odds_win": null,
+   "odds_win": 125.1,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -591,7 +591,7 @@
   {
    "race_id": "202608040911",
    "horse_number": 18,
-   "odds_win": null,
+   "odds_win": 139.9,
    "tier": null,
    "excluded_reason": [
     "extend"
