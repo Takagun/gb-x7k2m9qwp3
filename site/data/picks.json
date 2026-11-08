@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-11-08T11:02:51+09:00",
- "odds_asof": "11:02",
+ "updated_at": "2026-11-08T11:57:44+09:00",
+ "odds_asof": "11:57",
  "picks": [
   {
    "race_id": "202608050102",
@@ -355,7 +355,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 1,
-   "odds_win": 34.2,
+   "odds_win": 36.4,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -365,7 +365,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 5,
-   "odds_win": 7.6,
+   "odds_win": 7.4,
    "tier": null,
    "excluded_reason": [
     "long_layoff",
@@ -376,7 +376,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 6,
-   "odds_win": 76.1,
+   "odds_win": 74.7,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -394,7 +394,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 8,
-   "odds_win": 12.0,
+   "odds_win": 12.1,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -404,7 +404,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 9,
-   "odds_win": 5.8,
+   "odds_win": 5.7,
    "tier": null,
    "excluded_reason": [],
    "form_missing": false
@@ -412,7 +412,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 10,
-   "odds_win": 77.1,
+   "odds_win": 77.7,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -422,7 +422,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 11,
-   "odds_win": 14.3,
+   "odds_win": 14.2,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -431,7 +431,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 12,
-   "odds_win": 29.0,
+   "odds_win": 29.3,
    "tier": null,
    "excluded_reason": [
     "extend"
@@ -441,7 +441,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 14,
-   "odds_win": 17.8,
+   "odds_win": 18.9,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -450,7 +450,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 16,
-   "odds_win": 27.8,
+   "odds_win": 28.4,
    "tier": null,
    "excluded_reason": [
     "long_layoff"
@@ -460,7 +460,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 17,
-   "odds_win": 17.8,
+   "odds_win": 18.1,
    "tier": "core",
    "excluded_reason": [],
    "form_missing": false,
@@ -469,7 +469,7 @@
   {
    "race_id": "202605050211",
    "horse_number": 18,
-   "odds_win": 46.1,
+   "odds_win": 46.3,
    "tier": "watch",
    "excluded_reason": [],
    "form_missing": false,
