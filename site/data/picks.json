@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-11-15T12:28:51+09:00",
- "odds_asof": "12:28",
+ "updated_at": "2026-11-15T20:35:43+09:00",
+ "odds_asof": "20:35",
  "picks": [
   {
    "race_id": "202608050304",
@@ -459,90 +459,99 @@
   {
    "race_id": "202608050411",
    "horse_number": 1,
-   "odds_win": 34.5,
+   "odds_win": 32.0,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 492
   },
   {
    "race_id": "202608050411",
    "horse_number": 2,
-   "odds_win": 71.2,
+   "odds_win": 87.3,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 492
   },
   {
    "race_id": "202608050411",
    "horse_number": 4,
-   "odds_win": 81.2,
+   "odds_win": 68.3,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 446
   },
   {
    "race_id": "202608050411",
    "horse_number": 5,
-   "odds_win": 76.1,
+   "odds_win": 82.5,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 442
   },
   {
    "race_id": "202608050411",
    "horse_number": 7,
-   "odds_win": 4.6,
+   "odds_win": 4.2,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 504
   },
   {
    "race_id": "202608050411",
    "horse_number": 8,
-   "odds_win": 74.5,
+   "odds_win": 47.8,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 478
   },
   {
    "race_id": "202608050411",
    "horse_number": 9,
-   "odds_win": 8.6,
+   "odds_win": 7.8,
    "tier": null,
    "excluded_reason": [
     "extend"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 546
   },
   {
    "race_id": "202608050411",
    "horse_number": 15,
-   "odds_win": 9.6,
+   "odds_win": 12.6,
    "tier": null,
    "excluded_reason": [
     "long_layoff"
    ],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 462
   },
   {
    "race_id": "202608050411",
    "horse_number": 17,
-   "odds_win": 97.8,
+   "odds_win": 106.8,
    "tier": null,
    "excluded_reason": [],
-   "form_missing": false
+   "form_missing": false,
+   "day_weight": 456
   }
  ]
 }
